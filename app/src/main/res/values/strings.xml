@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Bouquiniste</string>
+
+    <string name="action_menu_search">Поиск</string>
+    <string name="action_menu_favorites">Избранное</string>
+    <string name="action_menu_add_advert">Добавить</string>
+    <string name="action_menu_profile">Профиль</string>
+
+
+</resources>
