@@ -15,6 +15,11 @@ public class MainPresenter implements IMainPresenter {
     }
 
     @Override
+    public void handleProfileItemClick() {
+        mView.showProfile();
+    }
+
+    @Override
     public void release() {
         mView = null;
     }

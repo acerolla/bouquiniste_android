@@ -65,5 +65,7 @@ public class MainView extends RelativeLayout {
         addView(mBottomMenu);
     }
 
-
+    public void setMenuListener(BottomNavigationView.OnNavigationItemSelectedListener listener) {
+        mBottomMenu.setOnNavigationItemSelectedListener(listener);
+    }
 }
