@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.FavoritesPresenter;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.IFavoritesPresenter;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
@@ -19,6 +22,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
 
     private FavoritesView mView;
 
+    @Inject
     IFavoritesPresenter mPresenter;
 
     @Nullable
@@ -33,7 +37,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPresenter = new FavoritesPresenter();
+        DiManager.getFavoritesComponent().inject(this);
         mPresenter.bindView(this);
     }
 

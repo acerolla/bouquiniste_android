@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.presentation.adverts.presenter;
 
+import com.acerolla.bouquiniste.domain.adverts.IAdvertsInteractor;
 import com.acerolla.bouquiniste.presentation.adding.presenter.AddingPresenter;
 import com.acerolla.bouquiniste.presentation.adverts.view.IAdvertsView;
 
@@ -11,9 +12,10 @@ import com.acerolla.bouquiniste.presentation.adverts.view.IAdvertsView;
 public class AdvertsPresenter implements IAdvertsPresenter {
 
     private IAdvertsView mView;
+    private IAdvertsInteractor mInteractor;
 
-    public AdvertsPresenter() {
-
+    public AdvertsPresenter(IAdvertsInteractor interactor) {
+        mInteractor = interactor;
     }
 
     @Override
@@ -24,5 +26,10 @@ public class AdvertsPresenter implements IAdvertsPresenter {
     @Override
     public void release() {
         mView = null;
+
+        if (mInteractor != null) {
+            mInteractor.release();
+        }
+        mInteractor = null;
     }
 }

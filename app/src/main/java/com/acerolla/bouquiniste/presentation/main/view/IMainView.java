@@ -1,7 +1,7 @@
 package com.acerolla.bouquiniste.presentation.main.view;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 22.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public interface IMainView {
 

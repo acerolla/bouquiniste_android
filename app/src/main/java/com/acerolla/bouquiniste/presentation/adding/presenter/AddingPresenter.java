@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.presentation.adding.presenter;
 
+import com.acerolla.bouquiniste.domain.adding.IAddingInteractor;
 import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
 
 /**
@@ -9,9 +10,10 @@ import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
 public class AddingPresenter implements IAddingPresenter {
 
     private IAddingView mView;
+    private IAddingInteractor mInteractor;
 
-    public AddingPresenter() {
-
+    public AddingPresenter(IAddingInteractor interactor) {
+        mInteractor = interactor;
     }
 
     @Override
@@ -22,5 +24,10 @@ public class AddingPresenter implements IAddingPresenter {
     @Override
     public void release() {
         mView = null;
+
+        if (mInteractor != null) {
+            mInteractor.release();
+        }
+        mInteractor = null;
     }
 }

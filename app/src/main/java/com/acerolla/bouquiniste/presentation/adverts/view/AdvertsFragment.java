@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.AdvertsPresenter;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.IAdvertsPresenter;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
@@ -20,6 +23,7 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
 
     private AdvertsView mView;
 
+    @Inject
     IAdvertsPresenter mPresenter;
 
     @Nullable
@@ -35,7 +39,7 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPresenter = new AdvertsPresenter();
+        DiManager.getAdvertsComponent().inject(this);
         mPresenter.bindView(this);
     }
 

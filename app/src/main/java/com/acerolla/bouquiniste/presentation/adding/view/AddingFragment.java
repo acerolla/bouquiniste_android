@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.presenter.AddingPresenter;
 import com.acerolla.bouquiniste.presentation.adding.presenter.IAddingPresenter;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
@@ -19,6 +22,7 @@ public class AddingFragment extends Fragment implements IAddingView {
 
     private AddingView mView;
 
+    @Inject
     IAddingPresenter mPresenter;
 
     @Nullable
@@ -33,7 +37,7 @@ public class AddingFragment extends Fragment implements IAddingView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPresenter = new AddingPresenter();
+        DiManager.getAddingComponent().inject(this);
         mPresenter.bindView(this);
     }
 

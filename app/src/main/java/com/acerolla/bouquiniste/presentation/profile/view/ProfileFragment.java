@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.repository.ProfileRepository;
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.domain.profile.ProfileInteractor;
 import com.acerolla.bouquiniste.presentation.profile.presenter.IProfilePresenter;
 import com.acerolla.bouquiniste.presentation.profile.presenter.ProfilePresenter;
+
+import javax.inject.Inject;
 
 /**
  * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
@@ -21,6 +24,7 @@ public class ProfileFragment extends Fragment implements IProfileView {
 
     private ProfileView mView;
 
+    @Inject
     IProfilePresenter mPresenter;
 
     @Nullable
@@ -35,7 +39,7 @@ public class ProfileFragment extends Fragment implements IProfileView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPresenter = new ProfilePresenter(new ProfileInteractor(new ProfileRepository()));
+        DiManager.getProfileComponent().inject(this);
         mPresenter.bindView(this);
     }
 
