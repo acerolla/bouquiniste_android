@@ -6,7 +6,7 @@ import com.acerolla.bouquiniste.data.utils.BackgroundThread;
 import com.acerolla.bouquiniste.data.utils.db.DbHelper;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 22.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class BouquinisteApplication extends Application {
 

@@ -9,4 +9,7 @@ import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 public interface IMainPresenter extends BasePresenter<IMainView> {
 
     void handleProfileItemClick();
+    void handleAddingClick();
+    void handleFavoritesClick();
+    void handleAdvertsClick();
 }

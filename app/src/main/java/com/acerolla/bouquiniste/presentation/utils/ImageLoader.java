@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class ImageLoader {
 

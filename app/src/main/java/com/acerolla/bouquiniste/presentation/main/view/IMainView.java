@@ -6,4 +6,7 @@ package com.acerolla.bouquiniste.presentation.main.view;
 public interface IMainView {
 
     void showProfile();
+    void showAdding();
+    void showFavorites();
+    void showAdverts();
 }

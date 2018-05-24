@@ -3,11 +3,13 @@ package com.acerolla.bouquiniste.presentation.main.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.acerolla.bouquiniste.R;
+import com.acerolla.bouquiniste.presentation.adding.view.AddingFragment;
+import com.acerolla.bouquiniste.presentation.adverts.view.AdvertsFragment;
+import com.acerolla.bouquiniste.presentation.favorites.view.FavoritesFragment;
 import com.acerolla.bouquiniste.presentation.main.presenter.IMainPresenter;
 import com.acerolla.bouquiniste.presentation.main.presenter.MainPresenter;
 import com.acerolla.bouquiniste.presentation.profile.view.ProfileFragment;
@@ -45,6 +47,21 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
+    public void showAdding() {
+        changeFragment(new AddingFragment());
+    }
+
+    @Override
+    public void showFavorites() {
+        changeFragment(new FavoritesFragment());
+    }
+
+    @Override
+    public void showAdverts() {
+        changeFragment(new AdvertsFragment());
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mView = null;
@@ -58,6 +75,15 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private BottomNavigationView.OnNavigationItemSelectedListener mMenuListener = item -> {
         if (item.getItemId() == R.id.action_menu_profile) {
             mPresenter.handleProfileItemClick();
+            return true;
+        } else if (item.getItemId() == R.id.action_menu_add_advert) {
+            mPresenter.handleAddingClick();
+            return true;
+        } else if (item.getItemId() == R.id.action_menu_favorites) {
+            mPresenter.handleFavoritesClick();
+            return true;
+        } else if (item.getItemId() == R.id.action_menu_adverts) {
+            mPresenter.handleAdvertsClick();
             return true;
         }
 
