@@ -2,6 +2,8 @@ package com.acerolla.bouquiniste.presentation.adding.presenter;
 
 import android.net.Uri;
 
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.profile.ResultListener;
 import com.acerolla.bouquiniste.domain.adding.IAddingInteractor;
 import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
 
@@ -37,6 +39,16 @@ public class AddingPresenter implements IAddingPresenter {
 
     private String getPathFromUri(Uri uri) {
         return uri.getPath().substring(uri.getPath().indexOf(STORAGE));
+    }
+
+    @Override
+    public void handleAddClick() {
+        AdvertData advert = mView.collectData();
+        mInteractor.postAdvert(result -> {
+            if (result != null) {
+                mView.navigateToDetail(result.getId());
+            }
+        }, advert);
     }
 
     @Override

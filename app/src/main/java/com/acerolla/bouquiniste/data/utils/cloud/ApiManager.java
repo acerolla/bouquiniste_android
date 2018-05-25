@@ -1,6 +1,11 @@
 package com.acerolla.bouquiniste.data.utils.cloud;
 
+import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
+import com.acerolla.bouquiniste.di.DiManager;
+
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -14,6 +19,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
  */
 public class ApiManager {
 
+    @Inject
+    IAuthRepository mRepository;
+
     private static final int TIMEOUT_SEC = 10;
 
     private static final String API_URL = "";
@@ -23,6 +31,9 @@ public class ApiManager {
     private static final String AUTH_KEY = "Authorization";
     private static final String AUTH_VALUE = "Bearer ";
 
+    private static final String LOGIN = "/login";
+    private static final String REGISTER = "/register";
+
     private IRestApi mRestApi;
 
     public ApiManager() {
@@ -30,14 +41,16 @@ public class ApiManager {
     }
 
     private void initCloud() {
+        DiManager.getRepositoryComponent().inject(this);
+
         final OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(chain -> {
                     Request request = chain.request();
                     Request.Builder builder = request.newBuilder();
                     builder.addHeader(CONTENT_KEY, CONTENT_VALUE);
-                    /*if (requestNeedsAuth(request.url().toString())) {
-                        builder.addHeader(AUTH_KEY, AUTH_VALUE + mRepository.getSessionToken());
-                    }*/
+                    if (requestNeedsAuth(request.url().toString())) {
+                        builder.addHeader(AUTH_KEY, AUTH_VALUE + mRepository.getTokenAsync().getToken());
+                    }
                     return chain.proceed(builder.build());
                 })
                 .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
@@ -51,6 +64,24 @@ public class ApiManager {
                 .build();
 
         mRestApi = retrofit.create(IRestApi.class);
+    }
+
+    private boolean requestNeedsAuth(String url) {
+        url = url.toLowerCase();
+
+        String comparable = API_URL + LOGIN;
+        comparable = comparable.toLowerCase();
+        if (url.contains(comparable)) {
+            return false;
+        }
+
+        comparable = API_URL + REGISTER;
+        comparable = comparable.toLowerCase();
+        if (url.contains(comparable)) {
+            return false;
+        }
+
+        return true;
     }
 
     public IRestApi getRestApi() {

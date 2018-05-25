@@ -2,25 +2,17 @@ package com.acerolla.bouquiniste.presentation.adding.view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.presenter.IAddingPresenter;
-import com.acerolla.bouquiniste.presentation.utils.Logger;
-
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
 
 import javax.inject.Inject;
 
@@ -61,12 +53,12 @@ public class AddingFragment extends Fragment implements IAddingView {
             if (data != null) {
                 mPresenter.handleFileChoosed(data.getData());
             }
-
         }
     }
 
     private void setListeners() {
-        mView.setUploadClickListener(v -> mPresenter.handleUploadClick());
+        mView.setAddClickListener(v -> mPresenter.handleAddClick());
+        mView.setImageClickListener(v -> mPresenter.handleUploadClick());
     }
 
     @Override
@@ -75,6 +67,16 @@ public class AddingFragment extends Fragment implements IAddingView {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_FILE_CHOOSER);
+    }
+
+    @Override
+    public AdvertData collectData() {
+        return mView.collectData();
+    }
+
+    @Override
+    public void navigateToDetail(int advertId) {
+
     }
 
     @Override

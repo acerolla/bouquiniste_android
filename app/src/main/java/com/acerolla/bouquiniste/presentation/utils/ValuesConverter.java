@@ -6,11 +6,13 @@ import android.util.SparseIntArray;
 public class ValuesConverter {
 
     public static final int DP_4 = 4;
+    public static final int DP_5 = 5;
     public static final int DP_10 = 10;
     public static final int DP_25 = 25;
     public static final int DP_30 = 30;
     public static final int DP_45 = 45;
     public static final int DP_100 = 100;
+    public static final int DP_200 = 200;
 
     private static final SparseIntArray CONVERTED_VALUES = new SparseIntArray();
 

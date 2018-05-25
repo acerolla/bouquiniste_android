@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.di.component;
 
+import com.acerolla.bouquiniste.data.utils.cloud.ApiManager;
 import com.acerolla.bouquiniste.di.module.AddingModule;
 import com.acerolla.bouquiniste.di.module.AdvertsModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
@@ -12,12 +13,13 @@ import dagger.Component;
 
 /**
  * Created by Evgeniy Solovev
- * Date: 25.05.2018
  * Email: solevur@gmail.com
  */
 @Singleton
 @Component(modules = RepositoryModule.class)
 public interface RepositoryComponent {
+
+    void inject(ApiManager manager);
 
     AddingComponent plus(AddingModule module);
     AdvertsComponent plus(AdvertsModule module);

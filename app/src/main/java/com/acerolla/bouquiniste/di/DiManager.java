@@ -24,7 +24,7 @@ public class DiManager {
     private static FavoritesComponent sFavoritesComponent;
     private static ProfileComponent sProfileComponent;
 
-    private static RepositoryComponent getRepositoryComponent() {
+    public static RepositoryComponent getRepositoryComponent() {
         if (sRepositoryComponent == null) {
             sRepositoryComponent = DaggerRepositoryComponent.create();
         }

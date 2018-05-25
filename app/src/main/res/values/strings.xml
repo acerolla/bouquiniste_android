@@ -7,4 +7,11 @@
     <string name="action_menu_profile">Профиль</string>
 
     <string name="profile_label_adverts">Объявления:</string>
+
+    <string name="adding_hint_title">Название</string>
+    <string name="adding_hint_author">Автор</string>
+    <string name="adding_hint_description">Описание</string>
+    <string name="adding_hint_price">Ценв</string>
+    <string name="adding_hint_phone">Номер телефона</string>
+    <string name="adding_button_add">Разместить</string>
 </resources>

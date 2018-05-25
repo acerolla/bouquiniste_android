@@ -13,4 +13,5 @@ public interface IAddingPresenter extends BasePresenter<IAddingView> {
 
     void handleUploadClick();
     void handleFileChoosed(Uri uri);
+    void handleAddClick();
 }
