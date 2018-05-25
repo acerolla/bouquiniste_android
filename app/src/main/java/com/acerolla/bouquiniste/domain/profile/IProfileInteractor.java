@@ -5,7 +5,7 @@ import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.domain.BaseInteractor;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public interface IProfileInteractor extends BaseInteractor {
 

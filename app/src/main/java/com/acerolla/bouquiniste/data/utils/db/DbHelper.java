@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.auth.entity.TokenData;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
@@ -20,6 +21,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public static final String TABLE_TOKEN = "bouquiniste_token";
     public static final String TABLE_PROFILE = "bouquiniste_profile";
     public static final String TABLE_ADVERTS = "bouquiniste_adverts";
+    public static final String TABLE_CATEGORY = "bouquiniste_category";
 
     private static final int DB_VERSION = 1;
 
@@ -35,6 +37,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, ProfileData.class);
             TableUtils.createTable(connectionSource, AdvertData.class);
             TableUtils.createTable(connectionSource, TokenData.class);
+            TableUtils.createTable(connectionSource, CategoryParentData.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

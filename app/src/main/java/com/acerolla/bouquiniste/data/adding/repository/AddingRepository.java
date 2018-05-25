@@ -12,7 +12,7 @@ public class AddingRepository implements IAddingRepository {
 
     @Override
     public void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
-        AddingDataSourceFactory.getCloudDataSource()
+        AddingDataSourceFactory.getLocalDataSource()
                 .postAdvert(listener, advertData);
     }
 

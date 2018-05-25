@@ -1,6 +1,10 @@
 package com.acerolla.bouquiniste.domain.favorites;
 
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.profile.ResultListener;
 import com.acerolla.bouquiniste.domain.BaseInteractor;
+
+import java.util.List;
 
 /**
  * Created by Evgeniy Solovev
@@ -8,4 +12,8 @@ import com.acerolla.bouquiniste.domain.BaseInteractor;
  * Email: solevur@gmail.com
  */
 public interface IFavoritesInteractor extends BaseInteractor {
+
+    void loadFavoritesList(ResultListener<List<AdvertData>> listResultListener);
+    void addToFavorites(ResultListener<Boolean> listener, int advertId);
+    void removeFromFavorites(ResultListener<Boolean> listener, int advertId);
 }

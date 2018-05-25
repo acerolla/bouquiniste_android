@@ -28,16 +28,16 @@ public class AdvertsRepository implements IAdvertsRepository {
     public void loadAdvertList(ResultListener<List<AdvertData>> listener) {
         AdvertDataSourceFactory.getLocalDataSource()
                 .getAdvertList(resultFromLocal -> {
-                    AdvertDataSourceFactory.getCloudDataSource()
-                            .getAdvertList(resultFromCloud -> {
-                                if (resultFromCloud != null) {
+                    //AdvertDataSourceFactory.getCloudDataSource()
+                            //.getAdvertList(resultFromCloud -> {
+                                /*if (resultFromCloud != null) {
                                     listener.onResult(resultFromCloud);
-                                } else if (resultFromLocal != null) {
+                                } else*/ if (resultFromLocal != null) {
                                     listener.onResult(resultFromLocal);
                                 } else {
                                     listener.onResult(null);
                                 }
-                            });
+                            //});
                 });
     }
 

@@ -49,6 +49,25 @@ class AdvertLocalDataSource implements IAdvertDataSource {
 
     @Override
     public void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId) {
-        //ignore
+        BouquinisteApplication.getInstance()
+                .getBackgroundThread()
+                .execute(new BouquinisteRunnable() {
+                    @Override
+                    public Object execute() throws Throwable {
+                        return BouquinisteApplication.getInstance()
+                                .getDbHelper()
+                                .getDao(AdvertData.class)
+                                .queryBuilder()
+                                .where()
+                                .eq("id", userId);
+                    }
+                }, result -> {
+                    if (result != null && result instanceof List && !((List) result).isEmpty() &&
+                            ((List) result).get(ZERO)!= null && ((List) result).get(ZERO) instanceof AdvertData) {
+                        listener.onResult((List<AdvertData>) result);
+                    } else {
+                        listener.onResult(null);
+                    }
+                });
     }
 }
