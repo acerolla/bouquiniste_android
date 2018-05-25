@@ -2,8 +2,8 @@ package com.acerolla.bouquiniste.di.module;
 
 import com.acerolla.bouquiniste.data.adding.repository.AddingRepository;
 import com.acerolla.bouquiniste.data.adding.repository.IAddingRepository;
-import com.acerolla.bouquiniste.data.adverts.repository.AdvertsRepository;
-import com.acerolla.bouquiniste.data.adverts.repository.IAdvertsRepository;
+import com.acerolla.bouquiniste.data.advert.repository.AdvertsRepository;
+import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.FavoritesRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.IFavoritesRepository;
 import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;

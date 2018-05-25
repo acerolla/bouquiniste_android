@@ -5,7 +5,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 @DatabaseTable(tableName = DbHelper.TABLE_PROFILE)
 public class ProfileData {
@@ -13,8 +13,11 @@ public class ProfileData {
     @DatabaseField(id = true, columnName = "id")
     private int mId;
 
-    @DatabaseField(columnName = "user")
-    private String mUser;
+    @DatabaseField(columnName = "token")
+    private String mToken;
+
+    @DatabaseField(columnName = "name")
+    private String mName;
 
     @DatabaseField(columnName = "email")
     private String mEmail;
@@ -23,10 +26,11 @@ public class ProfileData {
 
     }
 
-    public ProfileData(int id, String user, String email) {
-        this.mId = id;
-        this.mUser = user;
-        this.mEmail = email;
+    public ProfileData(int id, String token, String user, String email) {
+        mId = id;
+        mToken = token;
+        mName = user;
+        mEmail = email;
     }
 
     public int getId() {
@@ -34,10 +38,14 @@ public class ProfileData {
     }
 
     public String getUser() {
-        return mUser;
+        return mName;
     }
 
     public String getEmail() {
         return mEmail;
+    }
+
+    public String getToken() {
+        return mToken;
     }
 }

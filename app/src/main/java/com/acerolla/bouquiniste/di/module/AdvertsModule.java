@@ -1,6 +1,6 @@
 package com.acerolla.bouquiniste.di.module;
 
-import com.acerolla.bouquiniste.data.adverts.repository.IAdvertsRepository;
+import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.domain.adverts.AdvertsInteractor;
 import com.acerolla.bouquiniste.domain.adverts.IAdvertsInteractor;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.AdvertsPresenter;

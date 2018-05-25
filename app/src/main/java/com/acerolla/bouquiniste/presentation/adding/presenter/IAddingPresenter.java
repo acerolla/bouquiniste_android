@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.presentation.adding.presenter;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.presentation.BasePresenter;
 import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
 
@@ -8,4 +10,7 @@ import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
  * Email: solevur@gmail.com
  */
 public interface IAddingPresenter extends BasePresenter<IAddingView> {
+
+    void handleUploadClick();
+    void handleFileChoosed(Uri uri);
 }

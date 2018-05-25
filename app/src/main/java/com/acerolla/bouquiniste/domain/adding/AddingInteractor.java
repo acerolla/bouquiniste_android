@@ -1,10 +1,11 @@
 package com.acerolla.bouquiniste.domain.adding;
 
 import com.acerolla.bouquiniste.data.adding.repository.IAddingRepository;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.profile.ResultListener;
 
 /**
  * Created by Evgeniy Solovev
- * Date: 24.05.2018
  * Email: solevur@gmail.com
  */
 public class AddingInteractor implements IAddingInteractor {
@@ -15,6 +16,10 @@ public class AddingInteractor implements IAddingInteractor {
         mRepository = repository;
     }
 
+    @Override
+    public void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
+        mRepository.postAdvert(listener, advertData);
+    }
 
     @Override
     public void release() {

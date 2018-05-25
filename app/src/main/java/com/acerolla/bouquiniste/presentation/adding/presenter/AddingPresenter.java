@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.presentation.adding.presenter;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.domain.adding.IAddingInteractor;
 import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
 
@@ -8,6 +10,8 @@ import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
  * Email: solevur@gmail.com
  */
 public class AddingPresenter implements IAddingPresenter {
+
+    private static final String STORAGE = "storage";
 
     private IAddingView mView;
     private IAddingInteractor mInteractor;
@@ -19,6 +23,20 @@ public class AddingPresenter implements IAddingPresenter {
     @Override
     public void bindView(IAddingView view) {
         mView = view;
+    }
+
+    @Override
+    public void handleUploadClick() {
+        mView.showChooseFileActivity();
+    }
+
+    @Override
+    public void handleFileChoosed(Uri uri) {
+        String path = getPathFromUri(uri);
+    }
+
+    private String getPathFromUri(Uri uri) {
+        return uri.getPath().substring(uri.getPath().indexOf(STORAGE));
     }
 
     @Override

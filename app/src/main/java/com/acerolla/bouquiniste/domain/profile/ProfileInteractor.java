@@ -5,7 +5,7 @@ import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class ProfileInteractor implements IProfileInteractor {
 
@@ -18,6 +18,11 @@ public class ProfileInteractor implements IProfileInteractor {
     @Override
     public void loadProfile(ResultListener<ProfileData> listener) {
         mRepository.loadProfile(listener);
+    }
+
+    @Override
+    public void editProfile(ResultListener<ProfileData> listener, ProfileData userData) {
+        mRepository.editProfile(listener, userData);
     }
 
     @Override

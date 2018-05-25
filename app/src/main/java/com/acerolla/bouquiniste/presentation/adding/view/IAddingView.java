@@ -5,4 +5,6 @@ package com.acerolla.bouquiniste.presentation.adding.view;
  * Email: solevur@gmail.com
  */
 public interface IAddingView {
+
+    void showChooseFileActivity();
 }

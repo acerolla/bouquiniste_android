@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".presentation.detail.view.DetailActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"/>
+
     </application>
 
 </manifest>

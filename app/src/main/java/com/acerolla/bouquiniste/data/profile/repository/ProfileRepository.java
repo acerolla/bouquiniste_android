@@ -7,14 +7,16 @@ import com.acerolla.bouquiniste.data.profile.repository.datasource.ProfileDataSo
 import java.util.Random;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class ProfileRepository implements IProfileRepository {
 
+    private static final int ZERO = 0;
+
     private static final String DEFAULT_NAME = "Bouquiniste-";
     private static final String DEFAULT_EMAIL = "Unknown";
+    private static final String DEFAULT_TOKEN = "invalid_token";
     private static final int UPPER_BOUND = 99999;
-    private static final int ZERO = 0;
 
     @Override
     public void loadProfile(ResultListener<ProfileData> listener) {
@@ -38,8 +40,29 @@ public class ProfileRepository implements IProfileRepository {
     private ProfileData generateUser() {
         return new ProfileData(
                 ZERO,
-                DEFAULT_NAME + new Random().nextInt(UPPER_BOUND),
+                generateToken(),
+                generateName(),
                 DEFAULT_EMAIL);
+    }
+
+    private String generateToken() {
+        return DEFAULT_TOKEN;
+    }
+
+    private String generateName() {
+        return DEFAULT_NAME + new Random().nextInt(UPPER_BOUND);
+    }
+
+    @Override
+    public void editProfile(ResultListener<ProfileData> listener, ProfileData userData) {
+        ProfileDataSourceFactory.getCloudDataSource().loadProfile(resultFromCloud -> {
+            if (resultFromCloud != null) {
+                ProfileDataSourceFactory.getLocalDataSource().saveProfile(resultFromCloud);
+                listener.onResult(resultFromCloud);
+            } else {
+                listener.onResult(null);
+            }
+        });
     }
 
     @Override

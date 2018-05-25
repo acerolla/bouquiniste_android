@@ -54,4 +54,9 @@ public class ProfileLocalDataSource implements IProfileDataSource {
                     }
                 }, null);
     }
+
+    @Override
+    public void editProfile(ResultListener<ProfileData> listener, ProfileData userData) {
+        //ignore
+    }
 }

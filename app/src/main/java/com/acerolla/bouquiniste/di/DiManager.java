@@ -63,4 +63,12 @@ public class DiManager {
 
         return sProfileComponent;
     }
+
+    public static void release() {
+        sRepositoryComponent = null;
+        sAddingComponent = null;
+        sAdvertsComponent = null;
+        sProfileComponent = null;
+        sFavoritesComponent = null;
+    }
 }

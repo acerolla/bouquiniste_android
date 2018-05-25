@@ -10,4 +10,5 @@ import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 public interface IProfileRepository extends BaseRepository {
 
     void loadProfile(ResultListener<ProfileData> listener);
+    void editProfile(ResultListener<ProfileData> listener, ProfileData userData);
 }

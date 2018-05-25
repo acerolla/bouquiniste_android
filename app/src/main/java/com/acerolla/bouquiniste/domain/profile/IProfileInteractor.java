@@ -10,4 +10,5 @@ import com.acerolla.bouquiniste.domain.BaseInteractor;
 public interface IProfileInteractor extends BaseInteractor {
 
     void loadProfile(ResultListener<ProfileData> listener);
+    void editProfile(ResultListener<ProfileData> listener, ProfileData userData);
 }
