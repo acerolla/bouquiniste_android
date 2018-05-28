@@ -86,7 +86,14 @@ public class AddingView extends ScrollView {
     }
 
     public AdvertData collectData() {
-        return null;
+        AdvertData advert = new AdvertData();
+        advert.setmTitle(mEtTitle.getText().toString());
+        advert.setmAuthor(mEtAuthor.getText().toString());
+        advert.setmDescription(mEtDescription.getText().toString());
+        advert.setmPrice(Float.parseFloat(mEtPrice.getText().toString()));
+        advert.setmPhone(mEtPhone.getText().toString());
+        advert.setmStatus("active");
+        return advert;
     }
 
     public void setContentVisibility(int visibility) {

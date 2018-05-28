@@ -1,9 +1,9 @@
-package com.acerolla.bouquiniste.presentation.adverts.view.recycler.presenter;
+package com.acerolla.bouquiniste.presentation.favorites.view.recycler.presenter;
 
 import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.presentation.BasePresenter;
-import com.acerolla.bouquiniste.presentation.adverts.view.recycler.AdvertAdapter;
+import com.acerolla.bouquiniste.presentation.favorites.view.recycler.AdvertAdapter;
 
 /**
  * Created by Evgeniy Solovev

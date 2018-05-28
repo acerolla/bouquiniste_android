@@ -89,7 +89,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
 
     @Override
     public void changeFavoriteStatus(boolean isFavorite) {
-        mView.setFavorite(isFavorite);
+
     }
 
     @Override

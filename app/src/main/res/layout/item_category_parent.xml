@@ -13,10 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
+        android:layout_toStartOf="@+id/iv_arrow"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:gravity="start"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginStart="20dp" />
 
     <ImageView
         android:id="@+id/iv_arrow"

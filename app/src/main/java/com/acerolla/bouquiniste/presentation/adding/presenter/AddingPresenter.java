@@ -55,7 +55,7 @@ public class AddingPresenter implements IAddingPresenter {
         mView.setLoaderVisibility(true);
 
         AdvertData advert = mView.collectData();
-        advert.setImage(mInteractor.getImagePath());
+        //advert.setImage(mInteractor.getImagePath());
 
         mInteractor.postAdvert(result -> {
             if (result != null && mView != null) {

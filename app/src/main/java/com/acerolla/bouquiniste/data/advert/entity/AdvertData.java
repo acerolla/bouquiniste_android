@@ -117,4 +117,44 @@ public class AdvertData {
     public void setImage(String image) {
         mImage = image;
     }
+
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
+
+    public void setmAuthor(String mAuthor) {
+        this.mAuthor = mAuthor;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public void setmPrice(float mPrice) {
+        this.mPrice = mPrice;
+    }
+
+    public void setmPhone(String mPhone) {
+        this.mPhone = mPhone;
+    }
+
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
+    }
+
+    public void setmCategoryId(int mCategoryId) {
+        this.mCategoryId = mCategoryId;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
+
+    public void setmFavorite(boolean mFavorite) {
+        this.mFavorite = mFavorite;
+    }
+
+    public void setmLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
 }

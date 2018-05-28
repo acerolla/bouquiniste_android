@@ -1,69 +1,66 @@
 package com.acerolla.bouquiniste.presentation.detail.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.util.AttributeSet;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
-public class DetailView extends RelativeLayout {
+public class DetailView extends ScrollView {
 
-    private static final int ID_TOOLBAR = 1;
-
+    private ImageView mIvImage;
+    private TextView mTvTitle;
+    private TextView mTvAuthor;
+    private TextView mTvDescription;
+    private TextView mTvPrice;
+    private TextView mTvPhone;
+    private TextView mTvLocation;
+    private TextView mTvCategory;
     private Toolbar mToolbar;
-    private AppCompatImageView mIvFavorite;
 
     public DetailView(Context context) {
         super(context);
         initViews();
     }
 
-    private void initViews() {
-        setBackgroundColor(Color.WHITE);
+    public DetailView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-        AppBarLayout appBarLayout = new AppBarLayout(getContext());
-        appBarLayout.setId(ID_TOOLBAR);
-        appBarLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        addView(appBarLayout);
+    public DetailView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
-        mToolbar = new Toolbar(getContext());
-        mToolbar.setId(android.R.id.toggle);
-        mToolbar.setBackgroundColor(Color.BLACK);
-        mToolbar.setTitleTextColor(Color.WHITE);
-        mToolbar.setSubtitleTextColor(Color.WHITE);
-        mToolbar.setTitle(R.string.app_name);
+    public DetailView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
 
-        AppBarLayout.LayoutParams toolbarParams = new AppBarLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        mToolbar.setLayoutParams(toolbarParams);
-        appBarLayout.addView(mToolbar);
+    @SuppressLint("RestrictedApi")
+    public void initViews() {
+        mToolbar = findViewById(R.id.toolbar_actionbar);
+        mToolbar.inflateMenu(R.menu.menu_detail);
 
-        mIvFavorite = new AppCompatImageView(getContext());
-        mIvFavorite.setImageResource(R.drawable.ic_filter_list_white_24dp);
-        mIvFavorite.setVisibility(GONE);
-
-        Toolbar.LayoutParams categoryParams = new Toolbar.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        categoryParams.gravity = Gravity.END;
-        mIvFavorite.setLayoutParams(categoryParams);
-        mToolbar.addView(mIvFavorite);
+        mIvImage = findViewById(R.id.iv_image);
+        mTvTitle = findViewById(R.id.tv_title);
+        mTvAuthor = findViewById(R.id.tv_author);
+        mTvDescription = findViewById(R.id.tv_description);
+        mTvPrice = findViewById(R.id.tv_price);
+        mTvPhone = findViewById(R.id.tv_phone);
+        mTvLocation = findViewById(R.id.tv_location);
+        mTvCategory = findViewById(R.id.tv_category);
     }
 
     public void setFavoriteClickListener(OnClickListener listener) {
-        mIvFavorite.setOnClickListener(listener);
+
     }
 
     public void setContentData(AdvertData data) {
@@ -80,18 +77,6 @@ public class DetailView extends RelativeLayout {
 
     public void setErrorVisibility(int visibility) {
 
-    }
-
-    public void setFavorite(boolean isFavorite) {
-        if (isFavorite) {
-            Picasso.get()
-                    .load(R.drawable.ic_favorite_white_24dp)
-                    .into(mIvFavorite);
-        } else {
-            Picasso.get()
-                    .load(R.drawable.ic_unfavorite_white_24dp)
-                    .into(mIvFavorite);
-        }
     }
 
     public Toolbar getToolbar() {

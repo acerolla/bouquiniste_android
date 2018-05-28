@@ -14,4 +14,5 @@ import dagger.Subcomponent;
 public interface RecyclerComponent {
 
     void inject(AdvertAdapter adapter);
+    void inject(com.acerolla.bouquiniste.presentation.favorites.view.recycler.AdvertAdapter adapter);
 }

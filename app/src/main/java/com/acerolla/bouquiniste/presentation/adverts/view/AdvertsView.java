@@ -68,12 +68,11 @@ public class AdvertsView extends SwipeRefreshLayout {
     }
 
     public void setItemClickListener(OnClickListener listener) {
-
+        mAdapter.setItemClickListener(listener);
     }
 
     public AdvertData getDataByView(View v) {
-
-        return null;
+        return ((AdvertAdapter.ViewHolder)mRvAdverts.getChildViewHolder(v)).item;
     }
 
     public void setCategoryData(List<CategoryParentData> data) {
