@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.acerolla.bouquiniste.presentation.adding.view.AddingView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_camera"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_image"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint="Название"
+            android:inputType="text"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/et_author"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_title"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint="Автор"
+            android:inputType="text"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/et_author"
+            android:ellipsize="start"
+            android:gravity="start"
+            android:hint="Описание"
+            android:inputType="text"
+            android:background="@drawable/edit_text_style"/>
+
+        <Button
+            android:id="@+id/btn_category"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_description"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:text="Выбрать категорию"
+            android:textAllCaps="false"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/et_price"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_category"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint="Цена"
+            android:inputType="text"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_price"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint="Телефон"
+            android:inputType="phone"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/et_location"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_phone"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint="Адрес"
+            android:inputType="text"
+            android:background="@drawable/edit_text_style"/>
+
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_location"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:text="Разместить объявление"
+            android:background="@drawable/edit_text_style"/>
+
+    </RelativeLayout>
+
+</com.acerolla.bouquiniste.presentation.adding.view.AddingView>

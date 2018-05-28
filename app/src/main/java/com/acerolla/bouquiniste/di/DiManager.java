@@ -53,7 +53,7 @@ public class DiManager {
         return sRepositoryComponent;
     }
 
-    private static CategoryComponent getCategoryComponent() {
+    public static CategoryComponent getCategoryComponent() {
         if (sCategoryComponent == null) {
             sCategoryComponent = getRepositoryComponent().plus(new CategoryModule());
         }

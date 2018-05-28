@@ -28,11 +28,11 @@ public class AddingPresenter implements IAddingPresenter {
     @Override
     public void bindView(IAddingView view) {
         mView = view;
-        mInteractor.loadCategories(result -> {
+        /*mInteractor.loadCategories(result -> {
             if (result != null) {
                 mView.setContentData(result);
             }
-        });
+        });*/
     }
 
     @Override
@@ -72,6 +72,16 @@ public class AddingPresenter implements IAddingPresenter {
     @Override
     public void handleDetailFinished() {
         mView.changeFragment();
+    }
+
+    @Override
+    public void handleCategoryButtonClicked() {
+        mView.navigateToCategories();
+    }
+
+    @Override
+    public void handleCategorySelected(int categoryId, String categoryTitle) {
+        mView.showCategory(categoryId, categoryTitle);
     }
 
     @Override

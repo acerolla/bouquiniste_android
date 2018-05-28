@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.presenter.IAddingPresenter;
+import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 
@@ -38,7 +40,10 @@ public class AddingFragment extends Fragment implements IAddingView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mView = new AddingView(getContext());
+
+        mView = (AddingView) inflater.inflate(R.layout.fragment_adding, container, false);
+        mView.initViews();
+
         return mView;
     }
 
@@ -54,6 +59,7 @@ public class AddingFragment extends Fragment implements IAddingView {
     private void setListeners() {
         mView.setAddClickListener(v -> mPresenter.handleAddClick());
         mView.setImageClickListener(v -> mPresenter.handleUploadClick());
+        mView.setCategoryButtonCLickListener(v -> mPresenter.handleCategoryButtonClicked());
     }
 
     @Override
@@ -65,6 +71,10 @@ public class AddingFragment extends Fragment implements IAddingView {
             }
         } else if (requestCode == DetailActivity.REQUEST_CODE_DETAIL) {
             mPresenter.handleDetailFinished();
+        } else if (requestCode == CategoryActivity.REQUEST_CATEGORY && resultCode == Activity.RESULT_OK) {
+            mPresenter.handleCategorySelected(
+                    data.getExtras().getInt(CategoryActivity.EXTRA_CATEGORY_ID),
+                    data.getExtras().getString(CategoryActivity.EXTRA_CATEGORY_TITLE));
         }
     }
 
@@ -85,11 +95,6 @@ public class AddingFragment extends Fragment implements IAddingView {
     public void navigateToDetail(int advertId) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         startActivityForResult(intent, DetailActivity.REQUEST_CODE_DETAIL);
-    }
-
-    @Override
-    public void setContentData(List<CategoryParentData> categories) {
-        mView.setContentData(categories);
     }
 
     @Override
@@ -124,6 +129,17 @@ public class AddingFragment extends Fragment implements IAddingView {
         if (getActivity() != null) {
             ((IMainView) getActivity()).showAdverts();
         }
+    }
+
+    @Override
+    public void navigateToCategories() {
+        Intent intent = new Intent(getActivity(), CategoryActivity.class);
+        startActivityForResult(intent, CategoryActivity.REQUEST_CATEGORY);
+    }
+
+    @Override
+    public void showCategory(int id, String title) {
+        mView.setCategory(id, title);
     }
 
     @Override

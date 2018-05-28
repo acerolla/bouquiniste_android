@@ -34,6 +34,11 @@
             android:screenOrientation="portrait"
             android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".presentation.category.view.CategoryActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
+            android:theme="@style/AppTheme"/>
 
     </application>
 

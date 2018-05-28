@@ -14,9 +14,10 @@ public interface IAddingView {
     void showChooseFileActivity();
     AdvertData collectData();
     void navigateToDetail(int advertId);
-    void setContentData(List<CategoryParentData> categories);
     void setContentVisibility(boolean isVisible);
     void setLoaderVisibility(boolean isVisible);
     void setErrorVisibility(boolean isVisible);
     void changeFragment();
+    void navigateToCategories();
+    void showCategory(int id, String title);
 }

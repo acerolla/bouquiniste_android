@@ -15,4 +15,6 @@ public interface IAddingPresenter extends BasePresenter<IAddingView> {
     void handleFileChoosed(Uri uri);
     void handleAddClick();
     void handleDetailFinished();
+    void handleCategoryButtonClicked();
+    void handleCategorySelected(int categoryId, String categoryTitle);
 }

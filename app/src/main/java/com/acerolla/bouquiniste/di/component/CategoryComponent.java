@@ -7,6 +7,7 @@ import com.acerolla.bouquiniste.di.module.DetailModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
 import com.acerolla.bouquiniste.di.module.RecyclerModule;
+import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 
 import dagger.Subcomponent;
 
@@ -16,6 +17,8 @@ import dagger.Subcomponent;
  */
 @Subcomponent(modules = CategoryModule.class)
 public interface CategoryComponent {
+
+    void inject(CategoryActivity activity);
 
     FavoritesComponent plus(FavoritesModule module);
     AddingComponent plus(AddingModule module);
