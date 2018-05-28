@@ -13,4 +13,8 @@ public class CategoryDataSourceFactory {
     public static ICategoryDataSource getLocalDataSource() {
         return new CategoryLocalDataSource();
     }
+
+    public static ICategoryDataSource getMemoryCacheDataSource() {
+        return new CategoryMemoryCacheDataSource();
+    }
 }

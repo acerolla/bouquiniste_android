@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Bouquiniste</string>
+    <string name="sample_string">Пример текста</string>
+    <string name="hyphen"> — </string>
 
     <string name="action_menu_search">Поиск</string>
     <string name="action_menu_favorites">Избранное</string>

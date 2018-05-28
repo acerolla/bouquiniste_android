@@ -11,7 +11,9 @@ public class ValuesConverter {
     public static final int DP_25 = 25;
     public static final int DP_30 = 30;
     public static final int DP_45 = 45;
+    public static final int DP_48 = 48;
     public static final int DP_100 = 100;
+    public static final int DP_150 = 150;
     public static final int DP_200 = 200;
 
     private static final SparseIntArray CONVERTED_VALUES = new SparseIntArray();

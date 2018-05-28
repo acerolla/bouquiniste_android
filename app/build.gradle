@@ -47,4 +47,8 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
     // END Picasso
+
+    // Expandable RecyclerView
+    implementation 'com.bignerdranch.android:expandablerecyclerview:3.0.0-RC1'
+    // END Expandable RecyclerView
 }

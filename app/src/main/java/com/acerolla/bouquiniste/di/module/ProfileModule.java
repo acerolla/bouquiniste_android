@@ -1,6 +1,7 @@
 package com.acerolla.bouquiniste.di.module;
 
 import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;
+import com.acerolla.bouquiniste.domain.adverts.IAdvertsInteractor;
 import com.acerolla.bouquiniste.domain.profile.IProfileInteractor;
 import com.acerolla.bouquiniste.domain.profile.ProfileInteractor;
 import com.acerolla.bouquiniste.presentation.profile.presenter.IProfilePresenter;
@@ -22,7 +23,7 @@ public class ProfileModule {
     }
 
     @Provides
-    public IProfileInteractor provideInteractor(IProfileRepository repository) {
-        return new ProfileInteractor(repository);
+    public IProfileInteractor provideInteractor(IProfileRepository repository, IAdvertsInteractor advertsInteractor) {
+        return new ProfileInteractor(repository, advertsInteractor);
     }
 }

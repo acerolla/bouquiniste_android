@@ -2,8 +2,11 @@ package com.acerolla.bouquiniste.presentation.auth.register.presenter;
 
 import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.domain.auth.IAuthInteractor;
 import com.acerolla.bouquiniste.presentation.auth.register.view.IRegisterView;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
@@ -12,10 +15,12 @@ import com.acerolla.bouquiniste.presentation.auth.register.view.IRegisterView;
 public class RegisterPresenter implements IRegisterPresenter {
 
     private IRegisterView mView;
-    private IAuthInteractor mInteractor;
 
-    public RegisterPresenter(IAuthInteractor interactor) {
-        mInteractor = interactor;
+    @Inject
+    IAuthInteractor mInteractor;
+
+    public RegisterPresenter() {
+        DiManager.getAuthComponent().inject(this);
     }
 
     @Override

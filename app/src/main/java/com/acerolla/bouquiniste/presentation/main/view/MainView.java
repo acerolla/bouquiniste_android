@@ -42,7 +42,9 @@ public class MainView extends RelativeLayout {
 
         AppBarLayout appBarLayout = new AppBarLayout(getContext());
         appBarLayout.setId(ID_TOOLBAR);
-        appBarLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        appBarLayout.setLayoutParams(new LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                ValuesConverter.dp2px(ValuesConverter.DP_48)));
         addView(appBarLayout);
 
         mToolbar = new Toolbar(getContext());
@@ -75,8 +77,8 @@ public class MainView extends RelativeLayout {
         LayoutParams contentParams = new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        contentParams.addRule(BELOW, ID_TOOLBAR);
         contentParams.addRule(ABOVE, ID_SHADOW);
+        contentParams.topMargin = ValuesConverter.dp2px(ValuesConverter.DP_48);
         mContentFrame.setLayoutParams(contentParams);
         addView(mContentFrame);
 
@@ -109,7 +111,7 @@ public class MainView extends RelativeLayout {
     }
 
     public void setCategoryClickListener(OnClickListener listener) {
-        mIvCategory.setOnClickListener(listener);
+        //mIvCategory.setOnClickListener(listener);
     }
 
     public void setFilterVisibility(int visibility) {

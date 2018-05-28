@@ -42,20 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         setContentView(mView);
 
         mView.setMenuListener(mMenuListener);
-        initToolbar();
-
-
-        new AuthRepository().login(new ResultListener<ProfileData>() {
-            @Override
-            public void onResult(ProfileData result1) {
-                new CategoryRepository().loadCategories(new ResultListener<List<CategoryParentData>>() {
-                    @Override
-                    public void onResult(List<CategoryParentData> result2) {
-                        new CategoryRepository().loadAdvertsByCategory(null, result2.get(0).getId());
-                    }
-                });
-            }
-        }, new LoginData("evgeniybsfg@mail.ru", "epwFY84z35"));
+        //initToolbar();
 
         mPresenter = new MainPresenter();
         mPresenter.bindView(this);

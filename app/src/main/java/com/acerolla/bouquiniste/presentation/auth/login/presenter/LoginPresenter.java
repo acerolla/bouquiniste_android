@@ -2,8 +2,11 @@ package com.acerolla.bouquiniste.presentation.auth.login.presenter;
 
 import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.domain.auth.IAuthInteractor;
 import com.acerolla.bouquiniste.presentation.auth.login.view.ILoginView;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
@@ -12,10 +15,12 @@ import com.acerolla.bouquiniste.presentation.auth.login.view.ILoginView;
 public class LoginPresenter implements ILoginPresenter {
 
     private ILoginView mView;
-    private IAuthInteractor mInteractor;
 
-    public LoginPresenter(IAuthInteractor interactor) {
-        mInteractor = interactor;
+    @Inject
+    IAuthInteractor mInteractor;
+
+    public LoginPresenter() {
+        DiManager.getAuthComponent().inject(this);
     }
 
     @Override

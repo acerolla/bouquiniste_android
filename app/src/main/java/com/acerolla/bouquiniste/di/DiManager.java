@@ -10,6 +10,7 @@ import com.acerolla.bouquiniste.di.component.FavoritesComponent;
 import com.acerolla.bouquiniste.di.component.LoginComponent;
 import com.acerolla.bouquiniste.di.component.LoginContainerComponent;
 import com.acerolla.bouquiniste.di.component.ProfileComponent;
+import com.acerolla.bouquiniste.di.component.RecyclerComponent;
 import com.acerolla.bouquiniste.di.component.RegisterComponent;
 import com.acerolla.bouquiniste.di.component.RepositoryComponent;
 import com.acerolla.bouquiniste.di.module.AddingModule;
@@ -21,6 +22,7 @@ import com.acerolla.bouquiniste.di.module.FavoritesModule;
 import com.acerolla.bouquiniste.di.module.LoginContainerModule;
 import com.acerolla.bouquiniste.di.module.LoginModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
+import com.acerolla.bouquiniste.di.module.RecyclerModule;
 import com.acerolla.bouquiniste.di.module.RegisterModule;
 
 /**
@@ -40,6 +42,7 @@ public class DiManager {
     private static LoginContainerComponent sLoginContainerComponent;
     private static LoginComponent sLoginComponent;
     private static RegisterComponent sRegisterComponent;
+    private static RecyclerComponent sRecyclerComponent;
 
 
     public static RepositoryComponent getRepositoryComponent() {
@@ -58,7 +61,7 @@ public class DiManager {
         return sCategoryComponent;
     }
 
-    private static AuthComponent getAuthComponent() {
+    public static AuthComponent getAuthComponent() {
         if (sAuthComponent == null) {
             sAuthComponent = getRepositoryComponent().plus(new AuthModule());
         }
@@ -92,7 +95,7 @@ public class DiManager {
 
     public static ProfileComponent getProfileComponent() {
         if (sProfileComponent == null) {
-            sProfileComponent = getRepositoryComponent().plus(new ProfileModule());
+            sProfileComponent = getCategoryComponent().plus(new ProfileModule());
         }
 
         return sProfileComponent;
@@ -108,7 +111,7 @@ public class DiManager {
 
     public static LoginContainerComponent getLoginContainerComponent() {
         if (sLoginContainerComponent == null) {
-            sLoginContainerComponent = getAuthComponent().plus(new LoginContainerModule());
+            sLoginContainerComponent = getRepositoryComponent().plus(new LoginContainerModule());
         }
 
         return sLoginContainerComponent;
@@ -116,7 +119,7 @@ public class DiManager {
 
     public static LoginComponent getLoginComponent() {
         if (sLoginComponent == null) {
-            sLoginComponent = getAuthComponent().plus(new LoginModule());
+            sLoginComponent = getRepositoryComponent().plus(new LoginModule());
         }
 
         return sLoginComponent;
@@ -124,10 +127,18 @@ public class DiManager {
 
     public static RegisterComponent getRegisterComponent() {
         if (sRegisterComponent == null) {
-            sRegisterComponent = getAuthComponent().plus(new RegisterModule());
+            sRegisterComponent = getRepositoryComponent().plus(new RegisterModule());
         }
 
         return sRegisterComponent;
+    }
+
+    public static RecyclerComponent getRecyclerComponent() {
+        if (sRecyclerComponent == null) {
+            sRecyclerComponent = getCategoryComponent().plus(new RecyclerModule());
+        }
+
+        return sRecyclerComponent;
     }
 
 
@@ -143,5 +154,6 @@ public class DiManager {
         sLoginContainerComponent = null;
         sLoginComponent = null;
         sRegisterComponent = null;
+        sRecyclerComponent = null;
     }
 }

@@ -1,6 +1,9 @@
 package com.acerolla.bouquiniste.di.module;
 
+import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
+import com.acerolla.bouquiniste.domain.auth.AuthInteractor;
 import com.acerolla.bouquiniste.domain.auth.IAuthInteractor;
+import com.acerolla.bouquiniste.domain.profile.IProfileInteractor;
 import com.acerolla.bouquiniste.presentation.auth.login.presenter.ILoginPresenter;
 import com.acerolla.bouquiniste.presentation.auth.login.presenter.LoginPresenter;
 
@@ -15,7 +18,7 @@ import dagger.Provides;
 public class LoginModule {
 
     @Provides
-    public ILoginPresenter providePresenter(IAuthInteractor interactor) {
-        return new LoginPresenter(interactor);
+    public ILoginPresenter providePresenter() {
+        return new LoginPresenter();
     }
 }

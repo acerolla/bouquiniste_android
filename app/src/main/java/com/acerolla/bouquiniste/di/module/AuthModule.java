@@ -3,6 +3,7 @@ package com.acerolla.bouquiniste.di.module;
 import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
 import com.acerolla.bouquiniste.domain.auth.AuthInteractor;
 import com.acerolla.bouquiniste.domain.auth.IAuthInteractor;
+import com.acerolla.bouquiniste.domain.profile.IProfileInteractor;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,7 +16,7 @@ import dagger.Provides;
 public class AuthModule {
 
     @Provides
-    public IAuthInteractor provideInteractor(IAuthRepository repository) {
-        return new AuthInteractor(repository);
+    public IAuthInteractor provideInteractor(IAuthRepository repository, IProfileInteractor profileInteractor) {
+        return new AuthInteractor(repository, profileInteractor);
     }
 }

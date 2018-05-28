@@ -67,6 +67,12 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
     }
 
     @Override
+    public List<CategoryParentData> getCategoriesAsync() {
+        //ignore
+        return null;
+    }
+
+    @Override
     public void release() {
 
     }

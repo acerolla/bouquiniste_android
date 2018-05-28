@@ -126,6 +126,12 @@ public class CategoryCloudDataSource implements ICategoryDataSource {
     }
 
     @Override
+    public List<CategoryParentData> getCategoriesAsync() {
+        //ignore
+        return null;
+    }
+
+    @Override
     public void release() {
 
     }

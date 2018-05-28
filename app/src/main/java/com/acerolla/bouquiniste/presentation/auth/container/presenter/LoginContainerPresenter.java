@@ -1,7 +1,10 @@
 package com.acerolla.bouquiniste.presentation.auth.container.presenter;
 
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.domain.auth.IAuthInteractor;
 import com.acerolla.bouquiniste.presentation.auth.container.view.ILoginContainerView;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
@@ -10,10 +13,12 @@ import com.acerolla.bouquiniste.presentation.auth.container.view.ILoginContainer
 public class LoginContainerPresenter implements ILoginContainerPresenter {
 
     private ILoginContainerView mView;
-    private IAuthInteractor mInteractor;
 
-    public LoginContainerPresenter(IAuthInteractor interactor) {
-        mInteractor = interactor;
+    @Inject
+    IAuthInteractor mInteractor;
+
+    public LoginContainerPresenter() {
+        DiManager.getAuthComponent().inject(this);
     }
 
 

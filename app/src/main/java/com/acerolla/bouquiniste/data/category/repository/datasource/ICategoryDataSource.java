@@ -15,5 +15,6 @@ public interface ICategoryDataSource {
     void loadCategories(ResultListener<List<CategoryParentData>> listener);
     void saveCategories(List<CategoryParentData> categories);
     void loadAdvertsByCategory(ResultListener<List<AdvertData>> listener, int categoryId);
+    List<CategoryParentData> getCategoriesAsync();
     void release();
 }
