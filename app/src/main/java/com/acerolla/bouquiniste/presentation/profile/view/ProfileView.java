@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.acerolla.bouquiniste.R;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.presentation.utils.ImageLoader;
 import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
+
+import java.util.List;
 
 /**
  * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
@@ -112,6 +115,34 @@ public class ProfileView extends RelativeLayout {
 
     public void setEmail(CharSequence email) {
         mTvEmail.setText(email);
+    }
+
+    public void setContentAdverts(List<AdvertData> data) {
+
+    }
+
+    public void setProfileVisibility(int visibility) {
+
+    }
+
+    public void setAdvertsVisibility(int visibility) {
+
+    }
+
+    public void setLoaderVisibility(int visibility) {
+
+    }
+
+    public void setErrorVisibility(int visibility) {
+
+    }
+
+    public void setEmptyMessageVisibility(int visibility) {
+
+    }
+
+    public void setNameClickListener(OnClickListener listener) {
+        mTvUser.setOnClickListener(listener);
     }
 
     @Override

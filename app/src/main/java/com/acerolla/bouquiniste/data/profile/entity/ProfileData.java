@@ -37,8 +37,12 @@ public class ProfileData {
         return mId;
     }
 
-    public String getUser() {
+    public String getName() {
         return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
     }
 
     public String getEmail() {

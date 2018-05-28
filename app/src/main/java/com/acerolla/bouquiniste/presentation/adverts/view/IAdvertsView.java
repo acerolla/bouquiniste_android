@@ -1,9 +1,23 @@
 package com.acerolla.bouquiniste.presentation.adverts.view;
 
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
+
+import java.util.List;
+
 /**
  * Created by Evgeniy Solovev
- * Date: 24.05.2018
  * Email: solevur@gmail.com
  */
 public interface IAdvertsView {
+
+    void setContentData(List<AdvertData> data);
+    void setContentVisibility(boolean isVisible);
+    void setLoaderVisibility(boolean isVisible);
+    void setErrorVisibility(boolean isVisible);
+
+    void navigateToDetail();
+    void setCategoryData(List<CategoryParentData> data);
+    void showCategory();
+    void showCategoryErrorToast();
 }

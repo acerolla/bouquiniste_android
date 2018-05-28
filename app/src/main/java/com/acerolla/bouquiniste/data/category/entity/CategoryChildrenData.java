@@ -6,25 +6,26 @@ import java.io.Serializable;
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
-
 public class CategoryChildrenData implements Serializable {
 
     private int mId;
-    private String mName;
+
+    private String mTitle;
 
     public CategoryChildrenData() {
 
     }
 
-    public CategoryChildrenData(String name) {
-        mName = name;
+    public CategoryChildrenData(int id, String title) {
+        mId = id;
+        mTitle = title;
     }
 
     public int getId() {
         return mId;
     }
 
-    public String getName() {
-        return mName;
+    public String getTitle() {
+        return mTitle;
     }
 }

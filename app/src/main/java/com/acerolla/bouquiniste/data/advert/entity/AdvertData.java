@@ -42,7 +42,17 @@ public class AdvertData {
     @DatabaseField(columnName = "image")
     private String mImage;
 
-    public AdvertData(int id, String title, String author, String description, float price, String phone, String status, int categoryId, int userId, String image) {
+    @DatabaseField(columnName = "is_favorite")
+    private boolean mFavorite;
+
+    @DatabaseField(columnName = "location")
+    private String mLocation;
+
+    public AdvertData() {
+
+    }
+
+    public AdvertData(int id, String title, String author, String description, float price, String phone, String status, int categoryId, String image, boolean isFavorite, String location) {
         mId = id;
         mTitle = title;
         mAuthor = author;
@@ -51,8 +61,9 @@ public class AdvertData {
         mPhone = phone;
         mStatus = status;
         mCategoryId = categoryId;
-        mUserId = userId;
         mImage = image;
+        mFavorite = isFavorite;
+        mLocation = location;
     }
 
     public int getId() {
@@ -93,5 +104,17 @@ public class AdvertData {
 
     public String getImage() {
         return mImage;
+    }
+
+    public boolean isFavorite() {
+        return mFavorite;
+    }
+
+    public String getLocation() {
+        return mLocation;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
     }
 }

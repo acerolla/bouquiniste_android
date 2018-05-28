@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.data.category.repository.datasource;
 
+import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
  */
 public interface ICategoryDataSource {
 
-    List<CategoryParentData> getCategories();
+    void loadCategories(ResultListener<List<CategoryParentData>> listener);
+    void saveCategories(List<CategoryParentData> categories);
+    void loadAdvertsByCategory(ResultListener<List<AdvertData>> listener, int categoryId);
     void release();
 }

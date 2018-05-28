@@ -1,7 +1,7 @@
 package com.acerolla.bouquiniste.data.profile.repository.datasource;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class ProfileDataSourceFactory {
 
@@ -11,5 +11,9 @@ public class ProfileDataSourceFactory {
 
     public static IProfileDataSource getLocalDataSource() {
         return new ProfileLocalDataSource();
+    }
+
+    public static IProfileDataSource getMemoryCacheDataSource() {
+        return new ProfileMemoryCacheDataSource();
     }
 }

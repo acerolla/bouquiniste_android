@@ -4,10 +4,9 @@ import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.auth.entity.TokenData;
 import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
 import com.acerolla.bouquiniste.data.auth.entity.register.RegisterData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileResponse;
-import com.acerolla.bouquiniste.data.profile.repository.ProfileRepository;
 import com.acerolla.bouquiniste.data.utils.cloud.BaseResponseObject;
 import com.acerolla.bouquiniste.presentation.utils.Logger;
 
@@ -38,16 +37,22 @@ class AuthCloudDataSource implements IAuthDataSource {
                                     response.body().data.token,
                                     response.body().data.name,
                                     response.body().data.email);
-                            listener.onResult(profile);
+                            if (listener != null) {
+                                listener.onResult(profile);
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<ProfileResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -68,16 +73,22 @@ class AuthCloudDataSource implements IAuthDataSource {
                                     response.body().data.token,
                                     response.body().data.name,
                                     response.body().data.email);
-                            listener.onResult(profile);
+                            if (listener != null) {
+                                listener.onResult(profile);
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<ProfileResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -92,13 +103,17 @@ class AuthCloudDataSource implements IAuthDataSource {
                     @Override
                     public void onResponse(Call<BaseResponseObject> call, Response<BaseResponseObject> response) {
                         Logger.d(response.message());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -115,6 +130,12 @@ class AuthCloudDataSource implements IAuthDataSource {
 
     @Override
     public TokenData getTokenAsync() {
+        //ignore
         return null;
+    }
+
+    @Override
+    public void release() {
+
     }
 }

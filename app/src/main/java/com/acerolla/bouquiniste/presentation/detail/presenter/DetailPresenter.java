@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.presentation.detail.presenter;
 
+import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.domain.detail.IDetailInteractor;
 import com.acerolla.bouquiniste.presentation.detail.view.IDetailView;
 
@@ -19,6 +21,23 @@ public class DetailPresenter implements IDetailPresenter {
     @Override
     public void bindView(IDetailView view) {
         mView = view;
+        mInteractor.loadAdvert(result -> {
+            if (result != null) {
+                mView.setContentData(result);
+                mView.setLoaderVisibility(false);
+                mView.setContentVisibility(true);
+            } else {
+                mView.setLoaderVisibility(false);
+                mView.setErrorVisibility(true);
+            }
+        });
+    }
+
+    @Override
+    public void handleFavoriteClick() {
+        mInteractor.changeFavoriteStatus(
+                result -> mView.changeFavoriteStatus(result),
+                mInteractor.getCachedAdvert());
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.acerolla.bouquiniste.data.utils;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

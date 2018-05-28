@@ -3,8 +3,8 @@ package com.acerolla.bouquiniste.data.auth.repository;
 import com.acerolla.bouquiniste.data.auth.entity.TokenData;
 import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
 import com.acerolla.bouquiniste.data.auth.entity.register.RegisterData;
-import com.acerolla.bouquiniste.data.profile.BaseRepository;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.BaseRepository;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 
 /**

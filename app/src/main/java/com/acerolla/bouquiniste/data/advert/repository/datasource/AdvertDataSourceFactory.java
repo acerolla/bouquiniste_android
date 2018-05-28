@@ -2,7 +2,6 @@ package com.acerolla.bouquiniste.data.advert.repository.datasource;
 
 /**
  * Created by Evgeniy Solovev
- * Date: 25.05.2018
  * Email: solevur@gmail.com
  */
 public class AdvertDataSourceFactory {
@@ -13,5 +12,9 @@ public class AdvertDataSourceFactory {
 
     public static IAdvertDataSource getLocalDataSource() {
         return new AdvertLocalDataSource();
+    }
+
+    public static IAdvertDataSource getMemoryCacheDataSource() {
+        return new AdvertMemoryCacheDataSource();
     }
 }

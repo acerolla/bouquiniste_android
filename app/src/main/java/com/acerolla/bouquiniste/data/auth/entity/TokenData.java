@@ -12,7 +12,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = DbHelper.TABLE_TOKEN)
 public class TokenData {
 
-    @DatabaseField(columnName = "token")
+    @DatabaseField(id = true, columnName = "token")
     private String mToken;
 
     public TokenData() {

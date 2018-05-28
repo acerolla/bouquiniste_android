@@ -5,7 +5,7 @@ import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
 import com.acerolla.bouquiniste.data.auth.entity.register.RegisterData;
 import com.acerolla.bouquiniste.data.auth.repository.datasource.AuthDataSourceFactory;
 import com.acerolla.bouquiniste.data.auth.repository.datasource.IAuthDataSource;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 
 /**
@@ -18,15 +18,27 @@ public class AuthRepository implements IAuthRepository {
 
     @Override
     public void login(ResultListener<ProfileData> listener,  LoginData data) {
-        AuthDataSourceFactory.getCloudDataSource()
-                .login(result -> {
-                    if (result != null) {
-                        TokenData tokenData = new TokenData(result.getToken());
-                        AuthDataSourceFactory.getLocalDataSource().saveToken(tokenData);
-                        getCacheSource().saveToken(tokenData);
+        AuthDataSourceFactory.getLocalDataSource()
+                .getToken(resultFromLocal -> {
+                    if (resultFromLocal != null) {
+                        getCacheSource().saveToken(resultFromLocal);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
+                    } else {
+                        AuthDataSourceFactory.getCloudDataSource()
+                                .login(resultFromCloud -> {
+                                    if (resultFromCloud != null) {
+                                        TokenData tokenData = new TokenData(resultFromCloud.getToken());
+                                        AuthDataSourceFactory.getLocalDataSource().saveToken(tokenData);
+                                        getCacheSource().saveToken(tokenData);
+                                    }
+                                    if (listener != null) {
+                                        listener.onResult(resultFromCloud);
+                                    }
+                                }, data);
                     }
-                    listener.onResult(result);
-                }, data);
+                });
     }
 
     @Override
@@ -38,7 +50,9 @@ public class AuthRepository implements IAuthRepository {
                         AuthDataSourceFactory.getLocalDataSource().saveToken(tokenData);
                         getCacheSource().saveToken(tokenData);
                     }
-                    listener.onResult(result);
+                    if (listener != null) {
+                        listener.onResult(result);
+                    }
                 }, data);
     }
 
@@ -49,7 +63,9 @@ public class AuthRepository implements IAuthRepository {
                     if (result != null) {
                         getCacheSource().saveToken(result);
                     }
-                    listener.onResult(result);
+                    if (listener != null) {
+                        listener.onResult(result);
+                    }
                 });
     }
 
@@ -68,13 +84,15 @@ public class AuthRepository implements IAuthRepository {
 
     @Override
     public void logout(ResultListener<Object> listener) {
-        AuthDataSourceFactory.getLocalDataSource().logout(null);
-        AuthDataSourceFactory.getCloudDataSource().logout(listener);
+        getCacheSource().logout(null);
+        AuthDataSourceFactory.getLocalDataSource().logout(listener);
     }
 
     @Override
     public void release() {
+        if (mCacheSource != null) {
+            mCacheSource.release();
+        }
         mCacheSource = null;
     }
-
 }

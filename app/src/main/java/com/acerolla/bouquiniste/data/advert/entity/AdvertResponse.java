@@ -21,4 +21,5 @@ public class AdvertResponse {
     public int user_id;
     public String image;
     public boolean is_favorite;
+    public String location;
 }

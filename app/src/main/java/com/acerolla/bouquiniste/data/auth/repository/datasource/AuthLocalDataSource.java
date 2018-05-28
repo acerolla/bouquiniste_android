@@ -4,7 +4,7 @@ import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.auth.entity.TokenData;
 import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
 import com.acerolla.bouquiniste.data.auth.entity.register.RegisterData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.utils.BouquinisteRunnable;
 
@@ -74,9 +74,13 @@ class AuthLocalDataSource implements IAuthDataSource {
                 }, result -> {
                     if (result != null && result instanceof List && !((List) result).isEmpty() &&
                             ((List) result).get(ZERO)!= null && ((List) result).get(ZERO) instanceof TokenData) {
-                        listener.onResult((TokenData) ((List)result).get(ZERO));
+                        if (listener != null) {
+                            listener.onResult((TokenData) ((List) result).get(ZERO));
+                        }
                     } else {
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -85,5 +89,10 @@ class AuthLocalDataSource implements IAuthDataSource {
     public TokenData getTokenAsync() {
         //ignore
         return null;
+    }
+
+    @Override
+    public void release() {
+
     }
 }

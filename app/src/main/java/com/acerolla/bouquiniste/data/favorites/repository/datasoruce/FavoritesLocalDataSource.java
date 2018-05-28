@@ -1,7 +1,7 @@
 package com.acerolla.bouquiniste.data.favorites.repository.datasoruce;
 
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 
 import java.util.List;
 

@@ -8,14 +8,13 @@ import java.io.File;
  */
 public class AdvertRequest {
 
-    public int id;
     public String title;
     public String author;
     public String description;
     public float price;
     public String status;
     public String phone;
+    public String location;
     public int category_id;
-    public int user_id;
-    public File image;
+    //public File image;
 }

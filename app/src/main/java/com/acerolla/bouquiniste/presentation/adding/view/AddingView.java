@@ -14,7 +14,10 @@ import android.widget.ScrollView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
+
+import java.util.List;
 
 import static android.widget.RelativeLayout.BELOW;
 import static android.widget.RelativeLayout.CENTER_HORIZONTAL;
@@ -172,16 +175,22 @@ public class AddingView extends ScrollView {
     }
 
     public AdvertData collectData() {
-        return new AdvertData(
-                ZERO,
-                mTvTitle.getText().toString(),
-                mTvAuthor.getText().toString(),
-                mTvDescription.getText().toString(),
-                Float.parseFloat(mTvPrice.getText().toString()),
-                mTvPhone.getText().toString(),
-                "active",
-                ZERO,
-                ZERO,
-                imagePath);
+        return null;
+    }
+
+    public void setContentData(List<CategoryParentData> categories) {
+
+    }
+
+    public void setContentVisibility(int visibility) {
+
+    }
+
+    public void setLoaderVisibility(int visibility) {
+
+    }
+
+    public void setErrorVisibility(int visibility) {
+
     }
 }

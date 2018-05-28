@@ -4,15 +4,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.View;
 
 import com.acerolla.bouquiniste.R;
+import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
+import com.acerolla.bouquiniste.data.auth.repository.AuthRepository;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
+import com.acerolla.bouquiniste.data.category.repository.CategoryRepository;
+import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.presentation.adding.view.AddingFragment;
 import com.acerolla.bouquiniste.presentation.adverts.view.AdvertsFragment;
 import com.acerolla.bouquiniste.presentation.favorites.view.FavoritesFragment;
 import com.acerolla.bouquiniste.presentation.main.presenter.IMainPresenter;
 import com.acerolla.bouquiniste.presentation.main.presenter.MainPresenter;
 import com.acerolla.bouquiniste.presentation.profile.view.ProfileFragment;
+
+import java.util.List;
 
 /**
  * Created by Acerolla (Evgeniy Solovev) on 22.05.2018.
@@ -29,10 +40,29 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
         mView = new MainView(this);
         setContentView(mView);
+
         mView.setMenuListener(mMenuListener);
+        initToolbar();
+
+
+        new AuthRepository().login(new ResultListener<ProfileData>() {
+            @Override
+            public void onResult(ProfileData result1) {
+                new CategoryRepository().loadCategories(new ResultListener<List<CategoryParentData>>() {
+                    @Override
+                    public void onResult(List<CategoryParentData> result2) {
+                        new CategoryRepository().loadAdvertsByCategory(null, result2.get(0).getId());
+                    }
+                });
+            }
+        }, new LoginData("evgeniybsfg@mail.ru", "epwFY84z35"));
 
         mPresenter = new MainPresenter();
         mPresenter.bindView(this);
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(mView.getToolbar());
     }
 
     @Override
@@ -41,9 +71,14 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     private void changeFragment(Fragment fragment) {
+        hideCategories();
         getSupportFragmentManager().beginTransaction()
                 .replace(MainView.ID_CONTENT_FRAME, fragment)
                 .commit();
+    }
+
+    private void hideCategories() {
+        mView.setFilterVisibility(View.GONE);
     }
 
     @Override
@@ -59,6 +94,12 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void showAdverts() {
         changeFragment(new AdvertsFragment());
+    }
+
+    @Override
+    public void initToolbarForAdverts(View.OnClickListener listener) {
+        mView.setFilterVisibility(View.VISIBLE);
+        mView.setCategoryClickListener(listener);
     }
 
     @Override

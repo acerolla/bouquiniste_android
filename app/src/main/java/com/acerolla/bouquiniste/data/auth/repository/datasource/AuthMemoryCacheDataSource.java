@@ -3,7 +3,7 @@ package com.acerolla.bouquiniste.data.auth.repository.datasource;
 import com.acerolla.bouquiniste.data.auth.entity.TokenData;
 import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
 import com.acerolla.bouquiniste.data.auth.entity.register.RegisterData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 
 /**
@@ -26,7 +26,7 @@ class AuthMemoryCacheDataSource implements IAuthDataSource {
 
     @Override
     public void logout(ResultListener<Object> listener) {
-        //ignore
+        mToken = null;
     }
 
     @Override
@@ -42,5 +42,10 @@ class AuthMemoryCacheDataSource implements IAuthDataSource {
     @Override
     public TokenData getTokenAsync() {
         return mToken;
+    }
+
+    @Override
+    public void release() {
+        mToken = null;
     }
 }

@@ -4,13 +4,15 @@ import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertRequest;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertResponse;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.utils.cloud.BaseResponseObject;
 import com.acerolla.bouquiniste.presentation.utils.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,16 +35,22 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                     public void onResponse(Call<BaseResponseObject<List<AdvertResponse>>> call, Response<BaseResponseObject<List<AdvertResponse>>> response) {
                         Logger.d(response.message());
                         if (response.isSuccessful() && response.body() != null && response.body().data != null) {
-                            listener.onResult(proceedResponse(response.body().data));
+                            if (listener != null) {
+                                listener.onResult(proceedResponse(response.body().data));
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<List<AdvertResponse>>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -59,8 +67,9 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                     item.phone,
                     item.status,
                     item.category_id,
-                    item.user_id,
-                    item.image));
+                    item.image,
+                    item.is_favorite,
+                    item.location));
         }
 
         return adverts;
@@ -87,34 +96,40 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                                     response.body().data.phone,
                                     response.body().data.status,
                                     response.body().data.category_id,
-                                    response.body().data.user_id,
-                                    response.body().data.image);
-                            listener.onResult(advert);
+                                    response.body().data.image,
+                                    response.body().data.is_favorite,
+                                    response.body().data.location);
+                            if (listener != null) {
+                                listener.onResult(advert);
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
 
     @Override
     public void editAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
-        AdvertRequest requestBody = new AdvertRequest();
-        requestBody.title = advertData.getTitle();
-        requestBody.author = advertData.getAuthor();
-        requestBody.description = advertData.getDescription();
-        requestBody.price = advertData.getPrice();
-        requestBody.status = advertData.getStatus();
-        requestBody.category_id = advertData.getCategoryId();
-        requestBody.user_id = advertData.getUserId();
-        requestBody.phone = advertData.getPhone();
-        requestBody.image = new File(advertData.getImage());
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("title", advertData.getTitle());
+        requestBody.put("author", advertData.getAuthor());
+        requestBody.put("description", advertData.getDescription());
+        requestBody.put("price", Float.toString(advertData.getPrice()));
+        requestBody.put("status", advertData.getStatus());
+        requestBody.put("category_id", Integer.toString(advertData.getCategoryId()));
+        requestBody.put("phone", advertData.getPhone());
+        requestBody.put("location", advertData.getLocation());
 
         BouquinisteApplication.getInstance()
                 .getApiManager()
@@ -134,18 +149,25 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                                     response.body().data.phone,
                                     response.body().data.status,
                                     response.body().data.category_id,
-                                    response.body().data.user_id,
-                                    response.body().data.image);
-                            listener.onResult(advert);
+                                    response.body().data.image,
+                                    response.body().data.is_favorite,
+                                    response.body().data.location);
+                            if (listener != null) {
+                                listener.onResult(advert);
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -161,17 +183,39 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                     public void onResponse(Call<BaseResponseObject<List<AdvertResponse>>> call, Response<BaseResponseObject<List<AdvertResponse>>> response) {
                         Logger.d(response.message());
                         if (response.isSuccessful() && response.body() != null && response.body().data != null) {
-                            listener.onResult(proceedResponse(response.body().data));
+                            if (listener != null) {
+                                listener.onResult(proceedResponse(response.body().data));
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<List<AdvertResponse>>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
+    }
+
+    @Override
+    public AdvertData getAdvertAsync() {
+        //ignore
+        return null;
+    }
+
+    @Override
+    public void saveAdvertToCache(AdvertData advert) {
+        //ignore
+    }
+
+    @Override
+    public void release() {
+
     }
 }

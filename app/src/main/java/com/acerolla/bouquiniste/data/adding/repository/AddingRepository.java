@@ -2,7 +2,7 @@ package com.acerolla.bouquiniste.data.adding.repository;
 
 import com.acerolla.bouquiniste.data.adding.repository.datasource.AddingDataSourceFactory;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 
 /**
  * Created by Evgeniy Solovev
@@ -12,7 +12,7 @@ public class AddingRepository implements IAddingRepository {
 
     @Override
     public void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
-        AddingDataSourceFactory.getLocalDataSource()
+        AddingDataSourceFactory.getCloudDataSource()
                 .postAdvert(listener, advertData);
     }
 

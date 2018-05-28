@@ -11,24 +11,25 @@ import java.util.ArrayList;
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
-@DatabaseTable(tableName = DbHelper.TABLE_CATEGORY)
+@DatabaseTable(tableName = DbHelper.TABLE_CATEGORIES)
 public class CategoryParentData {
 
     @DatabaseField(id = true, columnName = "id")
     private int mId;
 
-    @DatabaseField(columnName = "name")
-    private String mName;
+    @DatabaseField(columnName = "title")
+    private String mTitle;
 
-    @DatabaseField(columnName = "hotspot", dataType = DataType.SERIALIZABLE)
+    @DatabaseField(columnName = "children", dataType = DataType.SERIALIZABLE)
     private ArrayList<CategoryChildrenData> mChildren;
 
     public CategoryParentData() {
 
     }
 
-    public CategoryParentData(String name, ArrayList<CategoryChildrenData> children) {
-        mName = name;
+    public CategoryParentData(int id, String title, ArrayList<CategoryChildrenData> children) {
+        mId = id;
+        mTitle = title;
         mChildren = children;
     }
 
@@ -36,8 +37,8 @@ public class CategoryParentData {
         return mId;
     }
 
-    public String getName() {
-        return mName;
+    public String getTitle() {
+        return mTitle;
     }
 
     public ArrayList<CategoryChildrenData> getChildren() {

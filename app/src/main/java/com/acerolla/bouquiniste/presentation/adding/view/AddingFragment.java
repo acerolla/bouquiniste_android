@@ -11,8 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.presenter.IAddingPresenter;
+import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
+import com.acerolla.bouquiniste.presentation.main.view.IMainView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -46,6 +51,11 @@ public class AddingFragment extends Fragment implements IAddingView {
         setListeners();
     }
 
+    private void setListeners() {
+        mView.setAddClickListener(v -> mPresenter.handleAddClick());
+        mView.setImageClickListener(v -> mPresenter.handleUploadClick());
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -53,12 +63,9 @@ public class AddingFragment extends Fragment implements IAddingView {
             if (data != null) {
                 mPresenter.handleFileChoosed(data.getData());
             }
+        } else if (requestCode == DetailActivity.REQUEST_CODE_DETAIL) {
+            mPresenter.handleDetailFinished();
         }
-    }
-
-    private void setListeners() {
-        mView.setAddClickListener(v -> mPresenter.handleAddClick());
-        mView.setImageClickListener(v -> mPresenter.handleUploadClick());
     }
 
     @Override
@@ -76,7 +83,47 @@ public class AddingFragment extends Fragment implements IAddingView {
 
     @Override
     public void navigateToDetail(int advertId) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        startActivityForResult(intent, DetailActivity.REQUEST_CODE_DETAIL);
+    }
 
+    @Override
+    public void setContentData(List<CategoryParentData> categories) {
+        mView.setContentData(categories);
+    }
+
+    @Override
+    public void setContentVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setContentVisibility(View.VISIBLE);
+        } else {
+            mView.setContentVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setLoaderVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setLoaderVisibility(View.VISIBLE);
+        } else {
+            mView.setLoaderVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setErrorVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setErrorVisibility(View.VISIBLE);
+        } else {
+            mView.setErrorVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void changeFragment() {
+        if (getActivity() != null) {
+            ((IMainView) getActivity()).showAdverts();
+        }
     }
 
     @Override

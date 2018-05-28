@@ -4,7 +4,10 @@ import com.acerolla.bouquiniste.presentation.BasePresenter;
 import com.acerolla.bouquiniste.presentation.profile.view.IProfileView;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 23.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public interface IProfilePresenter extends BasePresenter<IProfileView> {
+
+    void handleNameClicked();
+    void handleNameChanged(String userName);
 }

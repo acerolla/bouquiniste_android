@@ -21,7 +21,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public static final String TABLE_TOKEN = "bouquiniste_token";
     public static final String TABLE_PROFILE = "bouquiniste_profile";
     public static final String TABLE_ADVERTS = "bouquiniste_adverts";
-    public static final String TABLE_CATEGORY = "bouquiniste_category";
+    public static final String TABLE_CATEGORIES = "bouquiniste_categories";
 
     private static final int DB_VERSION = 1;
 

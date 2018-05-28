@@ -8,4 +8,6 @@ import com.acerolla.bouquiniste.presentation.detail.view.IDetailView;
  * Email: solevur@gmail.com
  */
 public interface IDetailPresenter extends BasePresenter<IDetailView> {
+
+    void handleFavoriteClick();
 }

@@ -6,6 +6,8 @@ import com.acerolla.bouquiniste.data.advert.repository.AdvertsRepository;
 import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.data.auth.repository.AuthRepository;
 import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
+import com.acerolla.bouquiniste.data.category.repository.CategoryRepository;
+import com.acerolla.bouquiniste.data.category.repository.ICategoryRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.FavoritesRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.IFavoritesRepository;
 import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;
@@ -18,7 +20,6 @@ import dagger.Provides;
 
 /**
  * Created by Evgeniy Solovev
- * Date: 25.05.2018
  * Email: solevur@gmail.com
  */
 @Module
@@ -52,5 +53,11 @@ public class RepositoryModule {
     @Singleton
     public IAuthRepository provideAuthRepository() {
         return new AuthRepository();
+    }
+
+    @Provides
+    @Singleton
+    public ICategoryRepository provideCategoryRepository() {
+        return new CategoryRepository();
     }
 }

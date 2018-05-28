@@ -3,7 +3,7 @@ package com.acerolla.bouquiniste.data.auth.repository.datasource;
 import com.acerolla.bouquiniste.data.auth.entity.TokenData;
 import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
 import com.acerolla.bouquiniste.data.auth.entity.register.RegisterData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 
 /**
@@ -18,5 +18,6 @@ public interface IAuthDataSource {
     void saveToken(TokenData token);
     void getToken(ResultListener<TokenData> listener);
     TokenData getTokenAsync();
+    void release();
 
 }

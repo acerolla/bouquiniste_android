@@ -1,7 +1,7 @@
 package com.acerolla.bouquiniste.data.profile.repository.datasource;
 
 import com.acerolla.bouquiniste.BouquinisteApplication;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileResponse;
 import com.acerolla.bouquiniste.data.utils.cloud.BaseResponseObject;
@@ -32,16 +32,22 @@ public class ProfileCloudDataSource implements IProfileDataSource {
                                     response.body().data.token,
                                     response.body().data.name,
                                     response.body().data.email);
-                            listener.onResult(profile);
+                            if (listener != null) {
+                                listener.onResult(profile);
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<ProfileResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -52,9 +58,9 @@ public class ProfileCloudDataSource implements IProfileDataSource {
     }
 
     @Override
-    public void editProfile(ResultListener<ProfileData> listener, ProfileData userData) {
+    public void editProfile(ResultListener<String> listener, String userName) {
         ProfileResponse requestBody = new ProfileResponse();
-        requestBody.name = userData.getUser();
+        requestBody.name = userName;
         BouquinisteApplication.getInstance()
                 .getApiManager()
                 .getRestApi()
@@ -64,22 +70,35 @@ public class ProfileCloudDataSource implements IProfileDataSource {
                     public void onResponse(Call<BaseResponseObject<ProfileResponse>> call, Response<BaseResponseObject<ProfileResponse>> response) {
                         Logger.d(response.message());
                         if (response.isSuccessful() && response.body() != null && response.body().data != null) {
-                            ProfileData profile = new ProfileData(
-                                    response.body().data.id,
-                                    response.body().data.token,
-                                    response.body().data.name,
-                                    response.body().data.email);
-                            listener.onResult(profile);
+                            String userNameResponse = response.body().data.name;
+                            if (listener != null) {
+                                listener.onResult(userNameResponse);
+                            }
                         } else {
-                            listener.onResult(null);
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<BaseResponseObject<ProfileResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
+    }
+
+    @Override
+    public ProfileData getUserProfileAsync() {
+        //ignore
+        return null;
+    }
+
+    @Override
+    public void release() {
+
     }
 }

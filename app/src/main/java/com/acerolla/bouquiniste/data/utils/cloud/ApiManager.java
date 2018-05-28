@@ -24,9 +24,11 @@ public class ApiManager {
 
     private static final int TIMEOUT_SEC = 10;
 
-    private static final String API_URL = "";
+    private static final String API_URL = "http://85.119.144.206/";
 
-    private static final String CONTENT_KEY = "Content-type";
+    private static final String SAMPLE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC84NS4xMTkuMTQ0LjIwNlwvYXBpXC9sb2dpbiIsImlhdCI6MTUyNzQ1MTUwNiwiZXhwIjoxNTI4MDU2MzA2LCJuYmYiOjE1Mjc0NTE1MDYsImp0aSI6Ind4VXF0RGY3U201VmkxTVYiLCJzdWIiOjQsInBydiI6ImY5MzA3ZWI1ZjI5YzcyYTkwZGJhYWVmMGUyNmYwMjYyZWRlODZmNTUiLCJtb2RlbCI6IkFwcFxcRW50aXRpZXNcXFVzZXIifQ.9VTmBcl7BKVoVbZoQjI8dd21G9bnrqRqutXV5UMC5eM";
+
+    private static final String CONTENT_KEY = "Accept";
     private static final String CONTENT_VALUE = "application/json";
     private static final String AUTH_KEY = "Authorization";
     private static final String AUTH_VALUE = "Bearer ";
@@ -48,9 +50,10 @@ public class ApiManager {
                     Request request = chain.request();
                     Request.Builder builder = request.newBuilder();
                     builder.addHeader(CONTENT_KEY, CONTENT_VALUE);
-                    if (requestNeedsAuth(request.url().toString())) {
+                    /*if (requestNeedsAuth(request.url().toString()) && mRepository.getTokenAsync() != null) {
                         builder.addHeader(AUTH_KEY, AUTH_VALUE + mRepository.getTokenAsync().getToken());
-                    }
+                    }*/
+                    builder.addHeader(AUTH_KEY, AUTH_VALUE + SAMPLE_TOKEN);
                     return chain.proceed(builder.build());
                 })
                 .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)
@@ -69,13 +72,13 @@ public class ApiManager {
     private boolean requestNeedsAuth(String url) {
         url = url.toLowerCase();
 
-        String comparable = API_URL + LOGIN;
+        String comparable = LOGIN;
         comparable = comparable.toLowerCase();
         if (url.contains(comparable)) {
             return false;
         }
 
-        comparable = API_URL + REGISTER;
+        comparable = REGISTER;
         comparable = comparable.toLowerCase();
         if (url.contains(comparable)) {
             return false;

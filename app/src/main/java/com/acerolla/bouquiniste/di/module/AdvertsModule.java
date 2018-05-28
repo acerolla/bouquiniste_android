@@ -3,6 +3,7 @@ package com.acerolla.bouquiniste.di.module;
 import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.domain.adverts.AdvertsInteractor;
 import com.acerolla.bouquiniste.domain.adverts.IAdvertsInteractor;
+import com.acerolla.bouquiniste.domain.category.ICategoryInteractor;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.AdvertsPresenter;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.IAdvertsPresenter;
 
@@ -11,7 +12,6 @@ import dagger.Provides;
 
 /**
  * Created by Evgeniy Solovev
- * Date: 25.05.2018
  * Email: solevur@gmail.com
  */
 @Module
@@ -23,7 +23,7 @@ public class AdvertsModule {
     }
 
     @Provides
-    public IAdvertsInteractor provideInteractor(IAdvertsRepository repository) {
-        return new AdvertsInteractor(repository);
+    public IAdvertsInteractor provideInteractor(IAdvertsRepository repository, ICategoryInteractor categoryInteractor) {
+        return new AdvertsInteractor(repository, categoryInteractor);
     }
 }

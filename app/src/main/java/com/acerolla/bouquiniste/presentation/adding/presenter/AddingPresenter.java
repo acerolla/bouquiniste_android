@@ -2,10 +2,13 @@ package com.acerolla.bouquiniste.presentation.adding.presenter;
 
 import android.net.Uri;
 
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.domain.adding.IAddingInteractor;
 import com.acerolla.bouquiniste.presentation.adding.view.IAddingView;
+
+import java.util.List;
 
 /**
  * Created by Evgeniy Solovev
@@ -25,6 +28,11 @@ public class AddingPresenter implements IAddingPresenter {
     @Override
     public void bindView(IAddingView view) {
         mView = view;
+        mInteractor.loadCategories(result -> {
+            if (result != null) {
+                mView.setContentData(result);
+            }
+        });
     }
 
     @Override
@@ -34,7 +42,7 @@ public class AddingPresenter implements IAddingPresenter {
 
     @Override
     public void handleFileChoosed(Uri uri) {
-        String path = getPathFromUri(uri);
+        mInteractor.saveImagePath(getPathFromUri(uri)); ////storage/emulated/0/Download/sample_image.jpg
     }
 
     private String getPathFromUri(Uri uri) {
@@ -43,12 +51,27 @@ public class AddingPresenter implements IAddingPresenter {
 
     @Override
     public void handleAddClick() {
+        mView.setContentVisibility(false);
+        mView.setLoaderVisibility(true);
+
         AdvertData advert = mView.collectData();
+        advert.setImage(mInteractor.getImagePath());
+
         mInteractor.postAdvert(result -> {
-            if (result != null) {
+            if (result != null && mView != null) {
                 mView.navigateToDetail(result.getId());
+            } else {
+                if (mView != null) {
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(true);
+                }
             }
         }, advert);
+    }
+
+    @Override
+    public void handleDetailFinished() {
+        mView.changeFragment();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.presentation.favorites.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,9 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.di.DiManager;
+import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.FavoritesPresenter;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.IFavoritesPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -39,6 +45,69 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
 
         DiManager.getFavoritesComponent().inject(this);
         mPresenter.bindView(this);
+
+        setListeners();
+    }
+
+    private void setListeners() {
+        mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DetailActivity.REQUEST_CODE_DETAIL && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getExtras() != null && data.getExtras().containsKey(DetailActivity.EXTRA_IS_CHANGED)) {
+                mPresenter.handleDetailFinished(data.getExtras().getBoolean(DetailActivity.EXTRA_IS_CHANGED));
+            }
+        }
+    }
+
+    @Override
+    public void setContentData(List<AdvertData> data) {
+        mView.setContentData(data);
+    }
+
+    @Override
+    public void setContentVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setContentVisibility(View.VISIBLE);
+        } else {
+            mView.setContentVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setLoaderVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setLoaderVisibility(View.VISIBLE);
+        } else {
+            mView.setLoaderVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setErrorVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setErrorVisibility(View.VISIBLE);
+        } else {
+            mView.setErrorVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setEmptyMessageVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setEmptyMessageVisibility(View.VISIBLE);
+        } else {
+            mView.setEmptyMessageVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void navigateToDetail() {
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        startActivityForResult(intent, DetailActivity.REQUEST_CODE_DETAIL);
     }
 
     @Override

@@ -2,7 +2,8 @@ package com.acerolla.bouquiniste.data.advert.repository;
 
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.advert.repository.datasource.AdvertDataSourceFactory;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.advert.repository.datasource.IAdvertDataSource;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
  * Email: solevur@gmail.com
  */
 public class AdvertsRepository implements IAdvertsRepository {
+
+    private IAdvertDataSource mMemoryCacheDataSource;
 
 
     @Override
@@ -21,34 +24,63 @@ public class AdvertsRepository implements IAdvertsRepository {
 
     @Override
     public void editAdvert(ResultListener<AdvertData> listener, AdvertData advert) {
-        AdvertDataSourceFactory.getCloudDataSource().editAdvert(listener, advert);
+        AdvertDataSourceFactory.getCloudDataSource()
+                .editAdvert(listener, advert);
     }
 
     @Override
     public void loadAdvertList(ResultListener<List<AdvertData>> listener) {
         AdvertDataSourceFactory.getLocalDataSource()
                 .getAdvertList(resultFromLocal -> {
-                    //AdvertDataSourceFactory.getCloudDataSource()
-                            //.getAdvertList(resultFromCloud -> {
-                                /*if (resultFromCloud != null) {
-                                    listener.onResult(resultFromCloud);
-                                } else*/ if (resultFromLocal != null) {
-                                    listener.onResult(resultFromLocal);
+                    AdvertDataSourceFactory.getCloudDataSource()
+                            .getAdvertList(resultFromCloud -> {
+                                if (resultFromCloud != null) {
+                                    if (listener != null) {
+                                        listener.onResult(resultFromCloud);
+                                    }
+                                } else if (resultFromLocal != null) {
+                                    if (listener != null) {
+                                        listener.onResult(resultFromLocal);
+                                    }
                                 } else {
-                                    listener.onResult(null);
+                                    if (listener != null) {
+                                        listener.onResult(null);
+                                    }
                                 }
-                            //});
+                            });
                 });
     }
 
     @Override
-    public void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId) {
+    public void loadUserAdverts(ResultListener<List<AdvertData>> listener, int userId) {
         AdvertDataSourceFactory.getCloudDataSource()
                 .getUserAdverts(listener, userId);
     }
 
     @Override
-    public void release() {
+    public AdvertData getCachedAdvert() {
+        return getMemoryCache().getAdvertAsync();
+    }
 
+    private IAdvertDataSource getMemoryCache() {
+        if (mMemoryCacheDataSource == null) {
+            mMemoryCacheDataSource = AdvertDataSourceFactory.getMemoryCacheDataSource();
+        }
+
+        return mMemoryCacheDataSource;
+    }
+
+    @Override
+    public void saveAdvertToCache(AdvertData advert) {
+        getMemoryCache().saveAdvertToCache(advert);
+    }
+
+    @Override
+    public void release() {
+        if (mMemoryCacheDataSource != null) {
+            mMemoryCacheDataSource.release();
+        }
+
+        mMemoryCacheDataSource = null;
     }
 }

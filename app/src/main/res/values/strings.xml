@@ -6,7 +6,10 @@
     <string name="action_menu_add_advert">Добавить</string>
     <string name="action_menu_profile">Профиль</string>
 
+    <string name="menu_item_category">Категории</string>
+
     <string name="profile_label_adverts">Объявления:</string>
+    <string name="profile_dialog_title">Хотите изменить имя пользователя?</string>
 
     <string name="adding_hint_title">Название</string>
     <string name="adding_hint_author">Автор</string>
@@ -14,4 +17,6 @@
     <string name="adding_hint_price">Ценв</string>
     <string name="adding_hint_phone">Номер телефона</string>
     <string name="adding_button_add">Разместить</string>
+
+    <string name="adverts_toast_category_error">Не удалось загрузить список категорий</string>
 </resources>

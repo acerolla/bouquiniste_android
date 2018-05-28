@@ -6,7 +6,11 @@ package com.acerolla.bouquiniste.data.category.repository.datasource;
  */
 public class CategoryDataSourceFactory {
 
-    public static ICategoryDataSource getMemoryCacheDataSource() {
-        return new CategoryMemoryCacheDataSource();
+    public static ICategoryDataSource getCloudDataSource() {
+        return new CategoryCloudDataSource();
+    }
+
+    public static ICategoryDataSource getLocalDataSource() {
+        return new CategoryLocalDataSource();
     }
 }

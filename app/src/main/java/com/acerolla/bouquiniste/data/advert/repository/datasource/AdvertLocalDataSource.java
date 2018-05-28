@@ -2,7 +2,7 @@ package com.acerolla.bouquiniste.data.advert.repository.datasource;
 
 import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.profile.ResultListener;
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.utils.BouquinisteRunnable;
 
 import java.util.List;
@@ -30,9 +30,13 @@ class AdvertLocalDataSource implements IAdvertDataSource {
                 }, result -> {
                     if (result != null && result instanceof List && !((List) result).isEmpty() &&
                             ((List) result).get(ZERO)!= null && ((List) result).get(ZERO) instanceof AdvertData) {
-                        listener.onResult((List<AdvertData>) result);
+                        if (listener != null) {
+                            listener.onResult((List<AdvertData>) result);
+                        }
                     } else {
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
     }
@@ -64,10 +68,30 @@ class AdvertLocalDataSource implements IAdvertDataSource {
                 }, result -> {
                     if (result != null && result instanceof List && !((List) result).isEmpty() &&
                             ((List) result).get(ZERO)!= null && ((List) result).get(ZERO) instanceof AdvertData) {
-                        listener.onResult((List<AdvertData>) result);
+                        if (listener != null) {
+                            listener.onResult((List<AdvertData>) result);
+                        }
                     } else {
-                        listener.onResult(null);
+                        if (listener != null) {
+                            listener.onResult(null);
+                        }
                     }
                 });
+    }
+
+    @Override
+    public AdvertData getAdvertAsync() {
+        //ignore
+        return null;
+    }
+
+    @Override
+    public void saveAdvertToCache(AdvertData advert) {
+        //ignore
+    }
+
+    @Override
+    public void release() {
+
     }
 }
