@@ -16,17 +16,20 @@ import com.bignerdranch.expandablerecyclerview.ChildViewHolder;
 public class SubcategoryViewHolder extends ChildViewHolder {
 
     private TextView mTvTitle;
+
+    public CategoryChildrenData item;
     /**
      * Default constructor.
      *
      * @param itemView The {@link View} being hosted in this ViewHolder
      */
-    public SubcategoryViewHolder(@NonNull View itemView) {
+    SubcategoryViewHolder(@NonNull View itemView) {
         super(itemView);
         mTvTitle = itemView.findViewById(R.id.tv_title);
     }
 
     public void bind(CategoryChildrenData children) {
         mTvTitle.setText(children.getTitle());
+        item = children;
     }
 }

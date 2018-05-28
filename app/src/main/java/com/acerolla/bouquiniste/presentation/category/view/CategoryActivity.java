@@ -10,6 +10,8 @@ import android.view.View;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.category.presenter.ICategoryPresenter;
+import com.acerolla.bouquiniste.presentation.category.view.recycler.CategoryViewHolder;
+import com.acerolla.bouquiniste.presentation.category.view.recycler.SubcategoryViewHolder;
 
 import java.util.List;
 
@@ -43,17 +45,19 @@ public class CategoryActivity extends AppCompatActivity implements ICategoryView
     }
 
     private void setListeners() {
-        mView.setParentClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mView.getViewHolder(v);
+        mView.setParentClickListener(v -> {
+            if (mView.getViewHolder(v) instanceof CategoryViewHolder) {
+                mPresenter.handleCategorySelected(
+                        ((CategoryViewHolder) mView.getViewHolder(v)).item.getId(),
+                        ((CategoryViewHolder) mView.getViewHolder(v)).item.getTitle());
             }
         });
 
-        mView.setChildClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mView.getViewHolder(v);
+        mView.setChildClickListener(v -> {
+            if (mView.getViewHolder(v) instanceof SubcategoryViewHolder) {
+                mPresenter.handleCategorySelected(
+                        ((SubcategoryViewHolder) mView.getViewHolder(v)).item.getId(),
+                        ((SubcategoryViewHolder) mView.getViewHolder(v)).item.getTitle());
             }
         });
     }
