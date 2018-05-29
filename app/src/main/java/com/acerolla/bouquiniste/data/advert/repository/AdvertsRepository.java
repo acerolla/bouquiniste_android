@@ -23,12 +23,6 @@ public class AdvertsRepository implements IAdvertsRepository {
     }
 
     @Override
-    public void editAdvert(ResultListener<AdvertData> listener, AdvertData advert) {
-        AdvertDataSourceFactory.getCloudDataSource()
-                .editAdvert(listener, advert);
-    }
-
-    @Override
     public void loadAdvertList(ResultListener<List<AdvertData>> listener) {
         AdvertDataSourceFactory.getLocalDataSource()
                 .getAdvertList(resultFromLocal -> {

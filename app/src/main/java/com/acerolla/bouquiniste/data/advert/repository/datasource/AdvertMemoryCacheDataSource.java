@@ -24,11 +24,6 @@ public class AdvertMemoryCacheDataSource implements IAdvertDataSource {
     }
 
     @Override
-    public void editAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
-        //ignore
-    }
-
-    @Override
     public void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId) {
         //ignore
     }

@@ -47,11 +47,6 @@ class AdvertLocalDataSource implements IAdvertDataSource {
     }
 
     @Override
-    public void editAdvert(ResultListener<AdvertData> listener, AdvertData advert) {
-        //ignore
-    }
-
-    @Override
     public void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId) {
         BouquinisteApplication.getInstance()
                 .getBackgroundThread()

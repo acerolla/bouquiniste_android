@@ -13,7 +13,6 @@ import java.util.List;
 public interface IAdvertsRepository extends BaseRepository {
 
     void loadAdvert(ResultListener<AdvertData> listener, int advertId);
-    void editAdvert(ResultListener<AdvertData> listener, AdvertData advert);
     void loadAdvertList(ResultListener<List<AdvertData>> listener);
     void loadUserAdverts(ResultListener<List<AdvertData>> listener, int userId);
 

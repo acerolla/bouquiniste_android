@@ -25,11 +25,6 @@ public class DetailInteractor implements IDetailInteractor {
     }
 
     @Override
-    public void editAdvert(ResultListener<AdvertData> listener, AdvertData advert) {
-        mRepository.editAdvert(listener, mRepository.getCachedAdvert());
-    }
-
-    @Override
     public void changeFavoriteStatus(ResultListener<Boolean> listener, AdvertData advert) {
         if (advert.isFavorite()) {
             if (listener != null) {

@@ -6,6 +6,7 @@ import com.acerolla.bouquiniste.di.component.AuthComponent;
 import com.acerolla.bouquiniste.di.component.CategoryComponent;
 import com.acerolla.bouquiniste.di.component.DaggerRepositoryComponent;
 import com.acerolla.bouquiniste.di.component.DetailComponent;
+import com.acerolla.bouquiniste.di.component.EditComponent;
 import com.acerolla.bouquiniste.di.component.FavoritesComponent;
 import com.acerolla.bouquiniste.di.component.LoginComponent;
 import com.acerolla.bouquiniste.di.component.LoginContainerComponent;
@@ -19,6 +20,7 @@ import com.acerolla.bouquiniste.di.module.AdvertsModule;
 import com.acerolla.bouquiniste.di.module.AuthModule;
 import com.acerolla.bouquiniste.di.module.CategoryModule;
 import com.acerolla.bouquiniste.di.module.DetailModule;
+import com.acerolla.bouquiniste.di.module.EditModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
 import com.acerolla.bouquiniste.di.module.FavoritesRecyclerModule;
 import com.acerolla.bouquiniste.di.module.LoginContainerModule;
@@ -47,6 +49,7 @@ public class DiManager {
     private static LoginComponent sLoginComponent;
     private static RegisterComponent sRegisterComponent;
     private static RecyclerComponent sRecyclerComponent;
+    private static EditComponent sEditComponent;
 
 
     public static RepositoryComponent getRepositoryComponent() {
@@ -153,6 +156,14 @@ public class DiManager {
         return sRecyclerComponent;
     }
 
+    public static EditComponent getEditComponent() {
+        if (sEditComponent == null) {
+            sEditComponent = getRepositoryComponent().plus(new EditModule());
+        }
+
+        return sEditComponent;
+    }
+
 
     public static void release() {
         sRepositoryComponent = null;
@@ -167,5 +178,6 @@ public class DiManager {
         sLoginComponent = null;
         sRegisterComponent = null;
         sRecyclerComponent = null;
+        sEditComponent = null;
     }
 }

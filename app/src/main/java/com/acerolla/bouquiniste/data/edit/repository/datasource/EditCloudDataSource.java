@@ -1,17 +1,13 @@
-package com.acerolla.bouquiniste.data.advert.repository.datasource;
+package com.acerolla.bouquiniste.data.edit.repository.datasource;
 
 import com.acerolla.bouquiniste.BouquinisteApplication;
-import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.advert.entity.AdvertRequest;
-import com.acerolla.bouquiniste.data.advert.entity.AdvertResponse;
 import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertResponse;
 import com.acerolla.bouquiniste.data.utils.cloud.BaseResponseObject;
 import com.acerolla.bouquiniste.presentation.utils.Logger;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -22,21 +18,31 @@ import retrofit2.Response;
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
-class AdvertCloudDataSource implements IAdvertDataSource {
+class EditCloudDataSource implements IEditDataSource {
 
     @Override
-    public void getAdvertList(ResultListener<List<AdvertData>> listener) {
+    public void closeAdvert(ResultListener<Boolean> listener, int advertId) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("status", "closed");
+
         BouquinisteApplication.getInstance()
                 .getApiManager()
                 .getRestApi()
-                .getAdverts()
-                .enqueue(new Callback<BaseResponseObject<List<AdvertResponse>>>() {
+                .editAdvert(advertId, requestBody)
+                .enqueue(new Callback<BaseResponseObject<AdvertResponse>>() {
                     @Override
-                    public void onResponse(Call<BaseResponseObject<List<AdvertResponse>>> call, Response<BaseResponseObject<List<AdvertResponse>>> response) {
+                    public void onResponse(Call<BaseResponseObject<AdvertResponse>> call, Response<BaseResponseObject<AdvertResponse>> response) {
                         Logger.d(response.message());
                         if (response.isSuccessful() && response.body() != null && response.body().data != null) {
-                            if (listener != null) {
-                                listener.onResult(proceedResponse(response.body().data));
+                            String status = response.body().data.status;
+                            if (status.equals("closed")) {
+                                if (listener != null) {
+                                    listener.onResult(true);
+                                }
+                            } else {
+                                if (listener != null) {
+                                    listener.onResult(null);
+                                }
                             }
                         } else {
                             if (listener != null) {
@@ -46,7 +52,7 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                     }
 
                     @Override
-                    public void onFailure(Call<BaseResponseObject<List<AdvertResponse>>> call, Throwable t) {
+                    public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
                         Logger.e(t.getMessage());
                         if (listener != null) {
                             listener.onResult(null);
@@ -55,33 +61,21 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                 });
     }
 
-    private List<AdvertData> proceedResponse(List<AdvertResponse> response) {
-        List<AdvertData> adverts = new ArrayList<>();
-        for (AdvertResponse item : response) {
-            adverts.add(new AdvertData(
-                    item.id,
-                    item.title,
-                    item.author,
-                    item.description,
-                    item.price,
-                    item.phone,
-                    item.status,
-                    item.category_id,
-                    item.image,
-                    item.is_favorite,
-                    item.location));
-        }
-
-        return adverts;
-    }
-
-
     @Override
-    public void getAdvert(ResultListener<AdvertData> listener, int advertId) {
+    public void editAdvert(ResultListener<AdvertData> listener, AdvertData data) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("title", data.getTitle());
+        requestBody.put("author", data.getAuthor());
+        requestBody.put("description", data.getDescription());
+        requestBody.put("price", Float.toString(data.getPrice()));
+        requestBody.put("category_id", Integer.toString(data.getCategoryId()));
+        requestBody.put("phone", data.getPhone());
+        requestBody.put("location", data.getLocation());
+
         BouquinisteApplication.getInstance()
                 .getApiManager()
                 .getRestApi()
-                .getAdvert(advertId)
+                .editAdvert(data.getId(), requestBody)
                 .enqueue(new Callback<BaseResponseObject<AdvertResponse>>() {
                     @Override
                     public void onResponse(Call<BaseResponseObject<AdvertResponse>> call, Response<BaseResponseObject<AdvertResponse>> response) {
@@ -117,52 +111,5 @@ class AdvertCloudDataSource implements IAdvertDataSource {
                         }
                     }
                 });
-    }
-
-    @Override
-    public void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId) {
-        BouquinisteApplication.getInstance()
-                .getApiManager()
-                .getRestApi()
-                .getUserAdverts(userId)
-                .enqueue(new Callback<BaseResponseObject<List<AdvertResponse>>>() {
-                    @Override
-                    public void onResponse(Call<BaseResponseObject<List<AdvertResponse>>> call, Response<BaseResponseObject<List<AdvertResponse>>> response) {
-                        Logger.d(response.message());
-                        if (response.isSuccessful() && response.body() != null && response.body().data != null) {
-                            if (listener != null) {
-                                listener.onResult(proceedResponse(response.body().data));
-                            }
-                        } else {
-                            if (listener != null) {
-                                listener.onResult(null);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<BaseResponseObject<List<AdvertResponse>>> call, Throwable t) {
-                        Logger.e(t.getMessage());
-                        if (listener != null) {
-                            listener.onResult(null);
-                        }
-                    }
-                });
-    }
-
-    @Override
-    public AdvertData getAdvertAsync() {
-        //ignore
-        return null;
-    }
-
-    @Override
-    public void saveAdvertToCache(AdvertData advert) {
-        //ignore
-    }
-
-    @Override
-    public void release() {
-
     }
 }

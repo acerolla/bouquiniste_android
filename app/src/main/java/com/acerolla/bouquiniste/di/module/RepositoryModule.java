@@ -8,6 +8,8 @@ import com.acerolla.bouquiniste.data.auth.repository.AuthRepository;
 import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
 import com.acerolla.bouquiniste.data.category.repository.CategoryRepository;
 import com.acerolla.bouquiniste.data.category.repository.ICategoryRepository;
+import com.acerolla.bouquiniste.data.edit.repository.EditRepository;
+import com.acerolla.bouquiniste.data.edit.repository.IEditRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.FavoritesRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.IFavoritesRepository;
 import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;
@@ -59,5 +61,11 @@ public class RepositoryModule {
     @Singleton
     public ICategoryRepository provideCategoryRepository() {
         return new CategoryRepository();
+    }
+
+    @Provides
+    @Singleton
+    public IEditRepository provideEditRepository() {
+        return new EditRepository();
     }
 }

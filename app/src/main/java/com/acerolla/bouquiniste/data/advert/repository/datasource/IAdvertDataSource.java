@@ -14,7 +14,6 @@ public interface IAdvertDataSource {
 
     void getAdvertList(ResultListener<List<AdvertData>> listener);
     void getAdvert(ResultListener<AdvertData> listener, int advertId);
-    void editAdvert(ResultListener<AdvertData> listener, AdvertData advertData);
     void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId);
     AdvertData getAdvertAsync();
     void saveAdvertToCache(AdvertData advert);

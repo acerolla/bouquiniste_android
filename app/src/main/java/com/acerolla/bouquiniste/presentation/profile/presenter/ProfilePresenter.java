@@ -83,8 +83,7 @@ public class ProfilePresenter implements IProfilePresenter {
 
     @Override
     public void handleItemClicked(AdvertData data) {
-        //mInteractor.saveAdvertToCache(data);
-        //mView.navigateToDetail();
+        mView.navigateToEdit(data.getId());
     }
 
     @Override

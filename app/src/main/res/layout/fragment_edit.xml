@@ -1,0 +1,160 @@
+<com.acerolla.bouquiniste.presentation.edit.view.EditView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_detail"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="60dp"
+        android:background="@drawable/borders">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/black"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24px"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white">
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_camera"
+            android:layout_below="@+id/toolbar_actionbar"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/tv_title"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/iv_image"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:hint="Название книги"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/tv_author"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_title"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:hint="Автор книги"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/tv_description"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tv_author"
+            android:padding="7dp"
+            android:ellipsize="start"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:hint="Описание"
+            android:background="@drawable/edit_text_style"/>
+
+        <Button
+            android:id="@+id/tv_category"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_description"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="Выбрать категорию"
+            android:textAllCaps="false"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/tv_price"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_category"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:hint="Цена"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/tv_phone"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_price"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:hint="Номер телефона для связи"
+            android:background="@drawable/edit_text_style"/>
+
+        <EditText
+            android:id="@+id/tv_location"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_phone"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:hint="Адрес"
+            android:background="@drawable/edit_text_style"/>
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_location"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:text="Редактировать"
+            android:background="@drawable/edit_text_style"/>
+
+    </RelativeLayout>
+
+</com.acerolla.bouquiniste.presentation.edit.view.EditView>

@@ -1,6 +1,7 @@
 package com.acerolla.bouquiniste.presentation.profile.view;
 
-import android.content.DialogInterface;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,8 @@ import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.di.DiManager;
+import com.acerolla.bouquiniste.presentation.edit.view.EditActivity;
+import com.acerolla.bouquiniste.presentation.edit.view.EditFragment;
 import com.acerolla.bouquiniste.presentation.profile.presenter.IProfilePresenter;
 import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
 
@@ -61,6 +64,14 @@ public class ProfileFragment extends Fragment implements IProfileView {
     private void setListeners() {
         mView.setNameClickListener(v -> mPresenter.handleNameClicked());
         mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EditFragment.REQUEST_EDIT && resultCode == Activity.RESULT_OK) {
+
+        }
     }
 
     @Override
@@ -117,15 +128,6 @@ public class ProfileFragment extends Fragment implements IProfileView {
     }
 
     @Override
-    public void setAdvertsVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setAdvertsVisibility(View.VISIBLE);
-        } else {
-            mView.setAdvertsVisibility(View.GONE);
-        }
-    }
-
-    @Override
     public void setLoaderVisibility(boolean isVisible) {
         if (isVisible) {
             mView.setLoaderVisibility(View.VISIBLE);
@@ -160,6 +162,13 @@ public class ProfileFragment extends Fragment implements IProfileView {
     @Override
     public void showUsefulToast(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void navigateToEdit(int advertId) {
+        Intent intent = new Intent(getContext(), EditActivity.class);
+        intent.putExtra(EditFragment.EXTRA_ID, advertId);
+        startActivityForResult(intent, EditFragment.REQUEST_EDIT);
     }
 
     @Override

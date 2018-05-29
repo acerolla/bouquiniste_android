@@ -5,6 +5,7 @@ import com.acerolla.bouquiniste.di.module.AddingModule;
 import com.acerolla.bouquiniste.di.module.AdvertsModule;
 import com.acerolla.bouquiniste.di.module.AuthModule;
 import com.acerolla.bouquiniste.di.module.CategoryModule;
+import com.acerolla.bouquiniste.di.module.EditModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
 import com.acerolla.bouquiniste.di.module.LoginContainerModule;
 import com.acerolla.bouquiniste.di.module.LoginModule;
@@ -33,4 +34,5 @@ public interface RepositoryComponent {
     LoginContainerComponent plus(LoginContainerModule module);
     LoginComponent plus(LoginModule module);
     RegisterComponent plus(RegisterModule module);
+    EditComponent plus(EditModule module);
 }

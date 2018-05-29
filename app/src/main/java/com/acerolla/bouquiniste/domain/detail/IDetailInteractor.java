@@ -11,7 +11,6 @@ import com.acerolla.bouquiniste.domain.BaseInteractor;
 public interface IDetailInteractor extends BaseInteractor {
 
     void loadAdvert(ResultListener<AdvertData> listener);
-    void editAdvert(ResultListener<AdvertData> listener, AdvertData advert);
     void changeFavoriteStatus(ResultListener<Boolean> listener, AdvertData advert);
     AdvertData getCachedAdvert();
 }
