@@ -19,6 +19,8 @@ import javax.inject.Inject;
  */
 public class LoginContainerActivity extends AppCompatActivity implements ILoginContainerView {
 
+    public static final int REQUEST_LOGIN = 78;
+
     private LoginContainerView mView;
 
     @Inject

@@ -43,6 +43,11 @@ public class AdvertsInteractor implements IAdvertsInteractor {
     }
 
     @Override
+    public void loadAdvertsByCategories(ResultListener<List<AdvertData>> listener, int categoryId) {
+        mCategoryInteractor.loadAdvertsByCategory(listener, categoryId);
+    }
+
+    @Override
     public void release() {
         mRepository = null;
 

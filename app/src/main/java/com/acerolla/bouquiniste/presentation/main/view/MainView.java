@@ -17,7 +17,7 @@ import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
 
 /**
- * Created by Acerolla (Evgeniy Solovev) on 22.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class MainView extends RelativeLayout {
 
@@ -68,6 +68,7 @@ public class MainView extends RelativeLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         categoryParams.gravity = Gravity.END;
+        categoryParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
         mIvCategory.setLayoutParams(categoryParams);
         mToolbar.addView(mIvCategory);
 
@@ -111,7 +112,7 @@ public class MainView extends RelativeLayout {
     }
 
     public void setCategoryClickListener(OnClickListener listener) {
-        //mIvCategory.setOnClickListener(listener);
+        mIvCategory.setOnClickListener(listener);
     }
 
     public void setFilterVisibility(int visibility) {

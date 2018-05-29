@@ -9,6 +9,7 @@ import com.acerolla.bouquiniste.di.component.DetailComponent;
 import com.acerolla.bouquiniste.di.component.FavoritesComponent;
 import com.acerolla.bouquiniste.di.component.LoginComponent;
 import com.acerolla.bouquiniste.di.component.LoginContainerComponent;
+import com.acerolla.bouquiniste.di.component.MainContainerComponent;
 import com.acerolla.bouquiniste.di.component.ProfileComponent;
 import com.acerolla.bouquiniste.di.component.RecyclerComponent;
 import com.acerolla.bouquiniste.di.component.RegisterComponent;
@@ -22,6 +23,7 @@ import com.acerolla.bouquiniste.di.module.FavoritesModule;
 import com.acerolla.bouquiniste.di.module.FavoritesRecyclerModule;
 import com.acerolla.bouquiniste.di.module.LoginContainerModule;
 import com.acerolla.bouquiniste.di.module.LoginModule;
+import com.acerolla.bouquiniste.di.module.MainContainerModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
 import com.acerolla.bouquiniste.di.module.CommonRecyclerModule;
 import com.acerolla.bouquiniste.di.module.RegisterModule;
@@ -33,6 +35,7 @@ import com.acerolla.bouquiniste.di.module.RegisterModule;
 public class DiManager {
 
     private static RepositoryComponent sRepositoryComponent;
+    private static MainContainerComponent sMainContainerComponent;
     private static AddingComponent sAddingComponent;
     private static AdvertsComponent sAdvertsComponent;
     private static FavoritesComponent sFavoritesComponent;
@@ -52,6 +55,14 @@ public class DiManager {
         }
 
         return sRepositoryComponent;
+    }
+
+    public static MainContainerComponent getMainContainerComponent() {
+        if (sMainContainerComponent == null) {
+            sMainContainerComponent = getRepositoryComponent().plus(new MainContainerModule());
+        }
+
+        return sMainContainerComponent;
     }
 
     public static CategoryComponent getCategoryComponent() {

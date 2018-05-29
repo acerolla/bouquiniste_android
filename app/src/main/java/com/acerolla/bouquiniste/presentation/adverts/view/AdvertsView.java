@@ -63,10 +63,6 @@ public class AdvertsView extends SwipeRefreshLayout {
 
     }
 
-    public void setCategoryVisibility(int visibility) {
-
-    }
-
     public void setItemClickListener(OnClickListener listener) {
         mAdapter.setItemClickListener(listener);
     }

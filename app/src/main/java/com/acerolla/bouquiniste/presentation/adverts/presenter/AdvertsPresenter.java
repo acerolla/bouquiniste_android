@@ -60,6 +60,17 @@ public class AdvertsPresenter implements IAdvertsPresenter {
     }
 
     @Override
+    public void handleCategorySelected(int categoryId, String categoryTitle) {
+        mInteractor.loadAdvertsByCategories(result -> {
+            if (result != null && !result.isEmpty()) {
+                if (mView != null) {
+                    mView.setContentData(result);
+                }
+            }
+        }, categoryId);
+    }
+
+    @Override
     public void release() {
         mLoadingListener = null;
         mView = null;

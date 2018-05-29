@@ -8,6 +8,7 @@ import com.acerolla.bouquiniste.di.module.CategoryModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
 import com.acerolla.bouquiniste.di.module.LoginContainerModule;
 import com.acerolla.bouquiniste.di.module.LoginModule;
+import com.acerolla.bouquiniste.di.module.MainContainerModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
 import com.acerolla.bouquiniste.di.module.RegisterModule;
 import com.acerolla.bouquiniste.di.module.RepositoryModule;
@@ -26,6 +27,7 @@ public interface RepositoryComponent {
 
     void inject(ApiManager manager);
 
+    MainContainerComponent plus(MainContainerModule module);
     CategoryComponent plus(CategoryModule module);
     AuthComponent plus(AuthModule module);
     LoginContainerComponent plus(LoginContainerModule module);

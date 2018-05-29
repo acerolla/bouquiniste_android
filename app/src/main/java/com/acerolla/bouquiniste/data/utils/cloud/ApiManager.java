@@ -50,10 +50,9 @@ public class ApiManager {
                     Request request = chain.request();
                     Request.Builder builder = request.newBuilder();
                     builder.addHeader(CONTENT_KEY, CONTENT_VALUE);
-                    /*if (requestNeedsAuth(request.url().toString()) && mRepository.getTokenAsync() != null) {
+                    if (requestNeedsAuth(request.url().toString()) && mRepository.getTokenAsync() != null) {
                         builder.addHeader(AUTH_KEY, AUTH_VALUE + mRepository.getTokenAsync().getToken());
-                    }*/
-                    builder.addHeader(AUTH_KEY, AUTH_VALUE + SAMPLE_TOKEN);
+                    }
                     return chain.proceed(builder.build());
                 })
                 .readTimeout(TIMEOUT_SEC, TimeUnit.SECONDS)

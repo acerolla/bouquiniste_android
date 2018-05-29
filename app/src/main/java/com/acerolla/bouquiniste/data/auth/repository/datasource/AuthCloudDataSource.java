@@ -125,7 +125,7 @@ class AuthCloudDataSource implements IAuthDataSource {
 
     @Override
     public void getToken(ResultListener<TokenData> listener) {
-
+        //ignore
     }
 
     @Override

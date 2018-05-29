@@ -13,4 +13,5 @@ public interface IAdvertsPresenter extends BasePresenter<IAdvertsView> {
     void handleDetailFinished(boolean isChanged);
     void handleItemClicked(AdvertData data);
     void handleFilterPressed();
+    void handleCategorySelected(int categoryId, String categoryTitle);
 }

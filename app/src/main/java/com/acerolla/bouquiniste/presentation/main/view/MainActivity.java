@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.presentation.main.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -16,8 +17,10 @@ import com.acerolla.bouquiniste.data.auth.repository.AuthRepository;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.data.category.repository.CategoryRepository;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
+import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.view.AddingFragment;
 import com.acerolla.bouquiniste.presentation.adverts.view.AdvertsFragment;
+import com.acerolla.bouquiniste.presentation.auth.container.view.LoginContainerActivity;
 import com.acerolla.bouquiniste.presentation.favorites.view.FavoritesFragment;
 import com.acerolla.bouquiniste.presentation.main.presenter.IMainPresenter;
 import com.acerolla.bouquiniste.presentation.main.presenter.MainPresenter;
@@ -25,13 +28,16 @@ import com.acerolla.bouquiniste.presentation.profile.view.ProfileFragment;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
- * Created by Acerolla (Evgeniy Solovev) on 22.05.2018.
+ * Created by Acerolla (Evgeniy Solovev).
  */
 public class MainActivity extends AppCompatActivity implements IMainView {
 
     private MainView mView;
 
+    @Inject
     IMainPresenter mPresenter;
 
     @Override
@@ -42,14 +48,22 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         setContentView(mView);
 
         mView.setMenuListener(mMenuListener);
-        //initToolbar();
+        initToolbar();
 
-        mPresenter = new MainPresenter();
+        DiManager.getMainContainerComponent().inject(this);
         mPresenter.bindView(this);
     }
 
     private void initToolbar() {
         setSupportActionBar(mView.getToolbar());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LoginContainerActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
+            mPresenter.handleUserLoggedIn();
+        }
     }
 
     @Override
@@ -87,6 +101,12 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void initToolbarForAdverts(View.OnClickListener listener) {
         mView.setFilterVisibility(View.VISIBLE);
         mView.setCategoryClickListener(listener);
+    }
+
+    @Override
+    public void navigateToLogin() {
+        Intent intent = new Intent(this, LoginContainerActivity.class);
+        startActivityForResult(intent, LoginContainerActivity.REQUEST_LOGIN);
     }
 
     @Override

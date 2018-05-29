@@ -20,6 +20,7 @@ import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.IAdvertsPresenter;
+import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 
@@ -76,6 +77,10 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
             if (data != null && data.getExtras() != null && data.getExtras().containsKey(DetailActivity.EXTRA_IS_CHANGED)) {
                 mPresenter.handleDetailFinished(data.getExtras().getBoolean(DetailActivity.EXTRA_IS_CHANGED));
             }
+        } else if (requestCode == CategoryActivity.REQUEST_CATEGORY && resultCode == Activity.RESULT_OK) {
+            mPresenter.handleCategorySelected(
+                    data.getExtras().getInt(CategoryActivity.EXTRA_CATEGORY_ID),
+                    data.getExtras().getString(CategoryActivity.EXTRA_CATEGORY_TITLE));
         }
     }
 
@@ -119,7 +124,8 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
 
     @Override
     public void showCategory() {
-        mView.setCategoryVisibility(View.VISIBLE);
+        Intent intent = new Intent(getActivity(), CategoryActivity.class);
+        startActivityForResult(intent, CategoryActivity.REQUEST_CATEGORY);
     }
 
     @Override

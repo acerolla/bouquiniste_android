@@ -18,4 +18,5 @@ public interface IAdvertsInteractor extends BaseInteractor {
     void loadUserAdverts(ResultListener<List<AdvertData>> listener, int userId);
     void saveAdvertToCache(AdvertData advertData);
     void loadCategories(ResultListener<List<CategoryParentData>> listener);
+    void loadAdvertsByCategories(ResultListener<List<AdvertData>> listener, int categoryId);
 }

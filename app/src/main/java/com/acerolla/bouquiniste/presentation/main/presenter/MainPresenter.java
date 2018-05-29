@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.presentation.main.presenter;
 
+import com.acerolla.bouquiniste.domain.main.IMainInteractor;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 
 /**
@@ -8,11 +9,17 @@ import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 public class MainPresenter implements IMainPresenter {
 
     private IMainView mView;
+    private IMainInteractor mInteractor;
+
+    public MainPresenter(IMainInteractor interactor) {
+        mInteractor = interactor;
+    }
 
     @Override
     public void bindView(IMainView view) {
         mView = view;
         mView.showAdverts();
+        mInteractor.tryLoginUser();
     }
 
     @Override
@@ -22,7 +29,11 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void handleAddingClick() {
-        mView.showAdding();
+        if (mInteractor.isUserLoggedIn()) {
+            mView.showAdding();
+        } else {
+            mView.navigateToLogin();
+        }
     }
 
     @Override
@@ -33,6 +44,11 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void handleFavoritesClick() {
         mView.showFavorites();
+    }
+
+    @Override
+    public void handleUserLoggedIn() {
+        mView.showAdding();
     }
 
     @Override

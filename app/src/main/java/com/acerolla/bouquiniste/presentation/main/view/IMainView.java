@@ -13,4 +13,6 @@ public interface IMainView {
     void showAdverts();
 
     void initToolbarForAdverts(View.OnClickListener listener);
+
+    void navigateToLogin();
 }

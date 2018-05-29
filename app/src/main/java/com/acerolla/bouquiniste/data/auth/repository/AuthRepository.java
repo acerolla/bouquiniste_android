@@ -18,27 +18,17 @@ public class AuthRepository implements IAuthRepository {
 
     @Override
     public void login(ResultListener<ProfileData> listener,  LoginData data) {
-        AuthDataSourceFactory.getLocalDataSource()
-                .getToken(resultFromLocal -> {
-                    if (resultFromLocal != null) {
-                        getCacheSource().saveToken(resultFromLocal);
-                        if (listener != null) {
-                            listener.onResult(null);
-                        }
-                    } else {
-                        AuthDataSourceFactory.getCloudDataSource()
-                                .login(resultFromCloud -> {
-                                    if (resultFromCloud != null) {
-                                        TokenData tokenData = new TokenData(resultFromCloud.getToken());
-                                        AuthDataSourceFactory.getLocalDataSource().saveToken(tokenData);
-                                        getCacheSource().saveToken(tokenData);
-                                    }
-                                    if (listener != null) {
-                                        listener.onResult(resultFromCloud);
-                                    }
-                                }, data);
+        AuthDataSourceFactory.getCloudDataSource()
+                .login(resultFromCloud -> {
+                    if (resultFromCloud != null) {
+                        TokenData tokenData = new TokenData(resultFromCloud.getToken());
+                        AuthDataSourceFactory.getLocalDataSource().saveToken(tokenData);
+                        getCacheSource().saveToken(tokenData);
                     }
-                });
+                    if (listener != null) {
+                        listener.onResult(resultFromCloud);
+                    }
+                }, data);
     }
 
     @Override
