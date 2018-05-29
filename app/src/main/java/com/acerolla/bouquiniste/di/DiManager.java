@@ -19,10 +19,11 @@ import com.acerolla.bouquiniste.di.module.AuthModule;
 import com.acerolla.bouquiniste.di.module.CategoryModule;
 import com.acerolla.bouquiniste.di.module.DetailModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
+import com.acerolla.bouquiniste.di.module.FavoritesRecyclerModule;
 import com.acerolla.bouquiniste.di.module.LoginContainerModule;
 import com.acerolla.bouquiniste.di.module.LoginModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
-import com.acerolla.bouquiniste.di.module.RecyclerModule;
+import com.acerolla.bouquiniste.di.module.CommonRecyclerModule;
 import com.acerolla.bouquiniste.di.module.RegisterModule;
 
 /**
@@ -135,7 +136,7 @@ public class DiManager {
 
     public static RecyclerComponent getRecyclerComponent() {
         if (sRecyclerComponent == null) {
-            sRecyclerComponent = getCategoryComponent().plus(new RecyclerModule());
+            sRecyclerComponent = getCategoryComponent().plus(new CommonRecyclerModule(), new FavoritesRecyclerModule());
         }
 
         return sRecyclerComponent;

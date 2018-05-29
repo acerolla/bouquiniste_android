@@ -5,8 +5,9 @@ import com.acerolla.bouquiniste.di.module.AdvertsModule;
 import com.acerolla.bouquiniste.di.module.CategoryModule;
 import com.acerolla.bouquiniste.di.module.DetailModule;
 import com.acerolla.bouquiniste.di.module.FavoritesModule;
+import com.acerolla.bouquiniste.di.module.FavoritesRecyclerModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
-import com.acerolla.bouquiniste.di.module.RecyclerModule;
+import com.acerolla.bouquiniste.di.module.CommonRecyclerModule;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 
 import dagger.Subcomponent;
@@ -26,5 +27,5 @@ public interface CategoryComponent {
     DetailComponent plus(DetailModule module);
     ProfileComponent plus(ProfileModule module);
 
-    RecyclerComponent plus(RecyclerModule module);
+    RecyclerComponent plus(CommonRecyclerModule module1, FavoritesRecyclerModule module2);
 }

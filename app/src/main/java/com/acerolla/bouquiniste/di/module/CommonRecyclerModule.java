@@ -1,7 +1,5 @@
 package com.acerolla.bouquiniste.di.module;
 
-import com.acerolla.bouquiniste.data.category.repository.ICategoryRepository;
-import com.acerolla.bouquiniste.domain.category.CategoryInteractor;
 import com.acerolla.bouquiniste.domain.category.ICategoryInteractor;
 import com.acerolla.bouquiniste.presentation.adverts.view.recycler.presenter.IRecyclerPresenter;
 import com.acerolla.bouquiniste.presentation.adverts.view.recycler.presenter.RecyclerPresenter;
@@ -14,7 +12,7 @@ import dagger.Provides;
  * Email: solevur@gmail.com
  */
 @Module
-public class RecyclerModule {
+public class CommonRecyclerModule {
 
     @Provides
     public IRecyclerPresenter providePresenter(ICategoryInteractor interactor) {

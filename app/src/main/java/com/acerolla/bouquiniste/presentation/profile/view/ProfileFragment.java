@@ -35,7 +35,10 @@ public class ProfileFragment extends Fragment implements IProfileView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mView = new ProfileView(getContext());
+
+        mView = (ProfileView) inflater.inflate(R.layout.fragment_profile, container, false);
+        mView.initViews();
+
         return mView;
     }
 
