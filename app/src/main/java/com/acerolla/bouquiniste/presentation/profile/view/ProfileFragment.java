@@ -1,21 +1,25 @@
 package com.acerolla.bouquiniste.presentation.profile.view;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.profile.presenter.IProfilePresenter;
+import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
 
 import java.util.List;
 
@@ -25,6 +29,8 @@ import javax.inject.Inject;
  * Created by Acerolla (Evgeniy Solovev).
  */
 public class ProfileFragment extends Fragment implements IProfileView {
+
+    private static final int ZERO = 0;
 
     private ProfileView mView;
 
@@ -54,21 +60,26 @@ public class ProfileFragment extends Fragment implements IProfileView {
 
     private void setListeners() {
         mView.setNameClickListener(v -> mPresenter.handleNameClicked());
+        mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
     }
 
     @Override
     public void showEditDialog(String userName) {
         AppCompatEditText edit = new AppCompatEditText(getContext());
+        int paddingLeftTopRight = ValuesConverter.dp2px(ValuesConverter.DP_30);
+        edit.setPadding(paddingLeftTopRight, paddingLeftTopRight, paddingLeftTopRight, ZERO);
+        edit.setGravity(Gravity.BOTTOM);
+        edit.setBackgroundColor(Color.WHITE);
         edit.setText(userName);
 
         new AlertDialog.Builder(getContext())
                 .setTitle(R.string.profile_dialog_title)
                 .setView(edit)
                 .setPositiveButton(
-                        android.R.string.yes,
-                        (dialog, which) -> mPresenter.handleNameChanged(edit.getText().toString()))
+                        "Изменить",
+                        (dialog, which) -> mPresenter.handleNameChanged(mView.getUserName(), edit.getText().toString()))
                 .setNegativeButton(
-                        android.R.string.cancel,
+                        "Отмена",
                         null)
                 .show();
 
@@ -139,6 +150,16 @@ public class ProfileFragment extends Fragment implements IProfileView {
         } else {
             mView.setEmptyMessageVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        mView.setUserName(userName);
+    }
+
+    @Override
+    public void showUsefulToast(String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
     }
 
     @Override

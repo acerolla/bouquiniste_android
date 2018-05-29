@@ -1,6 +1,8 @@
 package com.acerolla.bouquiniste.domain.main;
 
 import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
+import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;
+import com.acerolla.bouquiniste.domain.profile.IProfileInteractor;
 
 /**
  * Created by Evgeniy Solovev
@@ -8,26 +10,34 @@ import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
  */
 public class MainInteractor implements IMainInteractor{
 
-    private IAuthRepository mRepository;
+    private IAuthRepository mAuthRepository;
+    private IProfileRepository mProfileRepository;
 
-    public MainInteractor(IAuthRepository repository) {
-        mRepository = repository;
+    public MainInteractor(IAuthRepository authRepository, IProfileRepository profileRepository) {
+        mAuthRepository = authRepository;
+        mProfileRepository = profileRepository;
     }
 
     @Override
     public boolean isUserLoggedIn() {
-        return mRepository.getTokenAsync() != null;
+        return mAuthRepository.getTokenAsync() != null;
     }
 
     @Override
     public void tryLoginUser() {
-        mRepository.getToken(result -> {
-            //ignore
+        mAuthRepository.getToken(resultFromToken -> {
+            if (resultFromToken != null && mProfileRepository != null) {
+                mProfileRepository.loadProfile(result -> {
+                    //ignore
+                    //just to cache profile
+                });
+            }
         });
     }
 
     @Override
     public void release() {
-        mRepository = null;
+        mAuthRepository = null;
+        mProfileRepository = null;
     }
 }

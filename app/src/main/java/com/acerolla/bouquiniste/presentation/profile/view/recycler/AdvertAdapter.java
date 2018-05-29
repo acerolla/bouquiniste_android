@@ -1,4 +1,4 @@
-package com.acerolla.bouquiniste.presentation.favorites.view.recycler;
+package com.acerolla.bouquiniste.presentation.profile.view.recycler;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.di.DiManager;
-import com.acerolla.bouquiniste.presentation.favorites.view.recycler.presenter.IRecyclerPresenter;
+import com.acerolla.bouquiniste.presentation.profile.view.recycler.presenter.IRecyclerPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AdvertItemView root = (AdvertItemView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_advert, parent, false);
+                .inflate(R.layout.profile_item_advert, parent, false);
         root.initViews();
 
         return new ViewHolder(root);

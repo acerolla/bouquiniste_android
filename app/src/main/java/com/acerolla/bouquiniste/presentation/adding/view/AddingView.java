@@ -9,9 +9,6 @@ import android.widget.ScrollView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
-
-import java.util.List;
 
 /**
  * Created by Evgeniy Solovev
@@ -68,7 +65,7 @@ public class AddingView extends ScrollView {
         mEtPrice = findViewById(R.id.et_price);
         mEtPhone = findViewById(R.id.et_phone);
         mEtLocation = findViewById(R.id.et_location);
-        mBtnCategory = findViewById(R.id.btn_category);
+        mBtnCategory = findViewById(R.id.tv_category);
         mBtnPost = findViewById(R.id.btn_post);
 
     }

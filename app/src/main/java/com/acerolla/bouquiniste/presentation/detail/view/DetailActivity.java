@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.acerolla.bouquiniste.R;
@@ -31,8 +32,11 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mView = new DetailView(this);
-        setContentView(mView);
+
+        setContentView(R.layout.activity_detail);
+        mView = findViewById(R.id.root_detail);
+        mView.initViews();
+
 
         DiManager.getDetailComponent().inject(this);
         mPresenter.bindView(this);
@@ -45,10 +49,10 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
     private void initToolbar() {
         setSupportActionBar(mView.getToolbar());
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24px);
+        /*getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24px);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);*/
     }
 
     private void setListeners() {

@@ -33,6 +33,7 @@ public class ProfileRepository implements IProfileRepository {
                         }
                     } else {
                         if (listener != null) {
+                            getCacheSource().saveProfile(resultFromLocal);
                             listener.onResult(resultFromLocal);
                         }
                     }
@@ -40,6 +41,7 @@ public class ProfileRepository implements IProfileRepository {
             } else {
                 if (listener != null) {
                     ProfileDataSourceFactory.getLocalDataSource().saveProfile(resultFromCloud);
+                    getCacheSource().saveProfile(resultFromCloud);
                     listener.onResult(resultFromCloud);
                 }
             }

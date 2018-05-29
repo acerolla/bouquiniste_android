@@ -62,7 +62,7 @@
             android:background="@drawable/edit_text_style"/>
 
         <Button
-            android:id="@+id/btn_category"
+            android:id="@+id/tv_category"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
@@ -84,7 +84,7 @@
             android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_category"
+            android:layout_below="@+id/tv_category"
             android:ellipsize="start"
             android:gravity="center"
             android:hint="Цена"

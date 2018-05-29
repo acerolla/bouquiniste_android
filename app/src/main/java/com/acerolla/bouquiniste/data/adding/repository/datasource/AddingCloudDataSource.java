@@ -33,7 +33,7 @@ class AddingCloudDataSource implements IAddingDataSource {
         requestBody.put("author", advertData.getAuthor());
         requestBody.put("description", advertData.getDescription());
         requestBody.put("price", Float.toString(advertData.getPrice()));
-        requestBody.put("status", advertData.getStatus());
+        requestBody.put("status", "active");
         requestBody.put("category_id", Integer.toString(advertData.getCategoryId()));
         requestBody.put("phone", advertData.getPhone());
         requestBody.put("location", advertData.getLocation());

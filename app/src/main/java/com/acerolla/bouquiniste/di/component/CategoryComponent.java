@@ -9,6 +9,7 @@ import com.acerolla.bouquiniste.di.module.FavoritesRecyclerModule;
 import com.acerolla.bouquiniste.di.module.ProfileModule;
 import com.acerolla.bouquiniste.di.module.CommonRecyclerModule;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
+import com.acerolla.bouquiniste.presentation.detail.view.DetailView;
 
 import dagger.Subcomponent;
 
@@ -20,6 +21,7 @@ import dagger.Subcomponent;
 public interface CategoryComponent {
 
     void inject(CategoryActivity activity);
+    void inject(DetailView view);
 
     FavoritesComponent plus(FavoritesModule module);
     AddingComponent plus(AddingModule module);

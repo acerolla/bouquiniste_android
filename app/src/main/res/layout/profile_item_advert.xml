@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.acerolla.bouquiniste.presentation.adverts.view.recycler.AdvertItemView
+<com.acerolla.bouquiniste.presentation.profile.view.recycler.AdvertItemView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_marginBottom="10dp"
     android:layout_marginTop="5dp"
+    android:background="@color/white"
     android:elevation="7dp">
 
     <android.support.v7.widget.AppCompatImageView
@@ -76,4 +76,4 @@
         android:text="@string/sample_string"
         android:textColor="@color/black"/>
 
-</com.acerolla.bouquiniste.presentation.adverts.view.recycler.AdvertItemView>
+</com.acerolla.bouquiniste.presentation.profile.view.recycler.AdvertItemView>

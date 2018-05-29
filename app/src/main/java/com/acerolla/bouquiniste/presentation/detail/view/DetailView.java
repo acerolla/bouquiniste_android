@@ -10,12 +10,29 @@ import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.acerolla.bouquiniste.data.category.entity.CategoryChildrenData;
+import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
+import com.acerolla.bouquiniste.di.DiManager;
+import com.acerolla.bouquiniste.domain.category.ICategoryInteractor;
+import com.acerolla.bouquiniste.presentation.adverts.view.recycler.AdvertItemView;
+import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
+import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
+
+import javax.inject.Inject;
 
 /**
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
 public class DetailView extends ScrollView {
+
+    private static final String DEFAULT_CATEGORY = "UNKNOWN!";
+    private static final String API_URL = "http://85.119.144.206/";
+
+    @Inject
+    ICategoryInteractor mInteractor;
 
     private ImageView mIvImage;
     private TextView mTvTitle;
@@ -29,7 +46,6 @@ public class DetailView extends ScrollView {
 
     public DetailView(Context context) {
         super(context);
-        initViews();
     }
 
     public DetailView(Context context, AttributeSet attrs) {
@@ -46,6 +62,8 @@ public class DetailView extends ScrollView {
 
     @SuppressLint("RestrictedApi")
     public void initViews() {
+        DiManager.getCategoryComponent().inject(this);
+
         mToolbar = findViewById(R.id.toolbar_actionbar);
         mToolbar.inflateMenu(R.menu.menu_detail);
 
@@ -64,7 +82,45 @@ public class DetailView extends ScrollView {
     }
 
     public void setContentData(AdvertData data) {
+        String url = "";
+        if (data.getImage() != null && !data.getImage().isEmpty()) {
+            url = API_URL + data.getImage();
+        }
+        loadImage(url);
+        mTvTitle.setText(data.getTitle());
+        mTvAuthor.setText(data.getAuthor());
+        mTvPrice.setText(String.format(Locale.getDefault(), "%.2f \u20BD", data.getPrice()));
+        mTvLocation.setText(data.getLocation());
+        mTvCategory.setText(DEFAULT_CATEGORY);
+        mTvPhone.setText(data.getPhone());
+        mTvDescription.setText(data.getDescription());
 
+        mInteractor.loadCategories(result -> {
+            for (CategoryParentData parent : result) {
+                if (parent.getId() == data.getCategoryId()) {
+                    mTvTitle.setText(parent.getTitle());
+                    return;
+                }
+
+                for (CategoryChildrenData child : parent.getChildren()) {
+                    if (child.getId() == data.getCategoryId()) {
+                        mTvCategory.setText(parent.getTitle() + " / " + child.getTitle());
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadImage(String url) {
+        if (url != null && !url.isEmpty()) {
+            Picasso.get()
+                    .load(url)
+                    .into(mIvImage);
+        } else {
+            Picasso.get()
+                    .load(R.mipmap.ic_camera)
+                    .into(mIvImage);
+        }
     }
 
     public void setContentVisibility(int visibility) {

@@ -1,6 +1,7 @@
 package com.acerolla.bouquiniste.presentation.profile.presenter;
 
 import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.repository.ProfileRepository;
 import com.acerolla.bouquiniste.domain.profile.IProfileInteractor;
@@ -61,15 +62,29 @@ public class ProfilePresenter implements IProfilePresenter {
     }
 
     @Override
-    public void handleNameChanged(String userName) {
-        if (!userName.isEmpty()) {
-            mInteractor.editProfile(new ResultListener<ProfileData>() {
-                @Override
-                public void onResult(ProfileData result) {
+    public void handleNameChanged(String oldUserName, String newUserName) {
+        if (!newUserName.isEmpty()) {
+            mView.setUserName(newUserName);
+            if (oldUserName.equals(newUserName)) {
+                mView.showUsefulToast("Нет смысла менять на то же самое (:");
+                return;
+            }
 
+            mInteractor.editProfile(result -> {
+                if (result == null) {
+                    mView.setUserName(oldUserName);
+                    mView.showUsefulToast("Имя не было изменено из-за ошибки ответа сервера.");
+                } else {
+                    mView.showUsefulToast("Имя успешно изменено!");
                 }
-            }, userName);
+            }, newUserName);
         }
+    }
+
+    @Override
+    public void handleItemClicked(AdvertData data) {
+        //mInteractor.saveAdvertToCache(data);
+        //mView.navigateToDetail();
     }
 
     @Override

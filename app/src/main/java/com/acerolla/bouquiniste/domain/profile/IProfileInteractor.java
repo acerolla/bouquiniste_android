@@ -18,4 +18,5 @@ public interface IProfileInteractor extends BaseInteractor {
     ProfileData getUserProfileAsync();
     boolean isUserLoggedIn();
     void saveProfile(ProfileData data);
+    //void saveAdvertToCache(AdvertData data);
 }
