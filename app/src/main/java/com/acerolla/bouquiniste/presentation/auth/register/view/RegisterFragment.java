@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.auth.container.view.ILoginContainerView;
 import com.acerolla.bouquiniste.presentation.auth.container.view.LoginContainerActivity;
@@ -31,7 +32,10 @@ public class RegisterFragment extends Fragment implements IRegisterView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        mView = new RegisterView(getContext());
+
+        mView = (RegisterView) inflater.inflate(R.layout.fragment_register, container, false);
+        mView.initViews();
+
         return mView;
     }
 

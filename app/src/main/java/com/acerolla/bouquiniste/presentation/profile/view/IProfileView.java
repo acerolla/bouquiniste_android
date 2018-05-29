@@ -15,6 +15,7 @@ public interface IProfileView {
     void setContentProfile(ProfileData data);
     void setContentAdverts(List<AdvertData> data);
 
+    void setLoginButtonVisibility(boolean isVisible);
     void setProfileVisibility(boolean isVisible);
     void setAdvertsVisibility(boolean isVisible);
     void setLoaderVisibility(boolean isVisible);

@@ -98,6 +98,10 @@ public class ProfileView extends RelativeLayout {
 
     }
 
+    public void setLoginButtonVisibility(int visibility) {
+        mBtnLogin.setVisibility(visibility);
+    }
+
     public void setNameClickListener(OnClickListener listener) {
         mTvUser.setOnClickListener(listener);
     }

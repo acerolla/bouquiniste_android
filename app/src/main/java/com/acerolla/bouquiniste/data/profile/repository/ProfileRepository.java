@@ -13,6 +13,9 @@ import java.util.Random;
 public class ProfileRepository implements IProfileRepository {
 
     private static final int ZERO = 0;
+
+    public static final int DEFAULT_ID = ZERO;
+
     private static final String DEFAULT_NAME = "Unauthorized User";
     private static final String DEFAULT_EMAIL = "Unknown";
     private static final String DEFAULT_TOKEN = "invalid_token";
@@ -45,7 +48,7 @@ public class ProfileRepository implements IProfileRepository {
 
     private ProfileData generateProfile() {
         return new ProfileData(
-                ZERO,
+                DEFAULT_ID,
                 DEFAULT_TOKEN,
                 DEFAULT_EMAIL,
                 DEFAULT_NAME

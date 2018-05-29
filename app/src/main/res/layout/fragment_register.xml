@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.acerolla.bouquiniste.presentation.auth.register.view.RegisterView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/borders">
+
+    <FrameLayout
+        android:id="@+id/logoPanel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/logo_curve_sides"
+            android:layout_marginStart="@dimen/logo_curve_sides"
+            android:layout_marginTop="@dimen/logo_curve_top"
+            android:src="@drawable/oval_shape"
+            android:tint="@color/black"
+            tools:ignore="NegativeMargin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:text="Bouquiniste" />
+        </LinearLayout>
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_style"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:text="Регистрация:"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_style"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv_register"
+        android:hint="Введите email"/>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/edit_text_style"
+        android:text="Зарегистрироваться"/>
+
+</com.acerolla.bouquiniste.presentation.auth.register.view.RegisterView>

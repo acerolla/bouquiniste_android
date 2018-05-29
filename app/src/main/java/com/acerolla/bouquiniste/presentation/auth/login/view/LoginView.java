@@ -4,7 +4,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.util.AttributeSet;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import com.acerolla.bouquiniste.R;
 
 /**
  * Created by Evgeniy Solovev
@@ -12,24 +17,37 @@ import android.widget.RelativeLayout;
  */
 public class LoginView extends RelativeLayout {
 
-    private AppCompatEditText mEtEmail;
-    private AppCompatEditText mEtPassword;
-    private AppCompatButton mBtnLogin;
+    private EditText mEtEmail;
+    private EditText mEtPassword;
+    private Button mBtnLogin;
     private AppCompatButton mBtnRegister;
 
     public LoginView(Context context) {
         super(context);
-        initViews();
     }
 
-    private void initViews() {
-        setClickable(true);
-        setBackgroundColor(Color.WHITE);
+    public LoginView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
+    public LoginView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public LoginView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void initViews() {
+        setClickable(true);
+
+        mEtEmail = findViewById(R.id.et_email);
+        mEtPassword = findViewById(R.id.et_password);
+        mBtnLogin = findViewById(R.id.btn_login);
     }
 
     public void setRegisterClickListener(OnClickListener listener) {
-        mBtnRegister.setOnClickListener(listener);
+        //mBtnRegister.setOnClickListener(listener);
     }
 
     public void setLoginClickListener(OnClickListener listener) {

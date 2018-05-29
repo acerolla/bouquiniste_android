@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_curve_top">-22dp</dimen>
+    <dimen name="logo_curve_sides">-200dp</dimen>
+
+</resources>
