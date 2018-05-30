@@ -12,19 +12,6 @@
         android:background="@drawable/borders">
 
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_actionbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:background="@color/black"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24px"
-            app:title="@string/app_name"
-            app:titleTextColor="@color/white">
-
-        </android.support.v7.widget.Toolbar>
-
-
-
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"

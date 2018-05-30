@@ -98,7 +98,7 @@ public class DetailView extends ScrollView {
         mInteractor.loadCategories(result -> {
             for (CategoryParentData parent : result) {
                 if (parent.getId() == data.getCategoryId()) {
-                    mTvTitle.setText(parent.getTitle());
+                    mTvCategory.setText(parent.getTitle());
                     return;
                 }
 
@@ -137,5 +137,25 @@ public class DetailView extends ScrollView {
 
     public Toolbar getToolbar() {
         return mToolbar;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
+          mIvImage = null;
+          mTvTitle = null;
+          mTvAuthor = null;
+          mTvDescription = null;
+          mTvPrice = null;
+          mTvPhone = null;
+          mTvLocation = null;
+          mTvCategory = null;
+          mToolbar = null;
+
+          if (mInteractor != null) {
+              mInteractor.release();
+          }
+          mInteractor = null;
     }
 }

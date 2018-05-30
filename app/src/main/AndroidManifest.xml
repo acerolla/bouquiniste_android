@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.acerolla.bouquiniste">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,13 +13,14 @@
         android:name=".BouquinisteApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        tools:replace="android:theme"
+        android:theme="@style/BouquinisteAppTheme">
 
         <activity
             android:name=".presentation.main.view.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
-            android:theme="@style/AppTheme">
+            android:theme="@style/BouquinisteAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -28,23 +30,23 @@
         <activity android:name=".presentation.detail.view.DetailActivity"
             android:screenOrientation="portrait"
             android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/BouquinisteAppTheme"/>
 
         <activity android:name=".presentation.auth.container.view.LoginContainerActivity"
             android:screenOrientation="portrait"
             android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/BouquinisteAppTheme"/>
 
         <activity
             android:name=".presentation.category.view.CategoryActivity"
             android:screenOrientation="portrait"
             android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/BouquinisteAppTheme"/>
 
         <activity android:name=".presentation.edit.view.EditActivity"
             android:screenOrientation="portrait"
             android:configChanges="density|fontScale|screenSize|smallestScreenSize|keyboard|keyboardHidden|locale|navigation|orientation|screenLayout|touchscreen|layoutDirection"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/BouquinisteAppTheme" />
 
     </application>
 

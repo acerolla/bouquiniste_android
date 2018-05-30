@@ -81,6 +81,11 @@ public class EditPresenter implements IEditPresenter {
     }
 
     @Override
+    public void handleShareClick() {
+        mView.share();
+    }
+
+    @Override
     public void release() {
         mAdvert = null;
         mView = null;

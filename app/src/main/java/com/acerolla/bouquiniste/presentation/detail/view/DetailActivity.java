@@ -22,6 +22,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
 
     public static final int REQUEST_CODE_DETAIL = 1;
     public static final String EXTRA_IS_CHANGED = "DetailActivity.EXTRA_IS_CHANGED";
+    public static final String EXTRA_ID = "DetailActivity.EXTRA_ID";
 
     private DetailView mView;
 
@@ -57,6 +58,16 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
 
     private void setListeners() {
         mView.setFavoriteClickListener(v -> mPresenter.handleFavoriteClick());
+    }
+
+    public int getExtraId() {
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            if (getIntent().getExtras().containsKey(EXTRA_ID)) {
+                return getIntent().getExtras().getInt(EXTRA_ID);
+            }
+        }
+
+        return -1;
     }
 
     @Override

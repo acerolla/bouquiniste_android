@@ -21,16 +21,22 @@ public class DetailPresenter implements IDetailPresenter {
     @Override
     public void bindView(IDetailView view) {
         mView = view;
+
         mInteractor.loadAdvert(result -> {
             if (result != null) {
-                mView.setContentData(result);
-                mView.setLoaderVisibility(false);
-                mView.setContentVisibility(true);
+                if (mView != null) {
+                    mView.setContentData(result);
+                    mView.setLoaderVisibility(false);
+                    mView.setContentVisibility(true);
+                }
             } else {
-                mView.setLoaderVisibility(false);
-                mView.setErrorVisibility(true);
+                if (mView != null) {
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(true);
+                }
             }
         });
+
     }
 
     @Override

@@ -16,4 +16,6 @@ public interface IFavoritesInteractor extends BaseInteractor {
     void loadFavoritesList(ResultListener<List<AdvertData>> listResultListener);
     void addToFavorites(ResultListener<Boolean> listener, int advertId);
     void removeFromFavorites(ResultListener<Boolean> listener, int advertId);
+
+    void saveAdvertToCache(AdvertData data);
 }

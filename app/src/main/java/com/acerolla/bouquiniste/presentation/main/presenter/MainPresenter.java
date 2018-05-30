@@ -8,6 +8,11 @@ import com.acerolla.bouquiniste.presentation.main.view.IMainView;
  */
 public class MainPresenter implements IMainPresenter {
 
+    private static final int FROM_FAVORITES = 1;
+    private static final int FROM_ADDING = 2;
+    private static final int FROM_PROFILE = 3;
+    private int mWhere;
+
     private IMainView mView;
     private IMainInteractor mInteractor;
 
@@ -24,13 +29,19 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void handleProfileItemClick() {
-        mView.showProfile();
+        if (mInteractor.isUserLoggedIn()) {
+            mView.showProfile();
+            mWhere = FROM_PROFILE;
+        } else {
+            mView.navigateToLogin();
+        }
     }
 
     @Override
     public void handleAddingClick() {
         if (mInteractor.isUserLoggedIn()) {
             mView.showAdding();
+            mWhere = FROM_ADDING;
         } else {
             mView.navigateToLogin();
         }
@@ -43,16 +54,32 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void handleFavoritesClick() {
-        mView.showFavorites();
+        if (mInteractor.isUserLoggedIn()) {
+            mView.showFavorites();
+            mWhere = FROM_FAVORITES;
+        } else {
+            mView.navigateToLogin();
+        }
     }
 
     @Override
     public void handleUserLoggedIn() {
-        mView.showAdding();
+        if (mWhere == FROM_ADDING) {
+            mView.showAdding();
+        } else if (mWhere == FROM_FAVORITES) {
+            mView.showFavorites();
+        } else if (mWhere == FROM_PROFILE) {
+            mView.showProfile();
+        }
     }
 
     @Override
     public void release() {
         mView = null;
+
+        if (mInteractor != null) {
+            mInteractor.release();
+        }
+        mInteractor = null;
     }
 }

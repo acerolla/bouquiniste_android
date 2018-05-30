@@ -94,6 +94,7 @@ public class AddingFragment extends Fragment implements IAddingView {
     @Override
     public void navigateToDetail(int advertId) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_ID, advertId);
         startActivityForResult(intent, DetailActivity.REQUEST_CODE_DETAIL);
     }
 

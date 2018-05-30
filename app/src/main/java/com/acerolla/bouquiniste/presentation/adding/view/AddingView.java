@@ -37,7 +37,7 @@ public class AddingView extends ScrollView {
     private Button mBtnPost;
 
     private String mImagePath;
-    private int mId;
+    private int mCategoryId;
 
     public AddingView(Context context) {
         super(context);
@@ -90,6 +90,8 @@ public class AddingView extends ScrollView {
         advert.setmPrice(Float.parseFloat(mEtPrice.getText().toString()));
         advert.setmPhone(mEtPhone.getText().toString());
         advert.setmStatus("active");
+        advert.setmLocation(mEtLocation.getText().toString());
+        advert.setmCategoryId(mCategoryId);
         return advert;
     }
 
@@ -107,6 +109,6 @@ public class AddingView extends ScrollView {
 
     public void setCategory(int id, String title) {
         mBtnCategory.setText(title);
-        mId = id;
+        mCategoryId = id;
     }
 }

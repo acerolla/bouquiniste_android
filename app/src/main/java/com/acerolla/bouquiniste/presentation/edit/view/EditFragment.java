@@ -18,6 +18,8 @@ import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.edit.presenter.IEditPresenter;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 /**
@@ -61,6 +63,7 @@ public class EditFragment extends Fragment implements IEditView {
         mView.setCategoryButtonClickListener(v -> mPresenter.handleCategoryClicked());
 
         ((EditActivity) getActivity()).setCloseClickListener(v -> mPresenter.handleAdvertClosedClicked());
+        ((EditActivity) getActivity()).setShareClickListener(() -> mPresenter.handleShareClick());
 
         mView.setEditClickListener(v -> mPresenter.handleAdvertEditClicked(mView.collectData()));
     }
@@ -121,6 +124,25 @@ public class EditFragment extends Fragment implements IEditView {
         }
 
         getActivity().finish();
+    }
+
+    @Override
+    public void share() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, generateText(mView.collectData()));
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
+    private String generateText(AdvertData data) {
+        String body = "";
+        body += "Продаю книгу.\r\n";
+        body += data.getAuthor() + "  —  " + data.getTitle() + "\r\n";
+        body += String.format(Locale.getDefault(), "За %.0f %s \r\n", data.getPrice(), "\u20BD");
+        body += data.getLocation();
+
+        return body;
     }
 
     @Override

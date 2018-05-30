@@ -28,6 +28,7 @@ public class FavoritesPresenter implements IFavoritesPresenter {
 
     @Override
     public void handleItemClicked(AdvertData item) {
+        mInteractor.saveAdvertToCache(item);
         mView.navigateToDetail();
     }
 

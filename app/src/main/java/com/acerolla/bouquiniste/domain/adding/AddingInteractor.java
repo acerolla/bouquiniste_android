@@ -34,7 +34,7 @@ public class AddingInteractor implements IAddingInteractor {
                 if (listener != null) {
                     listener.onResult(result);
                 }
-                mAdvertsInteractor.saveAdvertToCache(result);
+                //mAdvertsInteractor.saveAdvertToCache(result);
             } else {
                 if (listener != null) {
                     listener.onResult(null);

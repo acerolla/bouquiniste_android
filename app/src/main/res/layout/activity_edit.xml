@@ -4,10 +4,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/black"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24px"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white">
+
+    </android.support.v7.widget.Toolbar>
+
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_actionbar">
     </FrameLayout>
 
     <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionLayout
@@ -35,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:text="Закрыть!"/>
+                android:text="Закрыто!"/>
 
             <ImageView
                 android:layout_width="wrap_content"

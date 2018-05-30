@@ -14,4 +14,5 @@ public interface IEditPresenter extends BasePresenter<IEditView> {
     void handleAdvertEditClicked(AdvertData data);
     void handleCategoryClicked();
     void handleCategorySelected(int categoryId, String categoryTitle);
+    void handleShareClick();
 }

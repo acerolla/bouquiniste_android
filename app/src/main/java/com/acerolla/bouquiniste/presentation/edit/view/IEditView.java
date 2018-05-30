@@ -18,4 +18,6 @@ public interface IEditView {
     void navigateToCategories();
 
     void changeCategory(int categoryId, String categoryTitle);
+
+    void share();
 }

@@ -52,7 +52,7 @@ public interface IRestApi {
 
 
 
-    @GET("api/advert?page=3")
+    @GET("api/advert")   //?page=3
     Call<BaseResponseObject<List<AdvertResponse>>> getAdverts();
 
     @GET("api/advert/{id}")

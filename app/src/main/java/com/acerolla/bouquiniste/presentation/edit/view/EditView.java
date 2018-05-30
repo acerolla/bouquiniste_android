@@ -2,6 +2,7 @@ package com.acerolla.bouquiniste.presentation.edit.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class EditView extends ScrollView {
     private static final String API_URL = "http://85.119.144.206/";
 
     private int mCategoryId;
+    private int mAdvertId;
 
     @Inject
     ICategoryInteractor mInteractor;
@@ -44,11 +46,6 @@ public class EditView extends ScrollView {
     private EditText mTvLocation;
     private Button mTvCategory;
     private Button mBtnEdit;
-
-
-
-    //private Toolbar mToolbar;
-    private FloatingActionLayout mFab;
 
 
     public EditView(Context context) {
@@ -72,9 +69,6 @@ public class EditView extends ScrollView {
     public void initViews() {
         DiManager.getCategoryComponent().inject(this);
 
-        //mToolbar = findViewById(R.id.toolbar_actionbar);
-        //mToolbar.inflateMenu(R.menu.menu_detail);
-
         mIvImage = findViewById(R.id.iv_image);
         mTvTitle = findViewById(R.id.tv_title);
         mTvAuthor = findViewById(R.id.tv_author);
@@ -84,8 +78,6 @@ public class EditView extends ScrollView {
         mTvLocation = findViewById(R.id.tv_location);
         mTvCategory = findViewById(R.id.tv_category);
         mBtnEdit = findViewById(R.id.btn_edit);
-
-        mFab = findViewById(R.id.fab);
     }
 
     public void setContentData(AdvertData data) {
@@ -96,7 +88,7 @@ public class EditView extends ScrollView {
         loadImage(url);
         mTvTitle.setText(data.getTitle());
         mTvAuthor.setText(data.getAuthor());
-        mTvPrice.setText(String.format(Locale.getDefault(), "%.2f \u20BD", data.getPrice()));
+        mTvPrice.setText(String.format(Locale.getDefault(), "%.0f \u20BD", data.getPrice()));
         mTvLocation.setText(data.getLocation());
         mTvCategory.setText(DEFAULT_CATEGORY);
         mTvPhone.setText(data.getPhone());
@@ -105,7 +97,7 @@ public class EditView extends ScrollView {
         mInteractor.loadCategories(result -> {
             for (CategoryParentData parent : result) {
                 if (parent.getId() == data.getCategoryId()) {
-                    mTvTitle.setText(parent.getTitle());
+                    mTvCategory.setText(parent.getTitle());
                     return;
                 }
 
@@ -117,7 +109,8 @@ public class EditView extends ScrollView {
             }
         });
 
-        mCategoryId = data.getId();
+        mAdvertId = data.getId();
+        mCategoryId = data.getCategoryId();
     }
 
     private void loadImage(String url) {
@@ -148,11 +141,11 @@ public class EditView extends ScrollView {
     public AdvertData collectData() {
 
         return new AdvertData(
-                0,
+                mAdvertId,
                 mTvTitle.getText().toString(),
                 mTvAuthor.getText().toString(),
                 mTvDescription.getText().toString(),
-                Float.parseFloat(mTvPrice.getText().toString()),
+                getPrice(mTvPrice.getText().toString()),
                 mTvPhone.getText().toString(),
                 "active",
                 mCategoryId,
@@ -160,6 +153,18 @@ public class EditView extends ScrollView {
                 false,
                 mTvLocation.getText().toString()
         );
+    }
+
+    private float getPrice(String price) {
+        if (price.indexOf('.') > -1) {
+            price = price.substring(0, price.indexOf('.'));
+        } else if (price.indexOf(',') > -1) {
+            price = price.substring(0, price.indexOf(','));
+        } else if (price.indexOf(' ') > -1){
+            price = price.substring(0, price.indexOf(' '));
+        }
+
+        return Float.parseFloat(price);
     }
 
     public void setContentVisibility(int visibility) {

@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.di.module;
 
+import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.data.favorites.repository.IFavoritesRepository;
 import com.acerolla.bouquiniste.domain.favorites.FavoritesInteractor;
 import com.acerolla.bouquiniste.domain.favorites.IFavoritesInteractor;
@@ -22,7 +23,7 @@ public class FavoritesModule {
     }
 
     @Provides
-    public IFavoritesInteractor provideInteractor(IFavoritesRepository repository) {
-        return new FavoritesInteractor(repository);
+    public IFavoritesInteractor provideInteractor(IFavoritesRepository repository, IAdvertsRepository advertsRepository) {
+        return new FavoritesInteractor(repository, advertsRepository);
     }
 }

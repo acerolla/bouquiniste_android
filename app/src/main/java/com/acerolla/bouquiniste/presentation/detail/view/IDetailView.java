@@ -13,4 +13,5 @@ public interface IDetailView {
     void setLoaderVisibility(boolean isVisible);
     void setErrorVisibility(boolean isVisible);
     void changeFavoriteStatus(boolean isFavorite);
+    int getExtraId();
 }

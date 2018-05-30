@@ -122,4 +122,13 @@ public class MainView extends RelativeLayout {
     public Toolbar getToolbar() {
         return mToolbar;
     }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mToolbar = null;
+        mIvCategory = null;
+        mContentFrame = null;
+        mBottomMenu = null;
+    }
 }
