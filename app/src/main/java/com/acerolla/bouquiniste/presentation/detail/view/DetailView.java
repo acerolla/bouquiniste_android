@@ -78,8 +78,8 @@ public class DetailView extends ScrollView {
         mTvCategory = findViewById(R.id.tv_category);
     }
 
-    public void setFavoriteClickListener(OnClickListener listener) {
-
+    public void setPhoneClickListener(OnClickListener listener) {
+        mTvPhone.setOnClickListener(listener);
     }
 
     public void setContentData(AdvertData data) {
@@ -124,6 +124,10 @@ public class DetailView extends ScrollView {
                     .load(R.mipmap.ic_camera)
                     .into(mIvImage);
         }
+    }
+
+    public String getPhoneNumber() {
+        return mTvPhone.getText().toString();
     }
 
     public void setContentVisibility(int visibility) {

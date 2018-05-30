@@ -10,6 +10,7 @@ import com.acerolla.bouquiniste.presentation.detail.view.IDetailView;
 public interface IDetailPresenter extends BasePresenter<IDetailView> {
 
     void handleFavoriteClick();
+    void handlePhoneClick(String phoneNumber);
     void handleShareClick();
     void handleOnMapClick();
 }

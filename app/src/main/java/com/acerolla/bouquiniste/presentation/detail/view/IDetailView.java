@@ -19,4 +19,5 @@ public interface IDetailView {
 
     void share();
     void navigateToMap();
+    void makeCall(String phoneNumber);
 }

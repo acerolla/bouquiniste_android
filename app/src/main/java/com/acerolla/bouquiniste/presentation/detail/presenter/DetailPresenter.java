@@ -1,5 +1,8 @@
 package com.acerolla.bouquiniste.presentation.detail.presenter;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.domain.detail.IDetailInteractor;
 import com.acerolla.bouquiniste.presentation.detail.view.IDetailView;
 
@@ -82,6 +85,11 @@ public class DetailPresenter implements IDetailPresenter {
     @Override
     public void handleOnMapClick() {
         mView.navigateToMap();
+    }
+
+    @Override
+    public void handlePhoneClick(String phoneNumber) {
+        mView.makeCall(phoneNumber);
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.acerolla.bouquiniste.presentation.detail.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +18,6 @@ import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.detail.presenter.IDetailPresenter;
-import com.acerolla.bouquiniste.presentation.edit.view.EditActivity;
 
 import java.util.Locale;
 
@@ -65,7 +67,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
     }
 
     private void setListeners() {
-        mView.setFavoriteClickListener(v -> mPresenter.handleFavoriteClick());
+        mView.setPhoneClickListener(v -> mPresenter.handlePhoneClick(mView.getPhoneNumber()));
     }
 
     public int getExtraId() {
@@ -159,6 +161,13 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
     @Override
     public void navigateToMap() {
         Toast.makeText(this, "Не отвечает Google Map API", Toast.LENGTH_SHORT).show();  //TODO:intent
+    }
+
+    @Override
+    public void makeCall(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        startActivity(intent);
     }
 
     @Override
