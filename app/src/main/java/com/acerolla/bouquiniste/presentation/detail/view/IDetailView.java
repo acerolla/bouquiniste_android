@@ -14,4 +14,9 @@ public interface IDetailView {
     void setErrorVisibility(boolean isVisible);
     void changeFavoriteStatus(boolean isFavorite);
     int getExtraId();
+
+    void setToolbarTitleParams(int advertId);
+
+    void share();
+    void navigateToMap();
 }

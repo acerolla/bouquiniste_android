@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment implements IProfileView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EditFragment.REQUEST_EDIT && resultCode == Activity.RESULT_OK) {
-
+            mPresenter.handleItemEdited();
         }
     }
 

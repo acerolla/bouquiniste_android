@@ -117,11 +117,11 @@ class FavoritesCloudDataSource implements IFavoritesDataSource {
                         if (response.isSuccessful() && response.body() != null && response.body().data != null) {
                             if (response.body().data.is_favorite) {
                                 if (listener != null) {
-                                    listener.onResult(true);
+                                    listener.onResult(false);
                                 }
                             } else {
                                 if (listener != null) {
-                                    listener.onResult(false);
+                                    listener.onResult(true);
                                 }
                             }
                         }

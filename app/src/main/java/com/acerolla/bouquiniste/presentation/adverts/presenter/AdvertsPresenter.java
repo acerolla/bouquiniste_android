@@ -44,30 +44,17 @@ public class AdvertsPresenter implements IAdvertsPresenter {
 
     @Override
     public void handleFilterPressed() {
-        mInteractor.loadCategories(result -> {
-            if (result != null) {
-                if (mView != null) {
-                    mView.setCategoryData(result);
-                    mView.setContentVisibility(false);
-                    mView.showCategory();
-                }
-            } else {
-                if (mView != null) {
-                    mView.showCategoryErrorToast();
-                }
-            }
-        });
+        mView.showCategory();
     }
 
     @Override
     public void handleCategorySelected(int categoryId, String categoryTitle) {
-        mInteractor.loadAdvertsByCategories(result -> {
-            if (result != null && !result.isEmpty()) {
-                if (mView != null) {
-                    mView.setContentData(result);
-                }
-            }
-        }, categoryId);
+        mInteractor.loadAdvertsByCategories(mLoadingListener, categoryId);
+    }
+
+    @Override
+    public void handleRefresh() {
+        mInteractor.loadAdvertList(mLoadingListener);
     }
 
     @Override
@@ -84,6 +71,7 @@ public class AdvertsPresenter implements IAdvertsPresenter {
     private ResultListener<List<AdvertData>> mLoadingListener = new ResultListener<List<AdvertData>>() {
         @Override
         public void onResult(List<AdvertData> result) {
+            mView.stopRefreshing();
             if (result != null) {
                 if (mView != null) {
                     mView.setContentData(result);
@@ -91,8 +79,10 @@ public class AdvertsPresenter implements IAdvertsPresenter {
                     mView.setContentVisibility(true);
                 }
             } else {
-                mView.setLoaderVisibility(false);
-                mView.setErrorVisibility(true);
+                if (mView != null) {
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(true);
+                }
             }
         }
     };

@@ -17,7 +17,6 @@ public interface IAdvertsView {
     void setErrorVisibility(boolean isVisible);
 
     void navigateToDetail();
-    void setCategoryData(List<CategoryParentData> data);
     void showCategory();
-    void showCategoryErrorToast();
+    void stopRefreshing();
 }

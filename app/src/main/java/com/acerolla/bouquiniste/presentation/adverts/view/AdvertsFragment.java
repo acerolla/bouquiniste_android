@@ -63,6 +63,12 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
 
     private void setListeners() {
         mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
+        mView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.handleRefresh();
+            }
+        });
     }
 
     private void setupToolbar() {
@@ -129,13 +135,8 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
     }
 
     @Override
-    public void setCategoryData(List<CategoryParentData> data) {
-        mView.setCategoryData(data);
-    }
-
-    @Override
-    public void showCategoryErrorToast() {
-        Toast.makeText(getContext(), R.string.adverts_toast_category_error, Toast.LENGTH_SHORT).show();
+    public void stopRefreshing() {
+        mView.setRefreshing(false);
     }
 
     @Override

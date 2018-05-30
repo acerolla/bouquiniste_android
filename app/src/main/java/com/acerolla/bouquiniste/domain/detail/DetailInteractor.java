@@ -21,19 +21,36 @@ public class DetailInteractor implements IDetailInteractor {
 
     @Override
     public void loadAdvert(ResultListener<AdvertData> listener) {
-        mRepository.loadAdvert(listener, mRepository.getCachedAdvert().getId());
+        if (mRepository.getCachedAdvert() != null) {
+            mRepository.loadAdvert(listener, mRepository.getCachedAdvert().getId());
+        }
     }
 
     @Override
-    public void changeFavoriteStatus(ResultListener<Boolean> listener, AdvertData advert) {
+    public void loadAdvert(ResultListener<AdvertData> listener, int advertId) {
+        mRepository.loadAdvert(listener, advertId);
+    }
+
+    @Override
+    public void changeFavoriteStatus(ResultListener<Boolean> listener) {
+
+        AdvertData advert = mRepository.getCachedAdvert();
+        if (advert == null) {
+            listener.onResult(null);
+            return;
+        }
+
         if (advert.isFavorite()) {
             if (listener != null) {
                 listener.onResult(false);
             }
             if (mFavoritesInteractor != null) {
                 mFavoritesInteractor.removeFromFavorites(
-                        result -> {},
-                        advert.getId());
+                        result -> {
+                            if (result != null && result && mRepository != null && mRepository.getCachedAdvert() != null) {
+                                mRepository.getCachedAdvert().setmFavorite(false);
+                            }
+                        }, advert.getId());
             }
         } else {
             if (listener != null) {
@@ -41,15 +58,13 @@ public class DetailInteractor implements IDetailInteractor {
             }
             if (mFavoritesInteractor != null) {
                 mFavoritesInteractor.addToFavorites(
-                        result -> {},
-                        advert.getId());
+                        result -> {
+                            if (result != null && result && mRepository != null && mRepository.getCachedAdvert() != null) {
+                                mRepository.getCachedAdvert().setmFavorite(true);
+                            }
+                        }, advert.getId());
             }
         }
-    }
-
-    @Override
-    public AdvertData getCachedAdvert() {
-        return mRepository.getCachedAdvert();
     }
 
     @Override
@@ -61,6 +76,4 @@ public class DetailInteractor implements IDetailInteractor {
         }
         mFavoritesInteractor = null;
     }
-
-
 }

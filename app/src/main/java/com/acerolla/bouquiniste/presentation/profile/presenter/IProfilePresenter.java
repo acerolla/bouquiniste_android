@@ -12,4 +12,6 @@ public interface IProfilePresenter extends BasePresenter<IProfileView> {
     void handleNameClicked();
     void handleNameChanged(String oldUserName, String newUserName);
     void handleItemClicked(AdvertData data);
+
+    void handleItemEdited();
 }

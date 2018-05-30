@@ -140,7 +140,7 @@ public class EditFragment extends Fragment implements IEditView {
         body += "Продаю книгу.\r\n";
         body += data.getAuthor() + "  —  " + data.getTitle() + "\r\n";
         body += String.format(Locale.getDefault(), "За %.0f %s \r\n", data.getPrice(), "\u20BD");
-        body += data.getLocation();
+        body += data.getPhone() + " (" + data.getLocation() + ")";
 
         return body;
     }

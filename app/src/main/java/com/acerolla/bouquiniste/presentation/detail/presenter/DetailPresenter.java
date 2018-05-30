@@ -1,7 +1,5 @@
 package com.acerolla.bouquiniste.presentation.detail.presenter;
 
-import com.acerolla.bouquiniste.data.ResultListener;
-import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.domain.detail.IDetailInteractor;
 import com.acerolla.bouquiniste.presentation.detail.view.IDetailView;
 
@@ -22,28 +20,62 @@ public class DetailPresenter implements IDetailPresenter {
     public void bindView(IDetailView view) {
         mView = view;
 
-        mInteractor.loadAdvert(result -> {
-            if (result != null) {
-                if (mView != null) {
-                    mView.setContentData(result);
-                    mView.setLoaderVisibility(false);
-                    mView.setContentVisibility(true);
+        if (mView.getExtraId() == -1) {
+            mInteractor.loadAdvert(resultFromCache -> {
+                if (resultFromCache != null) {
+                    if (mView != null) {
+                        mView.setContentData(resultFromCache);
+                        mView.setToolbarTitleParams(resultFromCache.getId());
+                        mView.changeFavoriteStatus(resultFromCache.isFavorite());
+                        mView.setLoaderVisibility(false);
+                        mView.setContentVisibility(true);
+                    }
+                } else {
+                    if (mView != null) {
+                        mView.setLoaderVisibility(false);
+                        mView.setErrorVisibility(true);
+                    }
                 }
-            } else {
-                if (mView != null) {
-                    mView.setLoaderVisibility(false);
-                    mView.setErrorVisibility(true);
+            });
+        } else {
+            mInteractor.loadAdvert(resultFromCloud -> {
+                if (resultFromCloud != null) {
+                    if (mView != null) {
+                        mView.setContentData(resultFromCloud);
+                        mView.setToolbarTitleParams(resultFromCloud.getId());
+                        mView.changeFavoriteStatus(resultFromCloud.isFavorite());
+                        mView.setLoaderVisibility(false);
+                        mView.setContentVisibility(true);
+                    }
+                } else {
+                    if (mView != null) {
+                        mView.setLoaderVisibility(false);
+                        mView.setErrorVisibility(true);
+                    }
                 }
-            }
-        });
+            }, mView.getExtraId());
+        }
 
     }
 
     @Override
     public void handleFavoriteClick() {
         mInteractor.changeFavoriteStatus(
-                result -> mView.changeFavoriteStatus(result),
-                mInteractor.getCachedAdvert());
+                result -> {
+                    if (mView != null) {
+                        mView.changeFavoriteStatus(result);
+                    }
+                });
+    }
+
+    @Override
+    public void handleShareClick() {
+        mView.share();
+    }
+
+    @Override
+    public void handleOnMapClick() {
+        mView.navigateToMap();
     }
 
     @Override

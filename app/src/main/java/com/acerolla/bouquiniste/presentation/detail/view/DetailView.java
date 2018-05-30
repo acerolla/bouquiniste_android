@@ -44,6 +44,8 @@ public class DetailView extends ScrollView {
     private TextView mTvCategory;
     private Toolbar mToolbar;
 
+    private AdvertData mAdvert;
+
     public DetailView(Context context) {
         super(context);
     }
@@ -65,7 +67,6 @@ public class DetailView extends ScrollView {
         DiManager.getCategoryComponent().inject(this);
 
         mToolbar = findViewById(R.id.toolbar_actionbar);
-        mToolbar.inflateMenu(R.menu.menu_detail);
 
         mIvImage = findViewById(R.id.iv_image);
         mTvTitle = findViewById(R.id.tv_title);
@@ -109,6 +110,8 @@ public class DetailView extends ScrollView {
                 }
             }
         });
+
+        mAdvert = data;
     }
 
     private void loadImage(String url) {
@@ -137,6 +140,10 @@ public class DetailView extends ScrollView {
 
     public Toolbar getToolbar() {
         return mToolbar;
+    }
+
+    public AdvertData getData() {
+        return mAdvert;
     }
 
     @Override

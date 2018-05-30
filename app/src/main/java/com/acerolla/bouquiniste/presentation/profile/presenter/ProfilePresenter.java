@@ -2,10 +2,11 @@ package com.acerolla.bouquiniste.presentation.profile.presenter;
 
 import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.repository.ProfileRepository;
 import com.acerolla.bouquiniste.domain.profile.IProfileInteractor;
 import com.acerolla.bouquiniste.presentation.profile.view.IProfileView;
+
+import java.util.List;
 
 /**
  * Created by Acerolla (Evgeniy Solovev).
@@ -14,6 +15,8 @@ public class ProfilePresenter implements IProfilePresenter {
 
     private IProfileView mView;
     private IProfileInteractor mInteractor;
+
+    private int mUserId = ProfileRepository.DEFAULT_ID;
 
     public ProfilePresenter(IProfileInteractor interactor) {
         mInteractor = interactor;
@@ -25,23 +28,34 @@ public class ProfilePresenter implements IProfilePresenter {
         mInteractor.loadProfile(resultProfile -> {
             if (resultProfile != null && mView != null) {
                 if (resultProfile.getId() == ProfileRepository.DEFAULT_ID) {
-                    mView.setLoginButtonVisibility(true);
+                    if (mView != null) {
+                        mView.setLoginButtonVisibility(true);
+                    }
                 } else {
-                    mView.setLoginButtonVisibility(false);
+                    if (mView != null) {
+                        mUserId = resultProfile.getId();
+                        mView.setLoginButtonVisibility(false);
+                    }
                 }
-                mView.setContentProfile(resultProfile);
-                mView.setProfileVisibility(true);
+                if (mView != null) {
+                    mView.setContentProfile(resultProfile);
+                    mView.setProfileVisibility(true);
+                }
             }
             if (resultProfile != null && mInteractor != null) {
                 mInteractor.loadUserAdverts(resultAdverts -> {
                     if (resultAdverts != null && mView != null) {
                         if (!resultAdverts.isEmpty()) {
-                            mView.setContentAdverts(resultAdverts);
-                            //mView.setAdvertsVisibility(true);
-                            //mView.setLoaderVisibility(false);
+                            if (mView != null) {
+                                mView.setContentAdverts(resultAdverts);
+                                //mView.setAdvertsVisibility(true);
+                                //mView.setLoaderVisibility(false);
+                            }
                         } else {
-                            mView.setEmptyMessageVisibility(true);
-                            mView.setLoaderVisibility(false);
+                            if (mView != null) {
+                                mView.setEmptyMessageVisibility(true);
+                                mView.setLoaderVisibility(false);
+                            }
                         }
                     }
                 }, resultProfile.getId());
@@ -84,6 +98,26 @@ public class ProfilePresenter implements IProfilePresenter {
     @Override
     public void handleItemClicked(AdvertData data) {
         mView.navigateToEdit(data.getId());
+    }
+
+    @Override
+    public void handleItemEdited() {
+        if (mInteractor != null && mUserId != ProfileRepository.DEFAULT_ID) {
+            mInteractor.loadUserAdverts(result -> {
+                if (result != null && mView != null) {
+                    if (!result.isEmpty()) {
+                        mView.setContentAdverts(result);
+                        //mView.setAdvertsVisibility(true);
+                        //mView.setLoaderVisibility(false);
+
+                    } else {
+                        mView.setEmptyMessageVisibility(true);
+                        mView.setLoaderVisibility(false);
+
+                    }
+                }
+            }, mUserId);
+        }
     }
 
     @Override

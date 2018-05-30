@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.category.presenter.ICategoryPresenter;
@@ -39,6 +40,7 @@ public class CategoryActivity extends AppCompatActivity implements ICategoryView
         mView = new CategoryView(this);
         setContentView(mView);
         setListeners();
+        initToolbar();
 
         DiManager.getCategoryComponent().inject(this);
         mPresenter.bindView(this);
@@ -59,6 +61,16 @@ public class CategoryActivity extends AppCompatActivity implements ICategoryView
                         ((SubcategoryViewHolder) mView.getViewHolder(v)).item.getId(),
                         ((SubcategoryViewHolder) mView.getViewHolder(v)).item.getTitle());
             }
+        });
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(mView.getToolbar());
+
+        mView.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
+        mView.getToolbar().setTitle("Категории");
+        mView.getToolbar().setNavigationOnClickListener(v -> {
+            finish();
         });
     }
 

@@ -9,13 +9,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.presentation.adverts.view.recycler.AdvertAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +31,9 @@ public class AdvertsView extends SwipeRefreshLayout {
     private RecyclerView.LayoutManager mLayoutManager;
     private AdvertAdapter mAdapter;
 
+    private ProgressBar mProgress;
+    private TextView mTvError;
+
     public AdvertsView(Context context) {
         super(context);
     }
@@ -37,6 +43,9 @@ public class AdvertsView extends SwipeRefreshLayout {
     }
 
     public void initViews() {
+          mProgress = findViewById(R.id.progress);
+          mTvError = findViewById(R.id.tv_error);
+
         mRvAdverts = findViewById(R.id.rv_adverts);
         mRvAdverts.setHasFixedSize(true);
 
@@ -47,20 +56,25 @@ public class AdvertsView extends SwipeRefreshLayout {
         mRvAdverts.setAdapter(mAdapter);
     }
 
+    @Override
+    public void setOnRefreshListener(@Nullable OnRefreshListener listener) {
+        super.setOnRefreshListener(listener);
+    }
+
     public void setContentData(List<AdvertData> data) {
         mAdapter.setData(data);
     }
 
     public void setContentVisibility(int visibility) {
-
+        mRvAdverts.setVisibility(visibility);
     }
 
     public void setLoaderVisibility(int visibility) {
-
+        mProgress.setVisibility(visibility);
     }
 
     public void setErrorVisibility(int visibility) {
-
+        mTvError.setVisibility(visibility);
     }
 
     public void setItemClickListener(OnClickListener listener) {
@@ -69,9 +83,5 @@ public class AdvertsView extends SwipeRefreshLayout {
 
     public AdvertData getDataByView(View v) {
         return ((AdvertAdapter.ViewHolder)mRvAdverts.getChildViewHolder(v)).item;
-    }
-
-    public void setCategoryData(List<CategoryParentData> data) {
-
     }
 }

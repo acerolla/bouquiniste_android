@@ -17,10 +17,9 @@ public class FavoritesView extends RelativeLayout {
 
     public FavoritesView(Context context) {
         super(context);
-        initViews();
     }
 
-    private void initViews() {
+    public void initViews() {
         setClickable(true);
         setBackgroundColor(Color.WHITE);
     }
