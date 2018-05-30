@@ -14,7 +14,7 @@ public interface IDetailView {
     void setErrorVisibility(boolean isVisible);
     void changeFavoriteStatus(boolean isFavorite);
     int getExtraId();
-
+    void showToast(String text);
     void setToolbarTitleParams(int advertId);
 
     void share();

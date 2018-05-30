@@ -60,12 +60,18 @@ public class DetailPresenter implements IDetailPresenter {
 
     @Override
     public void handleFavoriteClick() {
+        if (!mInteractor.isUserLoggedIn()) {
+            mView.showToast("Необходима авторизация!");
+            return;
+        }
+
         mInteractor.changeFavoriteStatus(
                 result -> {
                     if (mView != null) {
                         mView.changeFavoriteStatus(result);
                     }
                 });
+
     }
 
     @Override

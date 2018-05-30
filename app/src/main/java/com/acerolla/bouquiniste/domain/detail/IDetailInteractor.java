@@ -13,4 +13,6 @@ public interface IDetailInteractor extends BaseInteractor {
     void loadAdvert(ResultListener<AdvertData> listener);
     void loadAdvert(ResultListener<AdvertData> listener, int advertId);
     void changeFavoriteStatus(ResultListener<Boolean> listener);
+
+    boolean isUserLoggedIn();
 }

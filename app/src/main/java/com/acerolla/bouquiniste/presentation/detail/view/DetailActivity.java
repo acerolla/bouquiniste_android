@@ -180,6 +180,11 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
     }
 
     @Override
+    public void showToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mView = null;

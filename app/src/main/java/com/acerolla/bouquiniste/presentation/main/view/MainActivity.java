@@ -146,6 +146,4 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
         return false;
     };
-
-
 }

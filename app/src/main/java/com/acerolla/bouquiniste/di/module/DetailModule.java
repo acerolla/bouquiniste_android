@@ -1,6 +1,7 @@
 package com.acerolla.bouquiniste.di.module;
 
 import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
+import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
 import com.acerolla.bouquiniste.domain.detail.DetailInteractor;
 import com.acerolla.bouquiniste.domain.detail.IDetailInteractor;
 import com.acerolla.bouquiniste.domain.favorites.IFavoritesInteractor;
@@ -23,7 +24,7 @@ public class DetailModule {
     }
 
     @Provides
-    public IDetailInteractor provideInteractor(IAdvertsRepository repository, IFavoritesInteractor favoritesInteractor) {
-        return new DetailInteractor(repository, favoritesInteractor);
+    public IDetailInteractor provideInteractor(IAdvertsRepository repository, IFavoritesInteractor favoritesInteractor, IAuthRepository authRepository) {
+        return new DetailInteractor(repository, favoritesInteractor, authRepository);
     }
 }

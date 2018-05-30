@@ -3,6 +3,7 @@ package com.acerolla.bouquiniste.domain.detail;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.data.ResultListener;
+import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
 import com.acerolla.bouquiniste.domain.favorites.IFavoritesInteractor;
 
 /**
@@ -13,10 +14,12 @@ public class DetailInteractor implements IDetailInteractor {
 
     private IAdvertsRepository mRepository;
     private IFavoritesInteractor mFavoritesInteractor;
+    private IAuthRepository mAuthRepository;
 
-    public DetailInteractor(IAdvertsRepository repository, IFavoritesInteractor favoritesInteractor) {
+    public DetailInteractor(IAdvertsRepository repository, IFavoritesInteractor favoritesInteractor, IAuthRepository authRepository) {
         mRepository = repository;
         mFavoritesInteractor = favoritesInteractor;
+        mAuthRepository = authRepository;
     }
 
     @Override
@@ -68,8 +71,14 @@ public class DetailInteractor implements IDetailInteractor {
     }
 
     @Override
+    public boolean isUserLoggedIn() {
+        return mAuthRepository.getTokenAsync() != null;
+    }
+
+    @Override
     public void release() {
         mRepository = null;
+        mAuthRepository = null;
 
         if (mFavoritesInteractor != null) {
             mFavoritesInteractor.release();

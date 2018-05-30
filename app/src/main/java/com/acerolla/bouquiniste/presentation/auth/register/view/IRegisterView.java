@@ -8,4 +8,6 @@ public interface IRegisterView {
 
     void navigateToLogin();
     void navigateBack();
+
+    void showErrorDialog();
 }
