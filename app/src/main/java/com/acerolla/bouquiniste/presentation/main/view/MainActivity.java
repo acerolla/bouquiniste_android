@@ -5,28 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import com.acerolla.bouquiniste.R;
-import com.acerolla.bouquiniste.data.ResultListener;
-import com.acerolla.bouquiniste.data.auth.entity.login.LoginData;
-import com.acerolla.bouquiniste.data.auth.repository.AuthRepository;
-import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
-import com.acerolla.bouquiniste.data.category.repository.CategoryRepository;
-import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.view.AddingFragment;
 import com.acerolla.bouquiniste.presentation.adverts.view.AdvertsFragment;
 import com.acerolla.bouquiniste.presentation.auth.container.view.LoginContainerActivity;
 import com.acerolla.bouquiniste.presentation.favorites.view.FavoritesFragment;
 import com.acerolla.bouquiniste.presentation.main.presenter.IMainPresenter;
-import com.acerolla.bouquiniste.presentation.main.presenter.MainPresenter;
 import com.acerolla.bouquiniste.presentation.profile.view.ProfileFragment;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -56,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private void initToolbar() {
         setSupportActionBar(mView.getToolbar());
+
+        mView.setLogoutClickListener(v -> mPresenter.handleLogoutClick());
     }
 
     @Override
@@ -72,14 +64,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     private void changeFragment(Fragment fragment) {
-        hideCategories();
         getSupportFragmentManager().beginTransaction()
                 .replace(MainView.ID_CONTENT_FRAME, fragment)
                 .commit();
-    }
-
-    private void hideCategories() {
-        mView.setFilterVisibility(View.GONE);
     }
 
     @Override
@@ -98,8 +85,25 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
+    public void setFilterVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setFilterVisibility(View.VISIBLE);
+        } else {
+            mView.setFilterVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setLogoutVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setLogoutVisibility(View.VISIBLE);
+        } else {
+            mView.setLogoutVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void initToolbarForAdverts(View.OnClickListener listener) {
-        mView.setFilterVisibility(View.VISIBLE);
         mView.setCategoryClickListener(listener);
     }
 
@@ -107,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void navigateToLogin() {
         Intent intent = new Intent(this, LoginContainerActivity.class);
         startActivityForResult(intent, LoginContainerActivity.REQUEST_LOGIN);
+    }
+
+    @Override
+    public void showLogoutToast() {
+        Toast.makeText(this, "Выход из системы выполнен!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -91,7 +91,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
         } else if (item.getItemId() == R.id.menu_item_share) {
             mPresenter.handleShareClick();
         } else if (item.getItemId() == R.id.menu_item_on_map) {
-
+            mPresenter.handleOnMapClick();
         }
 
         return true;

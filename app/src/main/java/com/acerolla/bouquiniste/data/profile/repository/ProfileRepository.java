@@ -4,6 +4,7 @@ import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.profile.repository.datasource.IProfileDataSource;
 import com.acerolla.bouquiniste.data.profile.repository.datasource.ProfileDataSourceFactory;
+import com.acerolla.bouquiniste.data.profile.repository.datasource.ProfileLocalDataSource;
 
 import java.util.Random;
 
@@ -95,6 +96,13 @@ public class ProfileRepository implements IProfileRepository {
         getCacheSource().saveProfile(data);
         ProfileDataSourceFactory.getLocalDataSource()
                 .saveProfile(data);
+    }
+
+    @Override
+    public void clearProfile() {
+        ProfileDataSourceFactory.getLocalDataSource()
+                .clear();
+        getCacheSource().clear();
     }
 
     @Override

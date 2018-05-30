@@ -18,4 +18,6 @@ public interface IAdvertsRepository extends BaseRepository {
 
     AdvertData getCachedAdvert();
     void saveAdvertToCache(AdvertData advert);
+
+    void clearAdverts();
 }

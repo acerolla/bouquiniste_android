@@ -1,6 +1,8 @@
 package com.acerolla.bouquiniste.di.module;
 
+import com.acerolla.bouquiniste.data.advert.repository.IAdvertsRepository;
 import com.acerolla.bouquiniste.data.auth.repository.IAuthRepository;
+import com.acerolla.bouquiniste.data.category.repository.ICategoryRepository;
 import com.acerolla.bouquiniste.data.profile.repository.IProfileRepository;
 import com.acerolla.bouquiniste.domain.main.IMainInteractor;
 import com.acerolla.bouquiniste.domain.main.MainInteractor;
@@ -24,7 +26,7 @@ public class MainContainerModule {
     }
 
     @Provides
-    public  IMainInteractor provideInteractor(IAuthRepository authRepository, IProfileRepository profileRepository) {
-        return new MainInteractor(authRepository, profileRepository);
+    public  IMainInteractor provideInteractor(IAuthRepository authRepository, IProfileRepository profileRepository, IAdvertsRepository advertsRepository, ICategoryRepository categoryRepository) {
+        return new MainInteractor(authRepository, profileRepository, advertsRepository, categoryRepository);
     }
 }

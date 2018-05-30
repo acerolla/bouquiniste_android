@@ -12,4 +12,6 @@ public interface IFavoritesPresenter extends BasePresenter<IFavoritesView> {
 
     void handleItemClicked(AdvertData item);
     void handleDetailFinished(boolean isChanged);
+
+    void handleRefresh();
 }

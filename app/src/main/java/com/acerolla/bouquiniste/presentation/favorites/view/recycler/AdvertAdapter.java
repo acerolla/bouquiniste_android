@@ -42,7 +42,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AdvertItemView root = (AdvertItemView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_advert, parent, false);
+                .inflate(R.layout.favorites_item_advert, parent, false);
         root.initViews();
 
         return new ViewHolder(root);

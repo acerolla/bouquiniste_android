@@ -15,4 +15,6 @@ public interface ICategoryRepository extends BaseRepository {
 
     void loadCategories(ResultListener<List<CategoryParentData>> listener);
     void loadAdvertsByCategory(ResultListener<List<AdvertData>> listResultListener, int categoryId);
+
+    void clearCategory();
 }

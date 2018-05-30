@@ -12,5 +12,8 @@ public interface IProfileDataSource {
     void saveProfile(ProfileData profile);
     void editProfile(ResultListener<String> listener, String userName);
     ProfileData getUserProfileAsync();
+
+    void clear();
+
     void release();
 }

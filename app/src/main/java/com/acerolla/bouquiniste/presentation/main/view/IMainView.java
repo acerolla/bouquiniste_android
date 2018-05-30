@@ -11,8 +11,12 @@ public interface IMainView {
     void showAdding();
     void showFavorites();
     void showAdverts();
+    void setFilterVisibility(boolean isVisible);
+    void setLogoutVisibility(boolean isVisibile);
 
     void initToolbarForAdverts(View.OnClickListener listener);
 
     void navigateToLogin();
+
+    void showLogoutToast();
 }

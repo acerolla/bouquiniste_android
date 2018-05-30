@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.data.category.repository;
 
+import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.category.entity.CategoryChildrenData;
@@ -65,6 +66,13 @@ public class CategoryRepository implements ICategoryRepository {
     public void loadAdvertsByCategory(ResultListener<List<AdvertData>> listener, int categoryId) {
         CategoryDataSourceFactory.getCloudDataSource()
                 .loadAdvertsByCategory(listener, categoryId);
+    }
+
+    @Override
+    public void clearCategory() {
+        CategoryDataSourceFactory.getLocalDataSource()
+                .clear();
+        getCacheSource().clear();
     }
 
     @Override

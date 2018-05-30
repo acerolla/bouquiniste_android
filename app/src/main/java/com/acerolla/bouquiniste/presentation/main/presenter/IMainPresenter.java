@@ -13,4 +13,6 @@ public interface IMainPresenter extends BasePresenter<IMainView> {
     void handleFavoritesClick();
     void handleAdvertsClick();
     void handleUserLoggedIn();
+
+    void handleLogoutClick();
 }

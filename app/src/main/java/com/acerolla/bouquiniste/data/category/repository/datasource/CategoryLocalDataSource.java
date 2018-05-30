@@ -73,6 +73,22 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
     }
 
     @Override
+    public void clear() {
+        BouquinisteApplication.getInstance()
+                .getBackgroundThread()
+                .execute(new BouquinisteRunnable() {
+                    @Override
+                    public Object execute() throws Throwable {
+                        return BouquinisteApplication.getInstance()
+                                .getDbHelper()
+                                .getDao(CategoryParentData.class)
+                                .deleteBuilder()
+                                .delete();
+                    }
+                }, null);
+    }
+
+    @Override
     public void release() {
 
     }

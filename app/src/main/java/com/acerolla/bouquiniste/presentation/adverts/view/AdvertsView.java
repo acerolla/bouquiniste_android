@@ -43,8 +43,8 @@ public class AdvertsView extends SwipeRefreshLayout {
     }
 
     public void initViews() {
-          mProgress = findViewById(R.id.progress);
-          mTvError = findViewById(R.id.tv_error);
+        mProgress = findViewById(R.id.progress);
+        mTvError = findViewById(R.id.tv_error);
 
         mRvAdverts = findViewById(R.id.rv_adverts);
         mRvAdverts.setHasFixedSize(true);

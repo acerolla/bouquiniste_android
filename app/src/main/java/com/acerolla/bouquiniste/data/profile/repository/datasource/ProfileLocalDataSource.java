@@ -67,6 +67,22 @@ public class ProfileLocalDataSource implements IProfileDataSource {
     }
 
     @Override
+    public void clear() {
+        BouquinisteApplication.getInstance()
+                .getBackgroundThread()
+                .execute(new BouquinisteRunnable() {
+                    @Override
+                    public Object execute() throws Throwable {
+                        return BouquinisteApplication.getInstance()
+                                .getDbHelper()
+                                .getDao(ProfileData.class)
+                                .deleteBuilder()
+                                .delete();
+                    }
+                }, null);
+    }
+
+    @Override
     public void release() {
 
     }

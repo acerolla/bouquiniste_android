@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.presentation.main.presenter;
 
+import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.domain.main.IMainInteractor;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 
@@ -24,14 +25,17 @@ public class MainPresenter implements IMainPresenter {
     public void bindView(IMainView view) {
         mView = view;
         mView.showAdverts();
+        mView.setFilterVisibility(true);
         mInteractor.tryLoginUser();
     }
 
     @Override
     public void handleProfileItemClick() {
+        mWhere = FROM_PROFILE;
         if (mInteractor.isUserLoggedIn()) {
+            mView.setFilterVisibility(false);
+            mView.setLogoutVisibility(true);
             mView.showProfile();
-            mWhere = FROM_PROFILE;
         } else {
             mView.navigateToLogin();
         }
@@ -39,9 +43,11 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void handleAddingClick() {
+        mWhere = FROM_ADDING;
         if (mInteractor.isUserLoggedIn()) {
+            mView.setFilterVisibility(false);
+            mView.setLogoutVisibility(false);
             mView.showAdding();
-            mWhere = FROM_ADDING;
         } else {
             mView.navigateToLogin();
         }
@@ -49,14 +55,18 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void handleAdvertsClick() {
+        mView.setFilterVisibility(true);
+        mView.setLogoutVisibility(false);
         mView.showAdverts();
     }
 
     @Override
     public void handleFavoritesClick() {
+        mWhere = FROM_FAVORITES;
         if (mInteractor.isUserLoggedIn()) {
+            mView.setFilterVisibility(false);
+            mView.setLogoutVisibility(false);
             mView.showFavorites();
-            mWhere = FROM_FAVORITES;
         } else {
             mView.navigateToLogin();
         }
@@ -71,6 +81,16 @@ public class MainPresenter implements IMainPresenter {
         } else if (mWhere == FROM_PROFILE) {
             mView.showProfile();
         }
+    }
+
+    @Override
+    public void handleLogoutClick() {
+        mInteractor.logout(result -> {
+            if (result != null) {
+                mView.showLogoutToast();
+            }
+        });
+        mView.showAdverts();
     }
 
     @Override

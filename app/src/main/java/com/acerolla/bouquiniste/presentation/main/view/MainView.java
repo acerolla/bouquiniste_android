@@ -29,6 +29,7 @@ public class MainView extends RelativeLayout {
 
     private Toolbar mToolbar;
     private AppCompatImageView mIvCategory;
+    private AppCompatImageView mIvLogout;
     private FrameLayout mContentFrame;
     private BottomNavigationView mBottomMenu;
 
@@ -71,6 +72,18 @@ public class MainView extends RelativeLayout {
         categoryParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
         mIvCategory.setLayoutParams(categoryParams);
         mToolbar.addView(mIvCategory);
+
+        mIvLogout = new AppCompatImageView(getContext());
+        mIvLogout.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
+        mIvLogout.setVisibility(GONE);
+
+        Toolbar.LayoutParams logoutParams = new Toolbar.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        logoutParams.gravity = Gravity.END;
+        logoutParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
+        mIvLogout.setLayoutParams(logoutParams);
+        mToolbar.addView(mIvLogout);
 
         mContentFrame = new FrameLayout(getContext());
         mContentFrame.setId(ID_CONTENT_FRAME);
@@ -115,8 +128,16 @@ public class MainView extends RelativeLayout {
         mIvCategory.setOnClickListener(listener);
     }
 
+    public void setLogoutClickListener(OnClickListener listener) {
+        mIvLogout.setOnClickListener(listener);
+    }
+
     public void setFilterVisibility(int visibility) {
         mIvCategory.setVisibility(visibility);
+    }
+
+    public void setLogoutVisibility(int visibility) {
+        mIvLogout.setVisibility(visibility);
     }
 
     public Toolbar getToolbar() {

@@ -42,6 +42,11 @@ public class FavoritesPresenter implements IFavoritesPresenter {
     }
 
     @Override
+    public void handleRefresh() {
+        mInteractor.loadFavoritesList(mLoadingListener);
+    }
+
+    @Override
     public void release() {
         mLoadingListener = null;
         mView = null;
@@ -55,6 +60,7 @@ public class FavoritesPresenter implements IFavoritesPresenter {
     private ResultListener<List<AdvertData>> mLoadingListener = new ResultListener<List<AdvertData>>() {
         @Override
         public void onResult(List<AdvertData> result) {
+            mView.stopRefreshing();
             if (result != null) {
                 if (mView != null) {
                     if (!result.isEmpty()) {

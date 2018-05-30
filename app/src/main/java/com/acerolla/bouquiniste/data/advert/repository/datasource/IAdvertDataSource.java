@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * Created by Evgeniy Solovev
- * Date: 25.05.2018
  * Email: solevur@gmail.com
  */
 public interface IAdvertDataSource {
@@ -17,5 +16,8 @@ public interface IAdvertDataSource {
     void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId);
     AdvertData getAdvertAsync();
     void saveAdvertToCache(AdvertData advert);
+
+    void clearAdverts();
+
     void release();
 }

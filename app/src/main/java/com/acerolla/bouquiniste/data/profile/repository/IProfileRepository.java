@@ -13,4 +13,5 @@ public interface IProfileRepository extends BaseRepository {
     void editProfile(ResultListener<ProfileData> listener, String userName);
     ProfileData getUserProfileAsync();
     void saveProfile(ProfileData data);
+    void clearProfile();
 }

@@ -32,6 +32,11 @@ public class ProfileMemoryCacheDataSource implements IProfileDataSource {
     }
 
     @Override
+    public void clear() {
+        mProfile = null;
+    }
+
+    @Override
     public void release() {
         mProfile = null;
     }

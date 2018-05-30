@@ -162,6 +162,11 @@ class AdvertCloudDataSource implements IAdvertDataSource {
     }
 
     @Override
+    public void clearAdverts() {
+        //ignore
+    }
+
+    @Override
     public void release() {
 
     }

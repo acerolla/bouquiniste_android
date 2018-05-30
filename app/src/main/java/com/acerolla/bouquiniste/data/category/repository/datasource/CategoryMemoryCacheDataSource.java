@@ -35,6 +35,11 @@ public class CategoryMemoryCacheDataSource implements ICategoryDataSource {
     }
 
     @Override
+    public void clear() {
+        mCategories = null;
+    }
+
+    @Override
     public void release() {
         mCategories = null;
     }

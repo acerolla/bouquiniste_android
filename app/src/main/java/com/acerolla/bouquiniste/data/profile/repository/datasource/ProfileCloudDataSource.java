@@ -98,6 +98,11 @@ public class ProfileCloudDataSource implements IProfileDataSource {
     }
 
     @Override
+    public void clear() {
+        //ignore
+    }
+
+    @Override
     public void release() {
 
     }

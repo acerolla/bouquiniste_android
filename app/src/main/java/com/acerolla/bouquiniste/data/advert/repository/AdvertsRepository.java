@@ -70,6 +70,13 @@ public class AdvertsRepository implements IAdvertsRepository {
     }
 
     @Override
+    public void clearAdverts() {
+        AdvertDataSourceFactory.getLocalDataSource()
+                .clearAdverts();
+        getMemoryCache().clearAdverts();
+    }
+
+    @Override
     public void release() {
         if (mMemoryCacheDataSource != null) {
             mMemoryCacheDataSource.release();

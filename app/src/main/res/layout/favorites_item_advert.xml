@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.acerolla.bouquiniste.presentation.favorites.view.recycler.AdvertItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@color/white"
+    android:elevation="7dp">
 
-</LinearLayout>
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_advert_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/edit_text_style"
+        android:src="@mipmap/ic_camera"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/iv_advert_image"
+        android:text="@string/sample_string"
+        android:textColor="@color/black"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/tv_author"
+        android:text="@string/hyphen"
+        android:textColor="@color/black"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/tv_symbol"
+        android:text="@string/sample_string"
+        android:textColor="@color/black"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/iv_advert_image"
+        android:layout_below="@+id/tv_author"
+        android:text="@string/sample_string"
+        android:textColor="@color/darker_gray"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/iv_advert_image"
+        android:layout_alignParentBottom="true"
+        android:text="@string/sample_string"
+        android:textColor="@color/black"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/sample_string"
+        android:textColor="@color/black"/>
+
+</com.acerolla.bouquiniste.presentation.favorites.view.recycler.AdvertItemView>
