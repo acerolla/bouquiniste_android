@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.data.adding.repository.datasource;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertRequest;
@@ -26,56 +28,143 @@ import retrofit2.Response;
  */
 class AddingCloudDataSource implements IAddingDataSource {
 
-    @Override
-    public void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
-        Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("title", advertData.getTitle());
-        requestBody.put("author", advertData.getAuthor());
-        requestBody.put("description", advertData.getDescription());
-        requestBody.put("price", Float.toString(advertData.getPrice()));
-        requestBody.put("status", "active");
-        requestBody.put("category_id", Integer.toString(advertData.getCategoryId()));
-        requestBody.put("phone", advertData.getPhone());
-        requestBody.put("location", advertData.getLocation());
 
-        BouquinisteApplication.getInstance()
-                .getApiManager()
-                .getRestApi()
-                .postAdvert(requestBody)
-                .enqueue(new Callback<BaseResponseObject<AdvertResponse>>() {
-                    @Override
-                    public void onResponse(Call<BaseResponseObject<AdvertResponse>> call, Response<BaseResponseObject<AdvertResponse>> response) {
-                        Logger.d(response.message());
-                        if (response.isSuccessful() && response.body() != null && response.body().data != null) {
-                            AdvertData advert = new AdvertData(
-                                    response.body().data.id,
-                                    response.body().data.title,
-                                    response.body().data.author,
-                                    response.body().data.description,
-                                    response.body().data.price,
-                                    response.body().data.phone,
-                                    response.body().data.status,
-                                    response.body().data.category_id,
-                                    response.body().data.image,
-                                    response.body().data.is_favorite,
-                                    response.body().data.location);
-                            if (listener != null) {
-                                listener.onResult(advert);
+    private static final String STORAGE = "storage";
+
+    @Override
+    public void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData, Uri uri) {
+        if (uri == null) {
+            Map<String, String> requestBody = new HashMap<>();
+            requestBody.put("title", advertData.getTitle());
+            requestBody.put("author", advertData.getAuthor());
+            requestBody.put("description", advertData.getDescription());
+            requestBody.put("price", Float.toString(advertData.getPrice()));
+            requestBody.put("status", "active");
+            requestBody.put("category_id", Integer.toString(advertData.getCategoryId()));
+            requestBody.put("phone", advertData.getPhone());
+            requestBody.put("location", advertData.getLocation());
+
+            BouquinisteApplication.getInstance()
+                    .getApiManager()
+                    .getRestApi()
+                    .postAdvert(requestBody)
+                    .enqueue(new Callback<BaseResponseObject<AdvertResponse>>() {
+                        @Override
+                        public void onResponse(Call<BaseResponseObject<AdvertResponse>> call, Response<BaseResponseObject<AdvertResponse>> response) {
+                            Logger.d(response.message());
+                            if (response.isSuccessful() && response.body() != null && response.body().data != null) {
+                                AdvertData advert = new AdvertData(
+                                        response.body().data.id,
+                                        response.body().data.title,
+                                        response.body().data.author,
+                                        response.body().data.description,
+                                        response.body().data.price,
+                                        response.body().data.phone,
+                                        response.body().data.status,
+                                        response.body().data.category_id,
+                                        response.body().data.image,
+                                        response.body().data.is_favorite,
+                                        response.body().data.location);
+                                if (listener != null) {
+                                    listener.onResult(advert);
+                                }
+                            } else {
+                                if (listener != null) {
+                                    listener.onResult(null);
+                                }
                             }
-                        } else {
+                        }
+
+                        @Override
+                        public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
+                            Logger.e(t.getMessage());
                             if (listener != null) {
                                 listener.onResult(null);
                             }
                         }
-                    }
+                    });
+        } else {
+            Map<String, String> requestBody = new HashMap<>();
+            requestBody.put("title", advertData.getTitle());
+            requestBody.put("author", advertData.getAuthor());
+            requestBody.put("description", advertData.getDescription());
+            requestBody.put("price", Float.toString(advertData.getPrice()));
+            requestBody.put("status", "active");
+            requestBody.put("category_id", Integer.toString(advertData.getCategoryId()));
+            requestBody.put("phone", advertData.getPhone());
+            requestBody.put("location", advertData.getLocation());
 
-                    @Override
-                    public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
-                        Logger.e(t.getMessage());
-                        if (listener != null) {
-                            listener.onResult(null);
+            BouquinisteApplication.getInstance()
+                    .getApiManager()
+                    .getRestApi()
+                    .postAdvert(requestBody)
+                    .enqueue(new Callback<BaseResponseObject<AdvertResponse>>() {
+                        @Override
+                        public void onResponse(Call<BaseResponseObject<AdvertResponse>> call, Response<BaseResponseObject<AdvertResponse>> response) {
+                            Logger.d(response.message());
+                            if (response.isSuccessful() && response.body() != null && response.body().data != null) {
+
+                                File file = new File(getPathFromUri(uri));
+                                RequestBody requestFile =
+                                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                                MultipartBody.Part body =
+                                        MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+                                BouquinisteApplication.getInstance()
+                                        .getApiManager()
+                                        .getRestApi()
+                                        .uploadPhoto(response.body().data.id, body)
+                                        .enqueue(new Callback<BaseResponseObject<AdvertResponse>>() {
+                                            @Override
+                                            public void onResponse(Call<BaseResponseObject<AdvertResponse>> call, Response<BaseResponseObject<AdvertResponse>> response) {
+                                                Logger.d(response.message());
+                                                if (response.isSuccessful() && response.body() != null && response.body().data != null) {
+                                                    AdvertData advert = new AdvertData(
+                                                            response.body().data.id,
+                                                            response.body().data.title,
+                                                            response.body().data.author,
+                                                            response.body().data.description,
+                                                            response.body().data.price,
+                                                            response.body().data.phone,
+                                                            response.body().data.status,
+                                                            response.body().data.category_id,
+                                                            response.body().data.image,
+                                                            response.body().data.is_favorite,
+                                                            response.body().data.location);
+                                                    if (listener != null) {
+                                                        listener.onResult(advert);
+                                                    }
+                                                } else {
+                                                    if (listener != null) {
+                                                        listener.onResult(null);
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
+                                                Logger.e(t.getMessage());
+                                            }
+                                        });
+
+                            }
                         }
-                    }
-                });
+
+                        @Override
+                        public void onFailure(Call<BaseResponseObject<AdvertResponse>> call, Throwable t) {
+                            Logger.e(t.getMessage());
+                            if (listener != null) {
+                                listener.onResult(null);
+                            }
+                        }
+                    });
+        }
     }
+
+
+    private String getPathFromUri(Uri uri) {
+        return uri.getPath().substring(uri.getPath().indexOf(STORAGE));
+    }
+
+
 }

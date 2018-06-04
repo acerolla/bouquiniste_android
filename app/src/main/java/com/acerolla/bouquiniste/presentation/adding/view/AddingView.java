@@ -1,6 +1,7 @@
 package com.acerolla.bouquiniste.presentation.adding.view;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Evgeniy Solovev
@@ -147,6 +149,12 @@ public class AddingView extends ScrollView {
 
     public void setErrorVisibility(int visibility) {
 
+    }
+
+    public void setImage(Uri uri) {
+        Picasso.get()
+                .load(uri)
+                .into(mIvImage);
     }
 
     public void setCategory(int id, String title) {

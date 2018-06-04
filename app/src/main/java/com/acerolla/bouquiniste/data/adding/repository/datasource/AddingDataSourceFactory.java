@@ -9,8 +9,4 @@ public class AddingDataSourceFactory {
     public static IAddingDataSource getCloudDataSource() {
         return new AddingCloudDataSource();
     }
-
-    public static IAddingDataSource getLocalDataSource() {
-        return new AddingLocalDataSource();
-    }
 }

@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.data.adding.repository;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.data.adding.repository.datasource.AddingDataSourceFactory;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.ResultListener;
@@ -10,14 +12,21 @@ import com.acerolla.bouquiniste.data.ResultListener;
  */
 public class AddingRepository implements IAddingRepository {
 
+    private Uri mUri;
+
     @Override
     public void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData) {
         AddingDataSourceFactory.getCloudDataSource()
-                .postAdvert(listener, advertData);
+                .postAdvert(listener, advertData, mUri);
+    }
+
+    @Override
+    public void saveUri(Uri uri) {
+        mUri = uri;
     }
 
     @Override
     public void release() {
-
+        mUri = null;
     }
 }

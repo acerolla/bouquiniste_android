@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.presentation.adding.view;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 
@@ -20,4 +22,5 @@ public interface IAddingView {
     void changeFragment();
     void navigateToCategories();
     void showCategory(int id, String title);
+    void setImage(Uri uri);
 }

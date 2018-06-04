@@ -39,12 +39,12 @@ public class LoginContainerActivity extends AppCompatActivity implements ILoginC
 
     @Override
     public void navigateToRegister() {
-        mPresenter.handleRegisterClick();
+        showRegistration();
     }
 
     @Override
     public void navigateToLogin() {
-        mPresenter.handleLoginClick();
+        showLogin();
     }
 
     @Override

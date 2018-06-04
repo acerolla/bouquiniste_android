@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class AddingPresenter implements IAddingPresenter {
 
-    private static final String STORAGE = "storage";
 
     private IAddingView mView;
     private IAddingInteractor mInteractor;
@@ -28,11 +27,7 @@ public class AddingPresenter implements IAddingPresenter {
     @Override
     public void bindView(IAddingView view) {
         mView = view;
-        /*mInteractor.loadCategories(result -> {
-            if (result != null) {
-                mView.setContentData(result);
-            }
-        });*/
+
     }
 
     @Override
@@ -42,11 +37,8 @@ public class AddingPresenter implements IAddingPresenter {
 
     @Override
     public void handleFileChoosed(Uri uri) {
-        mInteractor.saveImagePath(getPathFromUri(uri)); ////storage/emulated/0/Download/sample_image.jpg
-    }
-
-    private String getPathFromUri(Uri uri) {
-        return uri.getPath().substring(uri.getPath().indexOf(STORAGE));
+        mInteractor.saveImagePath(uri); ////storage/emulated/0/Download/sample_image.jpg
+        mView.setImage(uri);
     }
 
     @Override

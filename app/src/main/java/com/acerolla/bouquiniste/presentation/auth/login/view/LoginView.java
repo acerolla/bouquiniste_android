@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 
@@ -20,7 +21,7 @@ public class LoginView extends RelativeLayout {
     private EditText mEtEmail;
     private EditText mEtPassword;
     private Button mBtnLogin;
-    private AppCompatButton mBtnRegister;
+    private TextView mBtnRegister;
 
     public LoginView(Context context) {
         super(context);
@@ -44,10 +45,12 @@ public class LoginView extends RelativeLayout {
         mEtEmail = findViewById(R.id.et_email);
         mEtPassword = findViewById(R.id.et_password);
         mBtnLogin = findViewById(R.id.btn_login);
+
+        mBtnRegister = findViewById(R.id.tv_label);
     }
 
     public void setRegisterClickListener(OnClickListener listener) {
-        //mBtnRegister.setOnClickListener(listener);
+        mBtnRegister.setOnClickListener(listener);
     }
 
     public void setLoginClickListener(OnClickListener listener) {

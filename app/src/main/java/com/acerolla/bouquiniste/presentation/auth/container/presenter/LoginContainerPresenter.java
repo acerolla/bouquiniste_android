@@ -25,7 +25,7 @@ public class LoginContainerPresenter implements ILoginContainerPresenter {
     @Override
     public void bindView(ILoginContainerView view) {
         mView = view;
-        mView.showRegistration();
+        mView.showLogin();
     }
 
     @Override

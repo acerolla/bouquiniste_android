@@ -62,8 +62,8 @@ public interface IRestApi {
     Call<BaseResponseObject<AdvertResponse>> postAdvert(@Body Map<String, String> requestBody);
 
     @Multipart
-    @POST("api/advert")//TODO: post with file
-    Call<BaseResponseObject<AdvertResponse>> postAdvert(@PartMap Map<String, String> requestBody, @Part MultipartBody.Part file);
+    @PUT("api/advert/{id}")
+    Call<BaseResponseObject<AdvertResponse>> uploadPhoto(@Path("id") int advertId, @Part MultipartBody.Part image);
 
     @PUT("api/advert/{id}")
     Call<BaseResponseObject<AdvertResponse>> editAdvert(@Path("id") int advertId, @Body Map<String, String> requestBody);

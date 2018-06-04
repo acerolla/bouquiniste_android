@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.domain.adding;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.data.adding.repository.IAddingRepository;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.ResultListener;
@@ -19,7 +21,6 @@ public class AddingInteractor implements IAddingInteractor {
     private ICategoryInteractor mCategoryInteractor;
     private IAdvertsInteractor mAdvertsInteractor;
 
-    private String mPath;
 
     public AddingInteractor(IAddingRepository repository, ICategoryInteractor categoryInteractor, IAdvertsInteractor advertsInteractor) {
         mRepository = repository;
@@ -49,18 +50,12 @@ public class AddingInteractor implements IAddingInteractor {
     }
 
     @Override
-    public void saveImagePath(String path) {
-        mPath = path;
-    }
-
-    @Override
-    public String getImagePath() {
-        return mPath;
+    public void saveImagePath(Uri uri) {
+        mRepository.saveUri(uri);
     }
 
     @Override
     public void release() {
-        mPath = null;
 
         mRepository = null;
 

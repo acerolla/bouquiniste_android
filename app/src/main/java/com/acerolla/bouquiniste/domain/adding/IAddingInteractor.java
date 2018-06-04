@@ -1,5 +1,7 @@
 package com.acerolla.bouquiniste.domain.adding;
 
+import android.net.Uri;
+
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
@@ -15,6 +17,5 @@ public interface IAddingInteractor extends BaseInteractor {
 
     void postAdvert(ResultListener<AdvertData> listener, AdvertData advertData);
     void loadCategories(ResultListener<List<CategoryParentData>> listener);
-    void saveImagePath(String path);
-    String getImagePath();
+    void saveImagePath(Uri path);
 }
