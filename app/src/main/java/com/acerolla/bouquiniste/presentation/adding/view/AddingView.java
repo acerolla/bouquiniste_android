@@ -3,9 +3,10 @@ package com.acerolla.bouquiniste.presentation.adding.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
@@ -27,14 +28,19 @@ public class AddingView extends ScrollView {
     private static final int ZERO = 0;
 
     private ImageView mIvImage;
-    private EditText mEtTitle;
-    private EditText mEtAuthor;
-    private EditText mEtDescription;
-    private EditText mEtPrice;
-    private EditText mEtPhone;
-    private EditText mEtLocation;
-    private Button mBtnCategory;
+    private TextView mTvTitle;
+    private TextView mTvAuthor;
+    private TextView mTvDescription;
+    private TextView mTvPrice;
+    private TextView mTvPhone;
+    private TextView mTvLocation;
+    private TextView mTvCategory;
     private Button mBtnPost;
+
+    private LinearLayout mLlDescription;
+    private LinearLayout mLlCategory;
+    private LinearLayout mLlPhone;
+    private LinearLayout mLlLocation;
 
     private String mImagePath;
     private int mCategoryId;
@@ -59,14 +65,19 @@ public class AddingView extends ScrollView {
         setClickable(true);
 
         mIvImage = findViewById(R.id.iv_image);
-        mEtTitle = findViewById(R.id.et_title);
-        mEtAuthor = findViewById(R.id.et_author);
-        mEtDescription = findViewById(R.id.et_description);
-        mEtPrice = findViewById(R.id.et_price);
-        mEtPhone = findViewById(R.id.et_phone);
-        mEtLocation = findViewById(R.id.et_location);
-        mBtnCategory = findViewById(R.id.tv_category);
+        mTvTitle = findViewById(R.id.tv_title);
+        mTvAuthor = findViewById(R.id.tv_author);
+        mTvDescription = findViewById(R.id.tv_description);
+        mTvPrice = findViewById(R.id.tv_price);
+        mTvPhone = findViewById(R.id.tv_phone);
+        mTvLocation = findViewById(R.id.tv_location);
+        mTvCategory = findViewById(R.id.tv_category);
         mBtnPost = findViewById(R.id.btn_post);
+
+        mLlDescription = findViewById(R.id.ll_description);
+        mLlCategory = findViewById(R.id.ll_category);
+        mLlPhone = findViewById(R.id.ll_phone);
+        mLlLocation = findViewById(R.id.ll_location);
 
     }
 
@@ -78,21 +89,52 @@ public class AddingView extends ScrollView {
         mIvImage.setOnClickListener(listener);
     }
 
-    public void setCategoryButtonCLickListener(OnClickListener listener) {
-        mBtnCategory.setOnClickListener(listener);
+    public void setFieldsClickListener(OnClickListener listener) {
+        mLlCategory.setOnClickListener(listener);
+        mLlDescription.setOnClickListener(listener);
+        mLlPhone.setOnClickListener(listener);
+        mLlLocation.setOnClickListener(listener);
+
+        mTvPrice.setOnClickListener(listener);
+        mTvTitle.setOnClickListener(listener);
+        mTvAuthor.setOnClickListener(listener);
     }
 
     public AdvertData collectData() {
         AdvertData advert = new AdvertData();
-        advert.setmTitle(mEtTitle.getText().toString());
-        advert.setmAuthor(mEtAuthor.getText().toString());
-        advert.setmDescription(mEtDescription.getText().toString());
-        advert.setmPrice(Float.parseFloat(mEtPrice.getText().toString()));
-        advert.setmPhone(mEtPhone.getText().toString());
+        advert.setmTitle(mTvTitle.getText().toString());
+        advert.setmAuthor(mTvAuthor.getText().toString());
+        advert.setmDescription(mTvDescription.getText().toString());
+        advert.setmPrice(Float.parseFloat(mTvPrice.getText().toString()));
+        advert.setmPhone(mTvPhone.getText().toString());
         advert.setmStatus("active");
-        advert.setmLocation(mEtLocation.getText().toString());
+        advert.setmLocation(mTvLocation.getText().toString());
         advert.setmCategoryId(mCategoryId);
         return advert;
+    }
+
+    public void setTitle(String title) {
+        mTvTitle.setText(title);
+    }
+
+    public void setAuthor(String author) {
+        mTvAuthor.setText(author);
+    }
+
+    public void setPrice(String price) {
+        mTvPrice.setText(price);
+    }
+
+    public void setDescription(String description) {
+        mTvDescription.setText(description);
+    }
+
+    public void setPhone(String phone) {
+        mTvPhone.setText(phone);
+    }
+
+    public void setLocation(String location) {
+        mTvLocation.setText(location);
     }
 
     public void setContentVisibility(int visibility) {
@@ -108,7 +150,7 @@ public class AddingView extends ScrollView {
     }
 
     public void setCategory(int id, String title) {
-        mBtnCategory.setText(title);
+        mTvCategory.setText(title);
         mCategoryId = id;
     }
 }

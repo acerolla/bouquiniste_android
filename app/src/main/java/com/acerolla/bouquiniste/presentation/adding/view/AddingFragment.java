@@ -12,14 +12,16 @@ import android.view.ViewGroup;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
-import com.acerolla.bouquiniste.data.category.entity.CategoryParentData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adding.presenter.IAddingPresenter;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
-
-import java.util.List;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditDescription;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditLocation;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditPhone;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditPrice;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditTitle;
 
 import javax.inject.Inject;
 
@@ -59,7 +61,42 @@ public class AddingFragment extends Fragment implements IAddingView {
     private void setListeners() {
         mView.setAddClickListener(v -> mPresenter.handleAddClick());
         mView.setImageClickListener(v -> mPresenter.handleUploadClick());
-        mView.setCategoryButtonCLickListener(v -> mPresenter.handleCategoryButtonClicked());
+        mView.setFieldsClickListener(v -> {
+            switch (v.getId()) {
+                case R.id.tv_title:
+                case R.id.tv_author:
+                    DialogEditTitle dialog1 = new DialogEditTitle();
+                    dialog1.setListener((title, author) -> {
+                        mView.setTitle(title);
+                        mView.setAuthor(author);
+                    });
+                    dialog1.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.tv_price:
+                    DialogEditPrice dialog2 = new DialogEditPrice();
+                    dialog2.setListener(price -> mView.setPrice(price));
+                    dialog2.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.ll_description:
+                    DialogEditDescription dialog3 = new DialogEditDescription();
+                    dialog3.setListener(price -> mView.setDescription(price));
+                    dialog3.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.ll_category:
+                    mPresenter.handleCategoryButtonClicked();
+                    break;
+                case R.id.ll_phone:
+                    DialogEditPhone dialog4 = new DialogEditPhone();
+                    dialog4.setListener(price -> mView.setPhone(price));
+                    dialog4.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.ll_location:
+                    DialogEditLocation dialog5 = new DialogEditLocation();
+                    dialog5.setListener(price -> mView.setLocation(price));
+                    dialog5.show(getActivity().getFragmentManager(), "");
+                    break;
+            }
+        });
     }
 
     @Override
@@ -141,6 +178,11 @@ public class AddingFragment extends Fragment implements IAddingView {
     @Override
     public void showCategory(int id, String title) {
         mView.setCategory(id, title);
+    }
+
+    public void onTitleChanged(String title, String author) {
+        mView.setTitle(title);
+        mView.setAuthor(author);
     }
 
     @Override
