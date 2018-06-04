@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
@@ -38,14 +40,20 @@ public class EditView extends ScrollView {
     ICategoryInteractor mInteractor;
 
     private ImageView mIvImage;
-    private EditText mTvTitle;
-    private EditText mTvAuthor;
-    private EditText mTvDescription;
-    private EditText mTvPrice;
-    private EditText mTvPhone;
-    private EditText mTvLocation;
-    private Button mTvCategory;
+    private TextView mTvTitle;
+    private TextView mTvAuthor;
+    private TextView mTvDescription;
+    private TextView mTvPrice;
+    private TextView mTvPhone;
+    private TextView mTvLocation;
+    private TextView mTvCategory;
     private Button mBtnEdit;
+
+
+    private LinearLayout mLlDescription;
+    private LinearLayout mLlCategory;
+    private LinearLayout mLlPhone;
+    private LinearLayout mLlLocation;
 
 
     public EditView(Context context) {
@@ -78,6 +86,11 @@ public class EditView extends ScrollView {
         mTvLocation = findViewById(R.id.tv_location);
         mTvCategory = findViewById(R.id.tv_category);
         mBtnEdit = findViewById(R.id.btn_edit);
+
+        mLlDescription = findViewById(R.id.ll_description);
+        mLlCategory = findViewById(R.id.ll_category);
+        mLlPhone = findViewById(R.id.ll_phone);
+        mLlLocation = findViewById(R.id.ll_location);
     }
 
     public void setContentData(AdvertData data) {
@@ -125,8 +138,15 @@ public class EditView extends ScrollView {
         }
     }
 
-    public void setCategoryButtonClickListener(OnClickListener listener) {
-        mTvCategory.setOnClickListener(listener);
+    public void setItemClickListener(OnClickListener listener) {
+        mLlCategory.setOnClickListener(listener);
+        mLlDescription.setOnClickListener(listener);
+        mLlPhone.setOnClickListener(listener);
+        mLlLocation.setOnClickListener(listener);
+
+        mTvPrice.setOnClickListener(listener);
+        mTvTitle.setOnClickListener(listener);
+        mTvAuthor.setOnClickListener(listener);
     }
 
     public void setEditClickListener(OnClickListener listener) {
@@ -165,6 +185,30 @@ public class EditView extends ScrollView {
         }
 
         return Float.parseFloat(price);
+    }
+
+    public void setTitle(String title) {
+        mTvTitle.setText(title);
+    }
+
+    public void setAuthor(String author) {
+        mTvAuthor.setText(author);
+    }
+
+    public void setPrice(String price) {
+        mTvPrice.setText(price);
+    }
+
+    public void setDescription(String description) {
+        mTvDescription.setText(description);
+    }
+
+    public void setPhone(String phone) {
+        mTvPhone.setText(phone);
+    }
+
+    public void setLocation(String location) {
+        mTvLocation.setText(location);
     }
 
     public void setContentVisibility(int visibility) {

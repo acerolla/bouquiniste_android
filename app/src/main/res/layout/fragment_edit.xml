@@ -8,8 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="60dp"
-        android:background="@drawable/borders">
+        android:background="@color/white">
 
 
         <ImageView
@@ -17,115 +16,175 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@mipmap/ic_camera"
-            android:layout_below="@+id/toolbar_actionbar"
-            android:background="@drawable/edit_text_style"/>
+            android:background="@color/white"/>
 
-        <EditText
+
+        <TextView
             android:id="@+id/tv_title"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/iv_image"
-            android:ellipsize="start"
-            android:gravity="center"
+            android:layout_marginStart="10dp"
             android:textColor="@color/black"
-            android:hint="Название книги"
-            android:background="@drawable/edit_text_style"/>
+            android:gravity="center"
+            android:textSize="17sp"
+            android:text="Название*"/>
 
-        <EditText
+        <TextView
+            android:id="@+id/symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_image"
+            android:layout_toEndOf="@id/tv_title"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:text="@string/hyphen"/>
+
+        <TextView
             android:id="@+id/tv_author"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_below="@+id/tv_title"
-            android:ellipsize="start"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/symbol"
+            android:layout_below="@+id/iv_image"
             android:textColor="@color/black"
-            android:hint="Автор книги"
-            android:background="@drawable/edit_text_style"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:text="Автор*"/>
 
-        <EditText
-            android:id="@+id/tv_description"
-            android:layout_marginLeft="15dp"
+        <TextView
+            android:id="@+id/tv_price"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_below="@+id/tv_author"
-            android:padding="7dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginStart="10dp"
             android:ellipsize="start"
             android:gravity="start"
             android:textColor="@color/black"
-            android:hint="Описание"
-            android:background="@drawable/edit_text_style"/>
+            android:textSize="17sp"
+            android:text="Цена*"/>
 
-        <Button
-            android:id="@+id/tv_category"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_below="@+id/tv_description"
-            android:ellipsize="start"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="Выбрать категорию"
-            android:textAllCaps="false"
-            android:background="@drawable/edit_text_style"/>
-
-        <EditText
-            android:id="@+id/tv_price"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_below="@+id/tv_category"
-            android:ellipsize="start"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:hint="Цена"
-            android:background="@drawable/edit_text_style"/>
-
-        <EditText
-            android:id="@+id/tv_phone"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_price"
-            android:ellipsize="start"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:hint="Номер телефона для связи"
-            android:background="@drawable/edit_text_style"/>
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
+            android:text="Дополнительная информация"/>
 
-        <EditText
-            android:id="@+id/tv_location"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp"
+        <LinearLayout
+            android:id="@+id/ll_description"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_below="@+id/tv_phone"
-            android:ellipsize="start"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:hint="Адрес"
-            android:background="@drawable/edit_text_style"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/label"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Описание"/>
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Нажмите, чтобы добавить описание*"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/ll_description"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Категория"/>
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Нажмите, чтобы указать категорию*"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/ll_category"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Контактный телефон"/>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Нажмите, чтобы добавить контактный телефон*"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/ll_phone"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Адрес"/>
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Нажмите, чтобы добавить адрес*"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_edit"
@@ -135,12 +194,12 @@
             android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_location"
+            android:layout_below="@+id/ll_location"
             android:ellipsize="start"
             android:gravity="center"
-            android:textAllCaps="false"
-            android:text="Редактировать"
-            android:background="@drawable/edit_text_style"/>
+            android:text="Редактировать"/>
+
+
 
     </RelativeLayout>
 

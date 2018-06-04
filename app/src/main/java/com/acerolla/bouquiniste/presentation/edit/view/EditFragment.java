@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,11 @@ import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.edit.presenter.IEditPresenter;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditDescription;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditLocation;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditPhone;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditPrice;
+import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditTitle;
 
 import java.util.Locale;
 
@@ -60,7 +64,44 @@ public class EditFragment extends Fragment implements IEditView {
     }
 
     private void setListeners() {
-        mView.setCategoryButtonClickListener(v -> mPresenter.handleCategoryClicked());
+        mView.setItemClickListener(v -> mPresenter.handleCategoryClicked());
+
+        mView.setItemClickListener(v -> {
+            switch (v.getId()) {
+                case R.id.tv_title:
+                case R.id.tv_author:
+                    DialogEditTitle dialog1 = new DialogEditTitle();
+                    dialog1.setListener((title, author) -> {
+                        mView.setTitle(title);
+                        mView.setAuthor(author);
+                    });
+                    dialog1.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.tv_price:
+                    DialogEditPrice dialog2 = new DialogEditPrice();
+                    dialog2.setListener(price -> mView.setPrice(price));
+                    dialog2.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.ll_description:
+                    DialogEditDescription dialog3 = new DialogEditDescription();
+                    dialog3.setListener(price -> mView.setDescription(price));
+                    dialog3.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.ll_category:
+                    mPresenter.handleCategoryClicked();
+                    break;
+                case R.id.ll_phone:
+                    DialogEditPhone dialog4 = new DialogEditPhone();
+                    dialog4.setListener(price -> mView.setPhone(price));
+                    dialog4.show(getActivity().getFragmentManager(), "");
+                    break;
+                case R.id.ll_location:
+                    DialogEditLocation dialog5 = new DialogEditLocation();
+                    dialog5.setListener(price -> mView.setLocation(price));
+                    dialog5.show(getActivity().getFragmentManager(), "");
+                    break;
+            }
+        });
 
         ((EditActivity) getActivity()).setCloseClickListener(v -> mPresenter.handleAdvertClosedClicked());
         ((EditActivity) getActivity()).setShareClickListener(() -> mPresenter.handleShareClick());
