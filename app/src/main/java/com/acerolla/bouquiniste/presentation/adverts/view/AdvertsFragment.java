@@ -23,6 +23,7 @@ import com.acerolla.bouquiniste.presentation.adverts.presenter.IAdvertsPresenter
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
+import com.acerolla.bouquiniste.presentation.main.view.MainActivity;
 
 import java.util.List;
 
@@ -137,6 +138,11 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
     @Override
     public void stopRefreshing() {
         mView.setRefreshing(false);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        ((MainActivity)getActivity()).setTitle(title);
     }
 
     @Override

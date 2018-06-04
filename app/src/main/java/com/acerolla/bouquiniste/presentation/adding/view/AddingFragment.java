@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
@@ -22,6 +23,7 @@ import com.acerolla.bouquiniste.presentation.adding.presenter.IAddingPresenter;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.main.view.IMainView;
+import com.acerolla.bouquiniste.presentation.main.view.MainActivity;
 import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditDescription;
 import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditLocation;
 import com.acerolla.bouquiniste.presentation.utils.dialogs.DialogEditPhone;
@@ -40,6 +42,13 @@ public class AddingFragment extends Fragment implements IAddingView {
 
 
     private static final int REQUEST_FILE_CHOOSER = 42;
+
+    private boolean mTitle = false;
+    private boolean mPrice = false;
+    private boolean mDescription = false;
+    private boolean mCategory = false;
+    private boolean mPhone = false;
+    private boolean mLocation = false;
 
     private AddingView mView;
 
@@ -63,11 +72,19 @@ public class AddingFragment extends Fragment implements IAddingView {
 
         DiManager.getAddingComponent().inject(this);
         mPresenter.bindView(this);
+
+        ((MainActivity) getActivity()).setTitle("Новое объявление");
         setListeners();
     }
 
     private void setListeners() {
-        mView.setAddClickListener(v -> mPresenter.handleAddClick());
+        mView.setAddClickListener(v -> {
+            if (mTitle && mPrice && mDescription && mCategory && mPhone && mLocation) {
+                mPresenter.handleAddClick();
+            } else {
+                Toast.makeText(getContext(), "Не все поля заполнены!", Toast.LENGTH_LONG).show();
+            }
+        });
         mView.setImageClickListener(v -> mPresenter.handleUploadClick());
         mView.setFieldsClickListener(v -> {
             switch (v.getId()) {
@@ -77,30 +94,32 @@ public class AddingFragment extends Fragment implements IAddingView {
                     dialog1.setListener((title, author) -> {
                         mView.setTitle(title);
                         mView.setAuthor(author);
+                        mTitle = true;
                     });
                     dialog1.show(getActivity().getFragmentManager(), "");
                     break;
                 case R.id.tv_price:
                     DialogEditPrice dialog2 = new DialogEditPrice();
-                    dialog2.setListener(price -> mView.setPrice(price));
+                    dialog2.setListener(price -> {mView.setPrice(price); mPrice = true;});
                     dialog2.show(getActivity().getFragmentManager(), "");
                     break;
                 case R.id.ll_description:
                     DialogEditDescription dialog3 = new DialogEditDescription();
-                    dialog3.setListener(price -> mView.setDescription(price));
+                    dialog3.setListener(price -> {mView.setDescription(price); mDescription = true;});
                     dialog3.show(getActivity().getFragmentManager(), "");
                     break;
                 case R.id.ll_category:
                     mPresenter.handleCategoryButtonClicked();
+                    mCategory = true;
                     break;
                 case R.id.ll_phone:
                     DialogEditPhone dialog4 = new DialogEditPhone();
-                    dialog4.setListener(price -> mView.setPhone(price));
+                    dialog4.setListener(price -> {mView.setPhone(price); mPhone = true;});
                     dialog4.show(getActivity().getFragmentManager(), "");
                     break;
                 case R.id.ll_location:
                     DialogEditLocation dialog5 = new DialogEditLocation();
-                    dialog5.setListener(price -> mView.setLocation(price));
+                    dialog5.setListener(price -> {mView.setLocation(price); mLocation = true;});
                     dialog5.show(getActivity().getFragmentManager(), "");
                     break;
             }

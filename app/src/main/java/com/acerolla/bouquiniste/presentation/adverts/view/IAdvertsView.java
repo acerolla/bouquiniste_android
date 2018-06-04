@@ -19,4 +19,6 @@ public interface IAdvertsView {
     void navigateToDetail();
     void showCategory();
     void stopRefreshing();
+
+    void setTitle(String title);
 }

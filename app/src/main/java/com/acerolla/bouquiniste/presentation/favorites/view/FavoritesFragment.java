@@ -17,6 +17,7 @@ import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.FavoritesPresenter;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.IFavoritesPresenter;
+import com.acerolla.bouquiniste.presentation.main.view.MainActivity;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
 
         DiManager.getFavoritesComponent().inject(this);
         mPresenter.bindView(this);
-
+        ((MainActivity) getActivity()).setTitle("Избранное");
         setListeners();
     }
 

@@ -118,6 +118,10 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         Toast.makeText(this, "Выход из системы выполнен!", Toast.LENGTH_SHORT).show();
     }
 
+    public void setTitle(String title) {
+        mView.getToolbar().setTitle(title);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

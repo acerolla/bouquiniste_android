@@ -21,6 +21,7 @@ import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.edit.view.EditActivity;
 import com.acerolla.bouquiniste.presentation.edit.view.EditFragment;
+import com.acerolla.bouquiniste.presentation.main.view.MainActivity;
 import com.acerolla.bouquiniste.presentation.profile.presenter.IProfilePresenter;
 import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
 
@@ -57,7 +58,7 @@ public class ProfileFragment extends Fragment implements IProfileView {
 
         DiManager.getProfileComponent().inject(this);
         mPresenter.bindView(this);
-
+        ((MainActivity) getActivity()).setTitle("Профиль");
         setListeners();
     }
 

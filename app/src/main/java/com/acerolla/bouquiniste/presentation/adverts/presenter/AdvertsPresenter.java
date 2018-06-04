@@ -24,6 +24,7 @@ public class AdvertsPresenter implements IAdvertsPresenter {
     @Override
     public void bindView(IAdvertsView view) {
         mView = view;
+        mView.setTitle("Все объявления");
         mInteractor.loadAdvertList(mLoadingListener);
     }
 
@@ -49,11 +50,13 @@ public class AdvertsPresenter implements IAdvertsPresenter {
 
     @Override
     public void handleCategorySelected(int categoryId, String categoryTitle) {
+        mView.setTitle(categoryTitle);
         mInteractor.loadAdvertsByCategories(mLoadingListener, categoryId);
     }
 
     @Override
     public void handleRefresh() {
+        mView.setTitle("Все объявления");
         mInteractor.loadAdvertList(mLoadingListener);
     }
 
