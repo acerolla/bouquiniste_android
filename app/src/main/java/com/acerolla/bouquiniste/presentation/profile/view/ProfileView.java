@@ -36,7 +36,6 @@ public class ProfileView extends RelativeLayout {
 
     private static final int TEXT_SIZE_LABEL_ADVERT = 16;
 
-    private ImageView mIvAvatar;
     private TextView mTvUser;
     private TextView mTvEmail;
     private Button mBtnLogin;
@@ -64,7 +63,6 @@ public class ProfileView extends RelativeLayout {
     public void initViews() {
         setClickable(true);
 
-        mIvAvatar = findViewById(R.id.iv_avatar);
         mTvUser = findViewById(R.id.tv_username);
         mTvEmail = findViewById(R.id.tv_email);
         mBtnLogin = findViewById(R.id.btn_login);
@@ -79,9 +77,7 @@ public class ProfileView extends RelativeLayout {
         mRvAdverts.setAdapter(mAdapter);
     }
 
-    public void setAvatar(String userName) {
-        ImageLoader.showAvatar(mIvAvatar, userName);
-    }
+
 
     public void setUserName(CharSequence userName) {
         mTvUser.setText(userName);
@@ -138,7 +134,6 @@ public class ProfileView extends RelativeLayout {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mIvAvatar = null;
         mTvUser = null;
         mTvEmail = null;
     }

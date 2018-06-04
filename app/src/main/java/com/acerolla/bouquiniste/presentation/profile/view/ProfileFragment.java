@@ -107,8 +107,6 @@ public class ProfileFragment extends Fragment implements IProfileView {
 
     @Override
     public void setContentProfile(ProfileData data) {
-        //mView.setLoginButtonVisibility(View.GONE);
-        mView.setAvatar(data.getName());
         mView.setUserName(data.getName());
         mView.setEmail(data.getEmail());
     }
