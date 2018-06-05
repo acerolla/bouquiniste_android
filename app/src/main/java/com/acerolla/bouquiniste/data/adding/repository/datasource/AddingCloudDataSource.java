@@ -1,6 +1,9 @@
 package com.acerolla.bouquiniste.data.adding.repository.datasource;
 
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 
 import com.acerolla.bouquiniste.BouquinisteApplication;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
@@ -104,7 +107,14 @@ class AddingCloudDataSource implements IAddingDataSource {
                             Logger.d(response.message());
                             if (response.isSuccessful() && response.body() != null && response.body().data != null) {
 
-                                File file = new File(getPathFromUri(uri));
+                                File file = new File(getRealPathFromURI_API19(uri));
+                                if (!file.exists()) {
+                                    file = new File(getPathFromUri(uri));
+                                    if (!file.exists()) {
+                                        postAdvert(listener, advertData, null);
+                                        return;
+                                    }
+                                }
                                 RequestBody requestFile =
                                         RequestBody.create(MediaType.parse("multipart/form-data"), file);
                                 MultipartBody.Part body =
@@ -159,6 +169,30 @@ class AddingCloudDataSource implements IAddingDataSource {
                         }
                     });
         }
+    }
+
+    private String getRealPathFromURI_API19(Uri uri){
+        String filePath = "";
+        String wholeID = DocumentsContract.getDocumentId(uri);
+
+        // Split at colon, use second item in the array
+        String id = wholeID.split(":")[1];
+
+        String[] column = { MediaStore.Images.Media.DATA };
+
+        // where id is equal to
+        String sel = MediaStore.Images.Media._ID + "=?";
+
+        Cursor cursor = BouquinisteApplication.getInstance().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                column, sel, new String[]{ id }, null);
+
+        int columnIndex = cursor.getColumnIndex(column[0]);
+
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex);
+        }
+        cursor.close();
+        return filePath;
     }
 
 
