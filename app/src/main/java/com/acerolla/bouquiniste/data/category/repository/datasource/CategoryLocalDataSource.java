@@ -18,8 +18,8 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
 
     @Override
     public void loadCategories(ResultListener<List<CategoryParentData>> listener) {
-        listener.onResult(null);
-        /*BouquinisteApplication.getInstance()
+        //listener.onResult(null);
+        BouquinisteApplication.getInstance()
                 .getBackgroundThread()
                 .execute(new BouquinisteRunnable() {
                     @Override
@@ -40,7 +40,7 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
                             listener.onResult(null);
                         }
                     }
-                });*/
+                });
     }
 
     @Override
@@ -50,16 +50,23 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
                 .execute(new BouquinisteRunnable() {
                     @Override
                     public Object execute() throws Throwable {
-                        for (CategoryParentData category : categories) {
-                            BouquinisteApplication.getInstance()
-                                    .getDbHelper()
-                                    .getDao(CategoryParentData.class)
-                                    .create(category);
-                        }
-
-                        return null;
+                        return BouquinisteApplication.getInstance()
+                                .getDbHelper()
+                                .getDao(CategoryParentData.class)
+                                .deleteBuilder()
+                                .delete();
                     }
-                }, null);
+                }, result -> BouquinisteApplication.getInstance()
+                        .getBackgroundThread()
+                        .execute(new BouquinisteRunnable() {
+                            @Override
+                            public Object execute() throws Throwable {
+                                return BouquinisteApplication.getInstance()
+                                        .getDbHelper()
+                                        .getDao(CategoryParentData.class)
+                                        .create(categories);
+                            }
+                        }, null));
     }
 
     @Override

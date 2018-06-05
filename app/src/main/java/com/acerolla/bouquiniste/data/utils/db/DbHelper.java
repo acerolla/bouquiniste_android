@@ -21,6 +21,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
     public static final String TABLE_TOKEN = "bouquiniste_token";
     public static final String TABLE_PROFILE = "bouquiniste_profile";
     public static final String TABLE_ADVERTS = "bouquiniste_adverts";
+    public static final String TABLE_CATEGORY = "bouquiniste_category";
 
     private static final int DB_VERSION = 1;
 
@@ -36,6 +37,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, ProfileData.class);
             TableUtils.createTable(connectionSource, AdvertData.class);
             TableUtils.createTable(connectionSource, TokenData.class);
+            TableUtils.createTable(connectionSource, CategoryParentData.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

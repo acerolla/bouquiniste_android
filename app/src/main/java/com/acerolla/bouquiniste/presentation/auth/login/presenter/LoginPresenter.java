@@ -34,6 +34,8 @@ public class LoginPresenter implements ILoginPresenter {
             if (result != null && mInteractor != null && mView != null) {
                 mInteractor.saveProfile(result);
                 mView.navigateBack();
+            } else if (mView != null){
+                mView.showErrorDialog();
             }
         }, email, password);
     }

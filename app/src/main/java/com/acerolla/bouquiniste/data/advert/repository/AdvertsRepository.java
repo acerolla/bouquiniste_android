@@ -29,6 +29,8 @@ public class AdvertsRepository implements IAdvertsRepository {
                     AdvertDataSourceFactory.getCloudDataSource()
                             .getAdvertList(resultFromCloud -> {
                                 if (resultFromCloud != null) {
+                                    AdvertDataSourceFactory.getLocalDataSource()
+                                            .saveAdverts(resultFromCloud);
                                     if (listener != null) {
                                         listener.onResult(resultFromCloud);
                                     }

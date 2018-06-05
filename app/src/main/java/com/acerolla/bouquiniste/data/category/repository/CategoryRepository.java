@@ -38,8 +38,8 @@ public class CategoryRepository implements ICategoryRepository {
                         CategoryDataSourceFactory.getCloudDataSource()
                                 .loadCategories(resultFromCloud -> {
                                     if (resultFromCloud != null) {
-                                        /*CategoryDataSourceFactory.getLocalDataSource()
-                                                .saveCategories(resultFromCloud);*/
+                                        CategoryDataSourceFactory.getLocalDataSource()
+                                                .saveCategories(resultFromCloud);
                                         getCacheSource().saveCategories(resultFromCloud);
                                         if (listener != null) {
                                             listener.onResult(resultFromCloud);

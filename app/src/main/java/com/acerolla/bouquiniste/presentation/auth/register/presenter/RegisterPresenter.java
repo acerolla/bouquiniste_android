@@ -34,13 +34,18 @@ public class RegisterPresenter implements IRegisterPresenter {
     @Override
     public void handleRegisterClicked(String email) {
         mInteractor.register(result -> {
-            if (result != null) {
+            if (result != null && mInteractor != null && mView != null) {
                 mInteractor.saveProfile(result);
-                mView.navigateBack();
-            } else {
+                mView.showSuccessDialog();
+            } else if (mView != null) {
                 mView.showErrorDialog();
             }
         }, email);
+    }
+
+    @Override
+    public void handleOkClick() {
+        mView.navigateBack();
     }
 
     @Override

@@ -66,6 +66,7 @@ public class FavoritesPresenter implements IFavoritesPresenter {
                     if (!result.isEmpty()) {
                         mView.setContentData(result);
                         mView.setLoaderVisibility(false);
+                        mView.setErrorVisibility(false);
                         mView.setContentVisibility(true);
                     } else {
                         mView.setLoaderVisibility(false);

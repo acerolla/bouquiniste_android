@@ -8,4 +8,5 @@ public interface ILoginView {
 
     void navigateToRegister();
     void navigateBack();
+    void showErrorDialog();
 }

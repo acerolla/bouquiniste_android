@@ -13,4 +13,5 @@ public interface IDetailPresenter extends BasePresenter<IDetailView> {
     void handlePhoneClick(String phoneNumber);
     void handleShareClick();
     void handleOnMapClick();
+    void handleRefreshClick();
 }

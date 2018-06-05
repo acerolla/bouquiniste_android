@@ -11,4 +11,5 @@ public interface IRegisterPresenter extends BasePresenter<IRegisterView> {
 
     void handleLoginClicked();
     void handleRegisterClicked(String email);
+    void handleOkClick();
 }

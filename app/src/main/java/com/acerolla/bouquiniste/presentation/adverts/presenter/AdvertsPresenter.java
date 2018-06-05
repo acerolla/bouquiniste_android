@@ -80,6 +80,7 @@ public class AdvertsPresenter implements IAdvertsPresenter {
             if (result != null) {
                 if (mView != null) {
                     mView.setContentData(result);
+                    mView.setErrorVisibility(false);
                     mView.setLoaderVisibility(false);
                     mView.setContentVisibility(true);
                 }

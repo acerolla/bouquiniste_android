@@ -13,6 +13,7 @@ import java.util.List;
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
+@DatabaseTable(tableName = DbHelper.TABLE_CATEGORY)
 public class CategoryParentData implements Parent<CategoryChildrenData> {
 
     @DatabaseField(id = true, columnName = "id")
@@ -47,7 +48,7 @@ public class CategoryParentData implements Parent<CategoryChildrenData> {
     }
 
     @Override
-    public List<CategoryChildrenData> getChildList() {
+    public ArrayList<CategoryChildrenData> getChildList() {
         return getChildren();
     }
 

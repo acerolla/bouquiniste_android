@@ -167,6 +167,11 @@ class AdvertCloudDataSource implements IAdvertDataSource {
     }
 
     @Override
+    public void saveAdverts(List<AdvertData> adverts) {
+
+    }
+
+    @Override
     public void release() {
 
     }

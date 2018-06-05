@@ -38,11 +38,6 @@ public class AdvertsInteractor implements IAdvertsInteractor {
     }
 
     @Override
-    public void loadCategories(ResultListener<List<CategoryParentData>> listener) {
-        mCategoryInteractor.loadCategories(listener);
-    }
-
-    @Override
     public void loadAdvertsByCategories(ResultListener<List<AdvertData>> listener, int categoryId) {
         mCategoryInteractor.loadAdvertsByCategory(listener, categoryId);
     }

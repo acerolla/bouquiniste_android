@@ -30,6 +30,10 @@ public class RecyclerPresenter implements IRecyclerPresenter {
     @Override
     public void onBind(ResultListener<String> listener, int categoryId) {
         mInteractor.loadCategories(result -> {
+            if (result == null) {
+                return;
+            }
+
             for (CategoryParentData parent : result) {
                 if (parent.getId() == categoryId) {
                     listener.onResult(parent.getTitle());

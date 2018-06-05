@@ -102,6 +102,35 @@ class AdvertLocalDataSource implements IAdvertDataSource {
     }
 
     @Override
+    public void saveAdverts(List<AdvertData> adverts) {
+        BouquinisteApplication.getInstance()
+                .getBackgroundThread()
+                .execute(new BouquinisteRunnable() {
+                    @Override
+                    public Object execute() throws Throwable {
+                        return BouquinisteApplication.getInstance()
+                                .getDbHelper()
+                                .getDao(AdvertData.class)
+                                .deleteBuilder()
+                                .delete();
+                    }
+                }, result ->
+                        BouquinisteApplication.getInstance()
+                                .getBackgroundThread()
+                                .execute(new BouquinisteRunnable() {
+                                    @Override
+                                    public Object execute() throws Throwable {
+                                        BouquinisteApplication.getInstance()
+                                                .getDbHelper()
+                                                .getDao(AdvertData.class)
+                                                .create(adverts);
+                                        return null;
+                                    }
+                                }, null));
+
+    }
+
+    @Override
     public void release() {
 
     }

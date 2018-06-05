@@ -68,6 +68,7 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
 
     private void setListeners() {
         mView.setPhoneClickListener(v -> mPresenter.handlePhoneClick(mView.getPhoneNumber()));
+        mView.setRefreshClickListener(v -> mPresenter.handleRefreshClick());
     }
 
     public int getExtraId() {

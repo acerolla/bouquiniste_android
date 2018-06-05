@@ -39,6 +39,11 @@ public class AdvertMemoryCacheDataSource implements IAdvertDataSource {
     }
 
     @Override
+    public void saveAdverts(List<AdvertData> adverts) {
+
+    }
+
+    @Override
     public void clearAdverts() {
         mAdvert = null;
     }

@@ -93,6 +93,48 @@ public class DetailPresenter implements IDetailPresenter {
     }
 
     @Override
+    public void handleRefreshClick() {
+        mView.setErrorVisibility(false);
+        mView.setLoaderVisibility(true);
+
+        if (mView.getExtraId() == -1) {
+            mInteractor.loadAdvert(resultFromCache -> {
+                if (resultFromCache != null) {
+                    if (mView != null) {
+                        mView.setContentData(resultFromCache);
+                        mView.setToolbarTitleParams(resultFromCache.getId());
+                        mView.changeFavoriteStatus(resultFromCache.isFavorite());
+                        mView.setLoaderVisibility(false);
+                        mView.setContentVisibility(true);
+                    }
+                } else {
+                    if (mView != null) {
+                        mView.setLoaderVisibility(false);
+                        mView.setErrorVisibility(true);
+                    }
+                }
+            });
+        } else {
+            mInteractor.loadAdvert(resultFromCloud -> {
+                if (resultFromCloud != null) {
+                    if (mView != null) {
+                        mView.setContentData(resultFromCloud);
+                        mView.setToolbarTitleParams(resultFromCloud.getId());
+                        mView.changeFavoriteStatus(resultFromCloud.isFavorite());
+                        mView.setLoaderVisibility(false);
+                        mView.setContentVisibility(true);
+                    }
+                } else {
+                    if (mView != null) {
+                        mView.setLoaderVisibility(false);
+                        mView.setErrorVisibility(true);
+                    }
+                }
+            }, mView.getExtraId());
+        }
+    }
+
+    @Override
     public void release() {
         mView = null;
 

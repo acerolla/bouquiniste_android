@@ -1,5 +1,6 @@
 package com.acerolla.bouquiniste.presentation.auth.register.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -71,8 +72,17 @@ public class RegisterFragment extends Fragment implements IRegisterView {
     public void showErrorDialog() {
         new AlertDialog.Builder(getContext())
                 .setTitle("Ошибка регистрации!")
-                .setMessage("Вероятно, такой email уже зарегистрирован.\nПопробуйте снова!")
+                .setMessage("Не удалось зарегистрировать аккаунт.\nПопробуйте снова!")
                 .setPositiveButton("ОК", null)
+                .show();
+    }
+
+    @Override
+    public void showSuccessDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Успешно!")
+                .setMessage("На почту, указанную при регистрации, было отправлено письмо с паролем для последующей авторизации в приложении")
+                .setPositiveButton("ОК", (dialog, which) -> mPresenter.handleOkClick())
                 .show();
     }
 

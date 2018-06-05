@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -44,6 +47,11 @@ public class DetailView extends ScrollView {
     private TextView mTvCategory;
     private Toolbar mToolbar;
 
+    private RelativeLayout mRlRoot;
+    private ProgressBar mProgress;
+    private TextView mTvError;
+    private Button mBtnRefresh;
+
     private AdvertData mAdvert;
 
     public DetailView(Context context) {
@@ -76,6 +84,11 @@ public class DetailView extends ScrollView {
         mTvPhone = findViewById(R.id.tv_phone);
         mTvLocation = findViewById(R.id.tv_location);
         mTvCategory = findViewById(R.id.tv_category);
+
+        mRlRoot = findViewById(R.id.content_root);
+        mProgress = findViewById(R.id.progress);
+        mTvError = findViewById(R.id.tv_error);
+        mBtnRefresh = findViewById(R.id.btn_refresh);
     }
 
     public void setPhoneClickListener(OnClickListener listener) {
@@ -131,15 +144,20 @@ public class DetailView extends ScrollView {
     }
 
     public void setContentVisibility(int visibility) {
-
+        mRlRoot.setVisibility(visibility);
     }
 
     public void setLoaderVisibility(int visibility) {
-
+        mProgress.setVisibility(visibility);
     }
 
     public void setErrorVisibility(int visibility) {
+        mTvError.setVisibility(visibility);
+        mBtnRefresh.setVisibility(visibility);
+    }
 
+    public void setRefreshClickListener(OnClickListener listener){
+        mBtnRefresh.setOnClickListener(listener);
     }
 
     public Toolbar getToolbar() {

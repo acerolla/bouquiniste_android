@@ -30,7 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Ошибка соединения с сервером. Потяните для повторения запроса запроса."
+            android:gravity="center"
+            android:text="Ошибка соединения с сервером. Потяните для повторения запроса."
+            android:textSize="14sp"
             android:visibility="gone"/>
 
     </RelativeLayout>
