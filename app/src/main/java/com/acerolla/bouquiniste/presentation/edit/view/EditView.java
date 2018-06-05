@@ -130,6 +130,8 @@ public class EditView extends ScrollView {
         if (url != null && !url.isEmpty()) {
             Picasso.get()
                     .load(url)
+                    .fit()
+                    .centerCrop()
                     .into(mIvImage);
         } else {
             Picasso.get()

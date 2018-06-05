@@ -139,21 +139,13 @@ public class AddingView extends ScrollView {
         mTvLocation.setText(location);
     }
 
-    public void setContentVisibility(int visibility) {
 
-    }
-
-    public void setLoaderVisibility(int visibility) {
-
-    }
-
-    public void setErrorVisibility(int visibility) {
-
-    }
 
     public void setImage(Uri uri) {
         Picasso.get()
                 .load(uri)
+                .fit()
+                .centerCrop()
                 .into(mIvImage);
     }
 

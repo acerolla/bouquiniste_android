@@ -32,7 +32,7 @@
         android:background="@color/white"
         android:paddingBottom="15dp"
         android:layout_below="@+id/relative_5"
-        android:elevation="8dp">
+        android:elevation="5dp">
 
         <TextView
             android:id="@+id/tv_username"
@@ -42,8 +42,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:background="@color/white"
-            android:text="@string/sample_string"
-            android:textColor="@color/black"/>
+            android:text="@string/user_name"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_edit_black_24dp"/>
 
         <TextView
             android:id="@+id/tv_email"
@@ -52,8 +55,11 @@
             android:padding="5dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:textSize="17sp"
             android:background="@color/white"
-            android:text="@string/sample_string" />
+            android:text="@string/email"
+            android:drawableLeft="@drawable/ic_email_black_24dp" />
 
 
     </RelativeLayout>
@@ -73,7 +79,7 @@
 
     <RelativeLayout
         android:padding="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/relative_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +104,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/relative_2"
         android:background="@color/white"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="5dp">
 
     </android.support.v7.widget.RecyclerView>
 

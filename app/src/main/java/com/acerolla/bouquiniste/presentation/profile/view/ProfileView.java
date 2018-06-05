@@ -80,11 +80,11 @@ public class ProfileView extends RelativeLayout {
 
 
     public void setUserName(CharSequence userName) {
-        mTvUser.setText(userName);
+        mTvUser.setText("    " + userName);
     }
 
     public void setEmail(CharSequence email) {
-        mTvEmail.setText(email);
+        mTvEmail.setText("     " + email);
     }
 
     public void setContentAdverts(List<AdvertData> data) {

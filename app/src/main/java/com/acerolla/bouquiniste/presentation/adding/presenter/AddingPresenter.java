@@ -43,14 +43,13 @@ public class AddingPresenter implements IAddingPresenter {
 
     @Override
     public void handleAddClick() {
-        mView.setContentVisibility(false);
         mView.setLoaderVisibility(true);
 
         AdvertData advert = mView.collectData();
-        //advert.setImage(mInteractor.getImagePath());
 
         mInteractor.postAdvert(result -> {
             if (result != null && mView != null) {
+                mView.setContentVisibility(false);
                 mView.navigateToDetail(result.getId());
             } else {
                 if (mView != null) {

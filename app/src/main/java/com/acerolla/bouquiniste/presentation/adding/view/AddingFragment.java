@@ -2,6 +2,7 @@ package com.acerolla.bouquiniste.presentation.adding.view;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -202,29 +204,33 @@ public class AddingFragment extends Fragment implements IAddingView {
 
     @Override
     public void setContentVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setContentVisibility(View.VISIBLE);
-        } else {
-            mView.setContentVisibility(View.GONE);
+        if (mProgress != null) {
+            mProgress.dismiss();
         }
+        mProgress = null;
     }
+
+    private ProgressDialog mProgress;
 
     @Override
     public void setLoaderVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setLoaderVisibility(View.VISIBLE);
-        } else {
-            mView.setLoaderVisibility(View.GONE);
-        }
+        mProgress = new ProgressDialog(getActivity());
+        mProgress.setTitle("Размещаем...");
+        mProgress.show();
     }
 
     @Override
     public void setErrorVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setErrorVisibility(View.VISIBLE);
-        } else {
-            mView.setErrorVisibility(View.GONE);
+        if (mProgress != null) {
+            mProgress.dismiss();
         }
+        mProgress =  null;
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Увы ):")
+                .setMessage("Не удалось разместить объявление.\nПопробуйте снова!")
+                .setPositiveButton("ОК", null)
+                .show();
     }
 
     @Override

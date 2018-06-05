@@ -7,6 +7,7 @@ public class ValuesConverter {
 
     public static final int DP_4 = 4;
     public static final int DP_5 = 5;
+    public static final int DP_8 = 8;
     public static final int DP_10 = 10;
     public static final int DP_25 = 25;
     public static final int DP_30 = 30;

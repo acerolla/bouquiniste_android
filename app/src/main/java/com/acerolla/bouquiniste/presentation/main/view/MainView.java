@@ -54,6 +54,7 @@ public class MainView extends RelativeLayout {
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setSubtitleTextColor(Color.WHITE);
         mToolbar.setTitle(R.string.app_name);
+        mToolbar.setElevation(ValuesConverter.dp2px(ValuesConverter.DP_8));
 
         AppBarLayout.LayoutParams toolbarParams = new AppBarLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

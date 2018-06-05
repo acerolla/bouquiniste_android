@@ -21,4 +21,6 @@
     <string name="adding_button_add">Разместить</string>
 
     <string name="adverts_toast_category_error">Не удалось загрузить список категорий</string>
+    <string name="email">     email</string>
+    <string name="user_name">    user_name</string>
 </resources>
