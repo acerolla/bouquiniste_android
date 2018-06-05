@@ -8,6 +8,7 @@ import com.acerolla.bouquiniste.data.ResultListener;
 import com.acerolla.bouquiniste.data.profile.entity.ProfileData;
 import com.acerolla.bouquiniste.data.utils.BouquinisteRunnable;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -87,8 +88,22 @@ class AuthLocalDataSource implements IAuthDataSource {
 
     @Override
     public TokenData getTokenAsync() {
-        //ignore
-        return null;
+        TokenData token = null;
+
+        try {
+            List<TokenData> tokenList = BouquinisteApplication.getInstance()
+                    .getDbHelper()
+                    .getDao(TokenData.class)
+                    .queryForAll();
+
+            if (tokenList != null && !tokenList.isEmpty()) {
+                token = tokenList.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return token;
     }
 
     @Override

@@ -61,6 +61,10 @@ public class AuthRepository implements IAuthRepository {
 
     @Override
     public TokenData getTokenAsync() {
+        if (getCacheSource() == null || getCacheSource().getTokenAsync() == null) {
+            getCacheSource().saveToken(AuthDataSourceFactory.getLocalDataSource()
+                    .getTokenAsync());
+        }
         return getCacheSource().getTokenAsync();
     }
 

@@ -61,11 +61,12 @@ public interface IRestApi {
     @POST("api/advert")
     Call<BaseResponseObject<AdvertResponse>> postAdvert(@Body Map<String, String> requestBody);
 
+
     @Multipart
-    @PUT("api/advert/{id}")
+    @POST("api/advert/{id}")
     Call<BaseResponseObject<AdvertResponse>> uploadPhoto(@Path("id") int advertId, @Part MultipartBody.Part image);
 
-    @PUT("api/advert/{id}")
+    @POST("api/advert/{id}")
     Call<BaseResponseObject<AdvertResponse>> editAdvert(@Path("id") int advertId, @Body Map<String, String> requestBody);
 
     @PUT("api/advert/{id}/favorite")

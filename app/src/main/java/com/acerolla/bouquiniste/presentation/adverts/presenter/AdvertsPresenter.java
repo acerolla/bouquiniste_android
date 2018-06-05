@@ -74,7 +74,9 @@ public class AdvertsPresenter implements IAdvertsPresenter {
     private ResultListener<List<AdvertData>> mLoadingListener = new ResultListener<List<AdvertData>>() {
         @Override
         public void onResult(List<AdvertData> result) {
-            mView.stopRefreshing();
+            if (mView != null) {
+                mView.stopRefreshing();
+            }
             if (result != null) {
                 if (mView != null) {
                     mView.setContentData(result);

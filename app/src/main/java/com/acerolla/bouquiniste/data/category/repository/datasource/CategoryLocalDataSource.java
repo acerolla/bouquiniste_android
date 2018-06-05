@@ -18,7 +18,8 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
 
     @Override
     public void loadCategories(ResultListener<List<CategoryParentData>> listener) {
-        BouquinisteApplication.getInstance()
+        listener.onResult(null);
+        /*BouquinisteApplication.getInstance()
                 .getBackgroundThread()
                 .execute(new BouquinisteRunnable() {
                     @Override
@@ -39,7 +40,7 @@ public class CategoryLocalDataSource implements ICategoryDataSource {
                             listener.onResult(null);
                         }
                     }
-                });
+                });*/
     }
 
     @Override
