@@ -215,7 +215,7 @@ public class EditView extends ScrollView {
     }
 
     public void setPrice(String price) {
-        mTvPrice.setText(String.format(Locale.getDefault(), "%s,00 \u20BD", price));
+        mTvPrice.setText(String.format(Locale.getDefault(), "%s.00 \u20BD", price));
     }
 
     public void setDescription(String description) {

@@ -16,7 +16,8 @@ public interface IFavoritesView {
     void setContentVisibility(boolean isVisible);
     void setLoaderVisibility(boolean isVisible);
     void setErrorVisibility(boolean isVisible);
-    void setEmptyMessageVisibility(boolean isVisibility);
+
+    void showToast(String toast);
 
     void stopRefreshing();
 }

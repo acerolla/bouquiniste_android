@@ -94,6 +94,15 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
+    public void setClearAllVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setClearAllVisibility(View.VISIBLE);
+        } else {
+            mView.setClearAllVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void setLogoutVisibility(boolean isVisible) {
         if (isVisible) {
             mView.setLogoutVisibility(View.VISIBLE);
@@ -103,8 +112,13 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
-    public void initToolbarForAdverts(View.OnClickListener listener) {
+    public void setCategoryClickListener(View.OnClickListener listener) {
         mView.setCategoryClickListener(listener);
+    }
+
+    @Override
+    public void setClearAllClickListener(View.OnClickListener listener) {
+        mView.setClearAllClickListener(listener);
     }
 
     @Override
@@ -113,10 +127,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         startActivityForResult(intent, LoginContainerActivity.REQUEST_LOGIN);
     }
 
-    @Override
-    public void showLogoutToast(String toast) {
-        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
-    }
 
     public void setTitle(String title) {
         mView.getToolbar().setTitle(title);

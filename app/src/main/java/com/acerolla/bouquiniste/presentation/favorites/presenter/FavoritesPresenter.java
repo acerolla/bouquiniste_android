@@ -5,6 +5,7 @@ import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.acerolla.bouquiniste.domain.favorites.IFavoritesInteractor;
 import com.acerolla.bouquiniste.presentation.favorites.view.IFavoritesView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ public class FavoritesPresenter implements IFavoritesPresenter {
 
     private IFavoritesView mView;
     private IFavoritesInteractor mInteractor;
+
+    private boolean mHasBeenNull;
 
     public FavoritesPresenter(IFavoritesInteractor interactor) {
         mInteractor = interactor;
@@ -47,6 +50,27 @@ public class FavoritesPresenter implements IFavoritesPresenter {
     }
 
     @Override
+    public void handleClearAllClick(List<AdvertData> adverts) {
+        mInteractor.clearAllFavorites(result -> {
+            if (mView == null || mInteractor == null) {
+                return;
+            }
+
+            if (result == null) {
+                mHasBeenNull = true;
+            } else {
+                if (!mHasBeenNull) {
+                    mView.setContentData(new ArrayList<>());
+                    mView.showToast("Избранные объявления были удалены!");
+                } else {
+                    mInteractor.loadFavoritesList(mLoadingListener);
+                    mView.showToast("Не все объявления были удалены!");
+                }
+            }
+        }, adverts);
+    }
+
+    @Override
     public void release() {
         mLoadingListener = null;
         mView = null;
@@ -70,7 +94,7 @@ public class FavoritesPresenter implements IFavoritesPresenter {
                         mView.setContentVisibility(true);
                     } else {
                         mView.setLoaderVisibility(false);
-                        mView.setEmptyMessageVisibility(true);
+                        mView.setErrorVisibility(true);
                     }
                 }
             } else {

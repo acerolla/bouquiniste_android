@@ -87,6 +87,10 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public List<AdvertData> getData() {
+        return mAdverts;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public AdvertData item;

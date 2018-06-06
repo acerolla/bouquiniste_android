@@ -34,6 +34,7 @@ public class MainPresenter implements IMainPresenter {
         mWhere = FROM_PROFILE;
         if (mInteractor.isUserLoggedIn()) {
             mView.setFilterVisibility(false);
+            mView.setClearAllVisibility(false);
             mView.setLogoutVisibility(true);
             mView.showProfile();
         } else {
@@ -47,6 +48,7 @@ public class MainPresenter implements IMainPresenter {
         if (mInteractor.isUserLoggedIn()) {
             mView.setFilterVisibility(false);
             mView.setLogoutVisibility(false);
+            mView.setClearAllVisibility(false);
             mView.showAdding();
         } else {
             mView.navigateToLogin();
@@ -57,6 +59,7 @@ public class MainPresenter implements IMainPresenter {
     public void handleAdvertsClick() {
         mView.setFilterVisibility(true);
         mView.setLogoutVisibility(false);
+        mView.setClearAllVisibility(false);
         mView.showAdverts();
     }
 
@@ -66,6 +69,7 @@ public class MainPresenter implements IMainPresenter {
         if (mInteractor.isUserLoggedIn()) {
             mView.setFilterVisibility(false);
             mView.setLogoutVisibility(false);
+            mView.setClearAllVisibility(true);
             mView.showFavorites();
         } else {
             mView.navigateToLogin();

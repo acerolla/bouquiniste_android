@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
@@ -17,6 +18,7 @@ import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.FavoritesPresenter;
 import com.acerolla.bouquiniste.presentation.favorites.presenter.IFavoritesPresenter;
+import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 import com.acerolla.bouquiniste.presentation.main.view.MainActivity;
 
 import java.util.List;
@@ -51,17 +53,15 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
         DiManager.getFavoritesComponent().inject(this);
         mPresenter.bindView(this);
         ((MainActivity) getActivity()).setTitle("Избранное");
+
         setListeners();
     }
 
     private void setListeners() {
         mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
-        mView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.handleRefresh();
-            }
-        });
+        mView.setOnRefreshListener(() -> mPresenter.handleRefresh());
+
+        ((IMainView)getActivity()).setClearAllClickListener(v -> mPresenter.handleClearAllClick(mView.getList()));
     }
 
     @Override
@@ -107,15 +107,6 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
     }
 
     @Override
-    public void setEmptyMessageVisibility(boolean isVisible) {
-        /*if (isVisible) {
-            mView.setEmptyMessageVisibility(View.VISIBLE);
-        } else {
-            mView.setEmptyMessageVisibility(View.GONE);
-        }*/
-    }
-
-    @Override
     public void navigateToDetail() {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         startActivityForResult(intent, DetailActivity.REQUEST_CODE_DETAIL);
@@ -124,6 +115,11 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
     @Override
     public void stopRefreshing() {
         mView.setRefreshing(false);
+    }
+
+    @Override
+    public void showToast(String toast) {
+        Toast.makeText(getContext(), toast, Toast.LENGTH_SHORT).show();
     }
 
     @Override

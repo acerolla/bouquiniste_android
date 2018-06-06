@@ -29,6 +29,7 @@ public class MainView extends RelativeLayout {
 
     private Toolbar mToolbar;
     private AppCompatImageView mIvCategory;
+    private AppCompatImageView mIvClearAll;
     private AppCompatImageView mIvLogout;
     private FrameLayout mContentFrame;
     private BottomNavigationView mBottomMenu;
@@ -74,6 +75,18 @@ public class MainView extends RelativeLayout {
         categoryParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
         mIvCategory.setLayoutParams(categoryParams);
         mToolbar.addView(mIvCategory);
+
+        mIvClearAll = new AppCompatImageView(getContext());
+        mIvClearAll.setImageResource(R.drawable.ic_clear_all_black_24dp);
+        mIvClearAll.setVisibility(GONE);
+
+        Toolbar.LayoutParams clearAllParams = new Toolbar.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        clearAllParams.gravity = Gravity.END;
+        clearAllParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
+        mIvClearAll.setLayoutParams(clearAllParams);
+        mToolbar.addView(mIvClearAll);
 
         mIvLogout = new AppCompatImageView(getContext());
         mIvLogout.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
@@ -130,12 +143,20 @@ public class MainView extends RelativeLayout {
         mIvCategory.setOnClickListener(listener);
     }
 
+    public void setClearAllClickListener(OnClickListener listener) {
+        mIvClearAll.setOnClickListener(listener);
+    }
+
     public void setLogoutClickListener(OnClickListener listener) {
         mIvLogout.setOnClickListener(listener);
     }
 
     public void setFilterVisibility(int visibility) {
         mIvCategory.setVisibility(visibility);
+    }
+
+    public void setClearAllVisibility(int visibility) {
+        mIvClearAll.setVisibility(visibility);
     }
 
     public void setLogoutVisibility(int visibility) {
@@ -155,6 +176,8 @@ public class MainView extends RelativeLayout {
         super.onDetachedFromWindow();
         mToolbar = null;
         mIvCategory = null;
+        mIvClearAll = null;
+        mIvLogout = null;
         mContentFrame = null;
         mBottomMenu = null;
     }

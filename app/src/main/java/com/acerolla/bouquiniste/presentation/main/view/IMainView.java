@@ -11,13 +11,15 @@ public interface IMainView {
     void showAdding();
     void showFavorites();
     void showAdverts();
-    void setFilterVisibility(boolean isVisible);
-    void setLogoutVisibility(boolean isVisibile);
 
-    void initToolbarForAdverts(View.OnClickListener listener);
+    void setFilterVisibility(boolean isVisible);
+    void setLogoutVisibility(boolean isVisible);
+    void setClearAllVisibility(boolean isVisible);
+
+    void setCategoryClickListener(View.OnClickListener listener);
+    void setClearAllClickListener(View.OnClickListener listener);
 
     void navigateToLogin();
-    void showLogoutToast(String toast);
 
     void imitateAdvertsClick();
 }

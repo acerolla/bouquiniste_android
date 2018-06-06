@@ -76,8 +76,8 @@
 
         <TextView
             android:id="@+id/tv_price"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
@@ -88,12 +88,22 @@
             android:textSize="17sp"
             android:text="@string/sample_string"/>
 
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/tv_price"
+                android:background="@color/lighter_gray"/>
+
         <TextView
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_price"
+            android:layout_below="@+id/separator"
             android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
             android:textSize="15sp"
             android:text="Дополнительная информация"/>
 
@@ -113,13 +123,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Описание"/>
+                android:text="Описание:"/>
 
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingStart="15dp"
                 android:text="@string/sample_string"/>
 
         </LinearLayout>
@@ -140,12 +151,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Категория"/>
+                android:text="Категория:"/>
 
             <TextView
                 android:id="@+id/tv_category"
                 android:layout_weight="1"
                 android:layout_width="0dp"
+                android:paddingStart="15dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sample_string"/>
 
@@ -167,12 +179,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Контактный телефон"/>
+                android:text="Контактный телефон:"/>
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_weight="1"
                 android:layout_width="0dp"
+                android:paddingStart="15dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sample_string"/>
 
@@ -194,13 +207,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Адрес"/>
+                android:text="Адрес:"/>
 
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingStart="15dp"
                 android:text="@string/sample_string"/>
 
         </LinearLayout>
@@ -209,9 +223,8 @@
                 android:id="@+id/fab"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="45dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="25dp"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 app:fabColor="@color/black"
                 app:fabType="circle">

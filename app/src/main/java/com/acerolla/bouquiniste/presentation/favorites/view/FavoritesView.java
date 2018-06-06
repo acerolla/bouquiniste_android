@@ -85,4 +85,8 @@ public class FavoritesView extends SwipeRefreshLayout {
     public AdvertData getDataByView(View v) {
         return ((AdvertAdapter.ViewHolder)mRvAdverts.getChildViewHolder(v)).item;
     }
+
+    public List<AdvertData> getList() {
+        return mAdapter.getData();
+    }
 }

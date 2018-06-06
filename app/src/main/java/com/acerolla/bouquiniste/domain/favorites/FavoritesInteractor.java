@@ -42,6 +42,21 @@ public class FavoritesInteractor implements IFavoritesInteractor {
     }
 
     @Override
+    public void clearAllFavorites(ResultListener<Object> listener, List<AdvertData> adverts) {
+        for (AdvertData advert : adverts) {
+            mFavoritesRepository.removeFromFavorites(result -> {
+                if (result == null && listener != null) {
+                    listener.onResult(null);
+                } else if (advert.getId() == adverts.get(adverts.size() - 1).getId()) {
+                    if (listener != null) {
+                        listener.onResult(new Object());
+                    }
+                }
+            }, advert.getId());
+        }
+    }
+
+    @Override
     public void release() {
         mFavoritesRepository = null;
     }
