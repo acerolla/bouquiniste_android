@@ -29,34 +29,27 @@ public class ProfilePresenter implements IProfilePresenter {
             if (resultProfile != null && mView != null) {
                 if (resultProfile.getId() == ProfileRepository.DEFAULT_ID) {
                     if (mView != null) {
-                        mView.setLoginButtonVisibility(true);
+                        //mView.setLoginButtonVisibility(true);
                     }
                 } else {
                     if (mView != null) {
                         mUserId = resultProfile.getId();
-                        mView.setLoginButtonVisibility(false);
                     }
                 }
                 if (mView != null) {
                     mView.setContentProfile(resultProfile);
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(false);
                     mView.setProfileVisibility(true);
                 }
             }
             if (resultProfile != null && mInteractor != null) {
                 mInteractor.loadUserAdverts(resultAdverts -> {
                     if (resultAdverts != null && mView != null) {
-                        if (!resultAdverts.isEmpty()) {
-                            if (mView != null) {
-                                mView.setContentAdverts(resultAdverts);
-                                //mView.setAdvertsVisibility(true);
-                                //mView.setLoaderVisibility(false);
-                            }
-                        } else {
-                            if (mView != null) {
-                                mView.setEmptyMessageVisibility(true);
-                                mView.setLoaderVisibility(false);
-                            }
+                        if (mView != null) {
+                            mView.setContentAdverts(resultAdverts);
                         }
+
                     }
                 }, resultProfile.getId());
             } else {

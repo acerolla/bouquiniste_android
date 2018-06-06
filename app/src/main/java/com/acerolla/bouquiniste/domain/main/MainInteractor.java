@@ -47,12 +47,9 @@ public class MainInteractor implements IMainInteractor{
         mAdvertsRepository.clearAdverts();
         mCategoryRepository.clearCategory();
         mProfileRepository.clearProfile();
-        mAuthRepository.logout(new ResultListener<Object>() {
-            @Override
-            public void onResult(Object result) {
-                if (result != null && listener != null) {
-                    listener.onResult(result);
-                }
+        mAuthRepository.logout(result -> {
+            if (listener != null) {
+                listener.onResult(result);
             }
         });
     }

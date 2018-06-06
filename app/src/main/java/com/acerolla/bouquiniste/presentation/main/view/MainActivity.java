@@ -114,12 +114,18 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
-    public void showLogoutToast() {
-        Toast.makeText(this, "Выход из системы выполнен!", Toast.LENGTH_SHORT).show();
+    public void showLogoutToast(String toast) {
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
     }
 
     public void setTitle(String title) {
         mView.getToolbar().setTitle(title);
+    }
+
+    @Override
+    public void imitateAdvertsClick() {
+        mView.getBottomMenu().setSelectedItemId(R.id.action_menu_adverts);
+        mPresenter.handleAdvertsClick();
     }
 
     @Override

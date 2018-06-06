@@ -19,6 +19,7 @@ import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.domain.category.ICategoryInteractor;
 import com.acerolla.bouquiniste.presentation.adverts.view.recycler.AdvertItemView;
 import com.acerolla.bouquiniste.presentation.utils.ValuesConverter;
+import com.robertlevonyan.views.customfloatingactionbutton.FloatingActionLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
@@ -29,7 +30,7 @@ import javax.inject.Inject;
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
  */
-public class DetailView extends ScrollView {
+public class DetailView extends RelativeLayout {
 
     private static final String DEFAULT_CATEGORY = "UNKNOWN!";
     private static final String API_URL = "http://85.119.144.206/";
@@ -51,6 +52,8 @@ public class DetailView extends ScrollView {
     private ProgressBar mProgress;
     private TextView mTvError;
     private Button mBtnRefresh;
+
+    private FloatingActionLayout mFab;
 
     private AdvertData mAdvert;
 
@@ -89,10 +92,11 @@ public class DetailView extends ScrollView {
         mProgress = findViewById(R.id.progress);
         mTvError = findViewById(R.id.tv_error);
         mBtnRefresh = findViewById(R.id.btn_refresh);
+        mFab = findViewById(R.id.fab);
     }
 
     public void setPhoneClickListener(OnClickListener listener) {
-        mTvPhone.setOnClickListener(listener);
+        mFab.setOnClickListener(listener);
     }
 
     public void setContentData(AdvertData data) {

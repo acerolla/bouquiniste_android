@@ -75,22 +75,23 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void handleUserLoggedIn() {
         if (mWhere == FROM_ADDING) {
-            mView.showAdding();
+            handleAddingClick();
         } else if (mWhere == FROM_FAVORITES) {
-            mView.showFavorites();
+            handleFavoritesClick();
         } else if (mWhere == FROM_PROFILE) {
-            mView.showProfile();
+            handleProfileItemClick();
         }
     }
 
     @Override
     public void handleLogoutClick() {
         mInteractor.logout(result -> {
-            if (result != null) {
-                mView.showLogoutToast();
+            if (mView != null) {
+                mView.imitateAdvertsClick();
+                mView.showLogoutToast("Выход из системы выполнен!");
             }
+
         });
-        mView.showAdverts();
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,6 +44,12 @@ public class ProfileView extends RelativeLayout {
     private RecyclerView mRvAdverts;
     private RecyclerView.LayoutManager mLayoutManager;
     private AdvertAdapter mAdapter;
+
+
+    private RelativeLayout mRlRoot;
+    private ProgressBar mProgress;
+    private TextView mTvError;
+    private Button mBtnRefresh;
 
     public ProfileView(Context context) {
         super(context);
@@ -75,6 +82,12 @@ public class ProfileView extends RelativeLayout {
 
         mAdapter = new AdvertAdapter();
         mRvAdverts.setAdapter(mAdapter);
+
+
+        mRlRoot = findViewById(R.id.content_root);
+        mProgress = findViewById(R.id.progress);
+        mTvError = findViewById(R.id.tv_error);
+        mBtnRefresh = findViewById(R.id.btn_refresh);
     }
 
 
@@ -100,19 +113,16 @@ public class ProfileView extends RelativeLayout {
     }
 
     public void setProfileVisibility(int visibility) {
-
-    }
-
-    public void setAdvertsVisibility(int visibility) {
-
+        mRlRoot.setVisibility(visibility);
     }
 
     public void setLoaderVisibility(int visibility) {
-
+        mProgress.setVisibility(visibility);
     }
 
     public void setErrorVisibility(int visibility) {
-
+        mTvError.setVisibility(visibility);
+        mBtnRefresh.setVisibility(visibility);
     }
 
     public void setEmptyMessageVisibility(int visibility) {

@@ -17,6 +17,7 @@ public interface IMainView {
     void initToolbarForAdverts(View.OnClickListener listener);
 
     void navigateToLogin();
+    void showLogoutToast(String toast);
 
-    void showLogoutToast();
+    void imitateAdvertsClick();
 }

@@ -145,6 +145,10 @@ public class MainView extends RelativeLayout {
         return mToolbar;
     }
 
+    public BottomNavigationView getBottomMenu() {
+        return mBottomMenu;
+    }
+
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();

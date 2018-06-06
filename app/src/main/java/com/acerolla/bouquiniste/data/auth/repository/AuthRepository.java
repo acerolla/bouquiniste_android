@@ -80,6 +80,7 @@ public class AuthRepository implements IAuthRepository {
     public void logout(ResultListener<Object> listener) {
         getCacheSource().logout(null);
         AuthDataSourceFactory.getLocalDataSource().logout(listener);
+        listener.onResult(null);
     }
 
     @Override

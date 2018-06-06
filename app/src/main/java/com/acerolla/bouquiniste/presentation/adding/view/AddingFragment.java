@@ -236,7 +236,7 @@ public class AddingFragment extends Fragment implements IAddingView {
     @Override
     public void changeFragment() {
         if (getActivity() != null) {
-            ((IMainView) getActivity()).showAdverts();
+            ((IMainView) getActivity()).imitateAdvertsClick();
         }
     }
 
