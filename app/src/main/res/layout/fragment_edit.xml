@@ -79,11 +79,20 @@
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/tv_price"
+                android:background="@color/lighter_gray"/>
+
             <TextView
                 android:id="@+id/label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_price"
+                android:layout_below="@+id/separator"
                 android:layout_marginStart="10dp"
                 android:text="Дополнительная информация"
                 android:textSize="15sp" />
