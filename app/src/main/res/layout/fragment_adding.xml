@@ -106,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Описание"/>
+                android:text="Описание:"/>
 
             <TextView
                 android:id="@+id/tv_description"
@@ -133,7 +133,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Категория"/>
+                android:text="Категория:"/>
 
             <TextView
                 android:id="@+id/tv_category"
@@ -160,14 +160,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Контактный телефон"/>
+                android:text="Контактный телефон:"/>
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Нажмите, чтобы добавить контактный телефон*"/>
+                android:text="Нажмите, чтобы добавить номер телефона*"/>
 
         </LinearLayout>
 
@@ -187,7 +187,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Адрес"/>
+                android:text="Адрес:"/>
 
             <TextView
                 android:id="@+id/tv_location"
@@ -210,8 +210,6 @@
             android:ellipsize="start"
             android:gravity="center"
             android:text="Разместить объявление"/>
-
-
 
     </RelativeLayout>
 

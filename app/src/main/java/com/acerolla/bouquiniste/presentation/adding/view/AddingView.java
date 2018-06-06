@@ -1,7 +1,12 @@
 package com.acerolla.bouquiniste.presentation.adding.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,13 +74,49 @@ public class AddingView extends ScrollView {
         setClickable(true);
 
         mIvImage = findViewById(R.id.iv_image);
+
         mTvTitle = findViewById(R.id.tv_title);
+        Spannable str = new SpannableString(mTvTitle.getText());
+        int loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvTitle.setText(str);
+
         mTvAuthor = findViewById(R.id.tv_author);
+        str = new SpannableString(mTvAuthor.getText());
+        loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvAuthor.setText(str);
+
         mTvDescription = findViewById(R.id.tv_description);
+        str = new SpannableString(mTvDescription.getText());
+        loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvDescription.setText(str);
+
         mTvPrice = findViewById(R.id.tv_price);
+        str = new SpannableString(mTvPrice.getText());
+        loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvPrice.setText(str);
+
         mTvPhone = findViewById(R.id.tv_phone);
+        str = new SpannableString(mTvPhone.getText());
+        loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvPhone.setText(str);
+
         mTvLocation = findViewById(R.id.tv_location);
+        str = new SpannableString(mTvLocation.getText());
+        loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvLocation.setText(str);
+
         mTvCategory = findViewById(R.id.tv_category);
+        str = new SpannableString(mTvCategory.getText());
+        loc = str.toString().indexOf("*");
+        str.setSpan(new ForegroundColorSpan(Color.RED), loc, loc + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvCategory.setText(str);
+
         mBtnPost = findViewById(R.id.btn_post);
 
         mLlDescription = findViewById(R.id.ll_description);
