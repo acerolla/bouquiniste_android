@@ -1,6 +1,6 @@
 # Bouquiniste
 
-## Выпускная квалификационная работа (ВШЭ ФКН ПИ 2018г.)
+### Выпускная квалификационная работа (ВШЭ ФКН ПИ 2018г.)
 
 "Bouquiniste" — android-приложение, позволяющее размещать объявления о продаже подержанных книг в сети.<br/>
 Стэк:
@@ -9,11 +9,12 @@
 3. Clean Architecture
 4. Dagger2
 5. ORMLite
-6. Retrofit 2.0 + OkHttp + JacksonConverter
+6. Retrofit 2.0 + OkHttp3 + JacksonConverter
 7. Picasso
-8. Android SupportLibs
+8. Android Support Libs
 9. Other small open-source libraries
 
+---
 
 Screenshots:<br/>
 ![Авторизация](https://raw.githubusercontent.com/acerolla/bouquiniste_android/master/screenshots/scrn_1.png)
