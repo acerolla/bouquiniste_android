@@ -59,10 +59,9 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/iv_advert_image"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/tv_location"
         android:text="@string/sample_string"
         android:textColor="@color/black"/>
 
@@ -71,7 +70,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="end"
+        android:layout_toEndOf="@+id/iv_advert_image"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:text="@string/sample_string"

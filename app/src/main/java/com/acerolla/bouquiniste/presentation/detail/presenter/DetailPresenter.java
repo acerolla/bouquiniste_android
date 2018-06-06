@@ -70,8 +70,13 @@ public class DetailPresenter implements IDetailPresenter {
 
         mInteractor.changeFavoriteStatus(
                 result -> {
-                    if (mView != null) {
+                    if (result != null && mView != null) {
                         mView.changeFavoriteStatus(result);
+                        if (result) {
+                            mView.showToast("Добавлено в избранное");
+                        } else {
+                            mView.showToast("Удалено из избранного");
+                        }
                     }
                 });
 

@@ -161,7 +161,14 @@ public class DetailActivity extends AppCompatActivity implements IDetailView {
 
     @Override
     public void navigateToMap() {
-        Toast.makeText(this, "Не отвечает Google Map API", Toast.LENGTH_SHORT).show();  //TODO:intent
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(mView.getLocation()));
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            showToast("Карты Google отсутствуют на устройстве.");
+        }
     }
 
     @Override

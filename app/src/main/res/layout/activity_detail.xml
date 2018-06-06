@@ -244,6 +244,7 @@
             android:layout_centerInParent="true"
             android:text="Ошибка соединения с сервером. Попробуйте еще раз."
             android:textSize="18sp"
+            android:gravity="center"
             android:visibility="gone"/>
 
         <Button

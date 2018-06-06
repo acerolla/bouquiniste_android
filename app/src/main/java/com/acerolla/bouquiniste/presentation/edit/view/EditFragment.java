@@ -107,6 +107,7 @@ public class EditFragment extends Fragment implements IEditView {
         ((EditActivity) getActivity()).setShareClickListener(() -> mPresenter.handleShareClick());
 
         mView.setEditClickListener(v -> mPresenter.handleAdvertEditClicked(mView.collectData()));
+        mView.setRefreshListener(v -> mPresenter.handleRefreshClick());
     }
 
     @Override
@@ -184,6 +185,35 @@ public class EditFragment extends Fragment implements IEditView {
         body += data.getPhone() + " (" + data.getLocation() + ")";
 
         return body;
+    }
+
+    @Override
+    public void setContentVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setContentVisibility(View.VISIBLE);
+            ((EditActivity) getActivity()).setFabVisibility(View.VISIBLE);
+        } else {
+            mView.setContentVisibility(View.INVISIBLE);
+            ((EditActivity) getActivity()).setFabVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setLoaderVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setLoaderVisibility(View.VISIBLE);
+        } else {
+            mView.setLoaderVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setErrorVisibility(boolean isVisible) {
+        if (isVisible) {
+            mView.setErrorVisibility(View.VISIBLE);
+        } else {
+            mView.setErrorVisibility(View.GONE);
+        }
     }
 
     @Override

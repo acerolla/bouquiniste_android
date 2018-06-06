@@ -84,6 +84,10 @@ public class EditActivity extends AppCompatActivity {
         mShareListener = listener;
     }
 
+    public void setFabVisibility(int visibility) {
+        mFab.setVisibility(visibility);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

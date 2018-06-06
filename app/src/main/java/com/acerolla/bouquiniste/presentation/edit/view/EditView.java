@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -55,6 +57,11 @@ public class EditView extends ScrollView {
     private LinearLayout mLlPhone;
     private LinearLayout mLlLocation;
 
+    private RelativeLayout mRlError;
+    private RelativeLayout mRlRoot;
+    private ProgressBar mProgress;
+    private Button mBtnRefresh;
+
 
     public EditView(Context context) {
         super(context);
@@ -91,6 +98,12 @@ public class EditView extends ScrollView {
         mLlCategory = findViewById(R.id.ll_category);
         mLlPhone = findViewById(R.id.ll_phone);
         mLlLocation = findViewById(R.id.ll_location);
+
+
+        mRlRoot = findViewById(R.id.content_root);
+        mProgress = findViewById(R.id.progress);
+        mRlError = findViewById(R.id.rl_error);
+        mBtnRefresh = findViewById(R.id.btn_refresh);
     }
 
     public void setContentData(AdvertData data) {
@@ -101,7 +114,7 @@ public class EditView extends ScrollView {
         loadImage(url);
         mTvTitle.setText(data.getTitle());
         mTvAuthor.setText(data.getAuthor());
-        mTvPrice.setText(String.format(Locale.getDefault(), "%.0f \u20BD", data.getPrice()));
+        mTvPrice.setText(String.format(Locale.getDefault(), "%.2f \u20BD", data.getPrice()));
         mTvLocation.setText(data.getLocation());
         mTvCategory.setText(DEFAULT_CATEGORY);
         mTvPhone.setText(data.getPhone());
@@ -155,6 +168,10 @@ public class EditView extends ScrollView {
         mBtnEdit.setOnClickListener(listener);
     }
 
+    public void setRefreshListener(OnClickListener listener) {
+        mBtnRefresh.setOnClickListener(listener);
+    }
+
     public void changeCategory(int categoryId, String categoryTitle) {
         mTvCategory.setText(categoryTitle);
         mCategoryId = categoryId;
@@ -198,7 +215,7 @@ public class EditView extends ScrollView {
     }
 
     public void setPrice(String price) {
-        mTvPrice.setText(price);
+        mTvPrice.setText(String.format(Locale.getDefault(), "%s,00 \u20BD", price));
     }
 
     public void setDescription(String description) {
@@ -214,14 +231,14 @@ public class EditView extends ScrollView {
     }
 
     public void setContentVisibility(int visibility) {
-
+        mRlRoot.setVisibility(visibility);
     }
 
     public void setLoaderVisibility(int visibility) {
-
+        mProgress.setVisibility(visibility);
     }
 
     public void setErrorVisibility(int visibility) {
-
+        mRlError.setVisibility(visibility);
     }
 }

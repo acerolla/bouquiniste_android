@@ -88,7 +88,6 @@ public class MainPresenter implements IMainPresenter {
         mInteractor.logout(result -> {
             if (mView != null) {
                 mView.imitateAdvertsClick();
-                mView.showLogoutToast("Выход из системы выполнен!");
             }
 
         });

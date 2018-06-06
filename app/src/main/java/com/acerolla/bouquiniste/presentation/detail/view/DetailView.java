@@ -145,6 +145,10 @@ public class DetailView extends RelativeLayout {
         }
     }
 
+    public String getLocation() {
+        return mTvLocation.getText().toString();
+    }
+
     public String getPhoneNumber() {
         return mTvPhone.getText().toString();
     }

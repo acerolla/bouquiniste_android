@@ -11,6 +11,10 @@ public interface IEditView {
     int getExtraId();
     void setContentData(AdvertData data);
 
+    void setContentVisibility(boolean isVisible);
+    void setLoaderVisibility(boolean isVisible);
+    void setErrorVisibility(boolean isVisible);
+
     void notifySuccess(String text);
     void notifyFailure(String text);
 

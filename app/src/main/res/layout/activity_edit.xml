@@ -33,7 +33,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         app:fabColor="@color/white"
-        app:fabType="roundedSquare">
+        app:fabType="roundedSquare"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -13,6 +13,8 @@ import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.data.advert.entity.AdvertData;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 /**
  * Created by Evgeniy Solovev
  * Email: solevur@gmail.com
@@ -107,12 +109,24 @@ public class AddingView extends ScrollView {
         advert.setmTitle(mTvTitle.getText().toString());
         advert.setmAuthor(mTvAuthor.getText().toString());
         advert.setmDescription(mTvDescription.getText().toString());
-        advert.setmPrice(Float.parseFloat(mTvPrice.getText().toString()));
+        advert.setmPrice(getPrice(mTvPrice.getText().toString()));
         advert.setmPhone(mTvPhone.getText().toString());
         advert.setmStatus("active");
         advert.setmLocation(mTvLocation.getText().toString());
         advert.setmCategoryId(mCategoryId);
         return advert;
+    }
+
+    private float getPrice(String price) {
+        if (price.indexOf('.') > -1) {
+            price = price.substring(0, price.indexOf('.'));
+        } else if (price.indexOf(',') > -1) {
+            price = price.substring(0, price.indexOf(','));
+        } else if (price.indexOf(' ') > -1){
+            price = price.substring(0, price.indexOf(' '));
+        }
+
+        return Float.parseFloat(price);
     }
 
     public void setTitle(String title) {
@@ -124,7 +138,7 @@ public class AddingView extends ScrollView {
     }
 
     public void setPrice(String price) {
-        mTvPrice.setText(price);
+        mTvPrice.setText(String.format(Locale.getDefault(), "%s,00 \u20BD", price));
     }
 
     public void setDescription(String description) {

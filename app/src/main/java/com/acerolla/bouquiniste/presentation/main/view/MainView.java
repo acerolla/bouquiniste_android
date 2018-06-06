@@ -40,6 +40,7 @@ public class MainView extends RelativeLayout {
 
     @SuppressLint("RestrictedApi")
     private void initViews() {
+        setBackgroundColor(Color.WHITE);
 
         AppBarLayout appBarLayout = new AppBarLayout(getContext());
         appBarLayout.setId(ID_TOOLBAR);

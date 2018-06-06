@@ -28,11 +28,15 @@ public class EditPresenter implements IEditPresenter {
             if (result != null) {
                 if (mView != null) {
                     mView.setContentData(result);
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(false);
+                    mView.setContentVisibility(true);
                     mAdvert = result;
                 }
             } else {
                 if (mView != null) {
-
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(true);
                 }
             }
         }, mView.getExtraId());
@@ -57,6 +61,9 @@ public class EditPresenter implements IEditPresenter {
 
     @Override
     public void handleAdvertEditClicked(AdvertData data) {
+        mView.setContentVisibility(false);
+        mView.setLoaderVisibility(true);
+
         mInteractor.editAdvert(result -> {
             if (result != null) {
                 if (mView != null) {
@@ -83,6 +90,29 @@ public class EditPresenter implements IEditPresenter {
     @Override
     public void handleShareClick() {
         mView.share();
+    }
+
+    @Override
+    public void handleRefreshClick() {
+        mView.setErrorVisibility(false);
+        mView.setLoaderVisibility(true);
+
+        mInteractor.loadAdvert(result -> {
+            if (result != null) {
+                if (mView != null) {
+                    mView.setContentData(result);
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(false);
+                    mView.setContentVisibility(true);
+                    mAdvert = result;
+                }
+            } else {
+                if (mView != null) {
+                    mView.setLoaderVisibility(false);
+                    mView.setErrorVisibility(true);
+                }
+            }
+        }, mView.getExtraId());
     }
 
     @Override
