@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_item_toolbar_filter"
+        android:title="Filter"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="2" />
+
+    <item
+        android:id="@+id/menu_item_toolbar_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search_white_24dp"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:orderInCategory="1" />
+
+    <item
+        android:id="@+id/menu_item_toolbar_clear"
+        android:title="Clear"
+        android:icon="@drawable/ic_clear_all_black_24dp"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/menu_item_toolbar_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"
+        android:visible="false"/>
+
+</menu>

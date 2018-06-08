@@ -6,8 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.acerolla.bouquiniste.R;
 import com.acerolla.bouquiniste.di.DiManager;
@@ -46,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private void initToolbar() {
         setSupportActionBar(mView.getToolbar());
-
-        mView.setLogoutClickListener(v -> mPresenter.handleLogoutClick());
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -56,6 +57,41 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         if (requestCode == LoginContainerActivity.REQUEST_LOGIN && resultCode == RESULT_OK) {
             mPresenter.handleUserLoggedIn();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
+        mView.initToolbarMenu(((AdvertsFragment) getCurrentFragment())::onSearchTextChanged, menu, this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_toolbar_search:
+                mView.getToolbar().setNavigationIcon(R.drawable.ic_arrow_back_black_24px);
+                break;
+            case R.id.menu_item_toolbar_filter:
+                ((AdvertsFragment) getCurrentFragment()).onFilterPressed();
+                break;
+            case R.id.menu_item_toolbar_clear:
+                ((FavoritesFragment) getCurrentFragment()).onClearAllPressed();
+                break;
+            case R.id.menu_item_toolbar_logout:
+                mPresenter.handleLogoutClick();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    private Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentById(MainView.ID_CONTENT_FRAME);
     }
 
     @Override
@@ -84,41 +120,25 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         changeFragment(new AdvertsFragment());
     }
 
+
+    @Override
+    public void setSearchButtonVisibility(boolean isVisible) {
+        mView.setSearchButtonVisibility(isVisible);
+    }
+
     @Override
     public void setFilterVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setFilterVisibility(View.VISIBLE);
-        } else {
-            mView.setFilterVisibility(View.GONE);
-        }
+        mView.setFilterVisibility(isVisible);
     }
 
     @Override
     public void setClearAllVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setClearAllVisibility(View.VISIBLE);
-        } else {
-            mView.setClearAllVisibility(View.GONE);
-        }
+        mView.setClearAllVisibility(isVisible);
     }
 
     @Override
     public void setLogoutVisibility(boolean isVisible) {
-        if (isVisible) {
-            mView.setLogoutVisibility(View.VISIBLE);
-        } else {
-            mView.setLogoutVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void setCategoryClickListener(View.OnClickListener listener) {
-        mView.setCategoryClickListener(listener);
-    }
-
-    @Override
-    public void setClearAllClickListener(View.OnClickListener listener) {
-        mView.setClearAllClickListener(listener);
+        mView.setLogoutVisibility(isVisible);
     }
 
     @Override
@@ -130,6 +150,10 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     public void setTitle(String title) {
         mView.getToolbar().setTitle(title);
+    }
+
+    public void collapseSearch() {
+        mView.collapseSearch();
     }
 
     @Override

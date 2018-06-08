@@ -26,8 +26,6 @@ public class ApiManager {
 
     private static final String API_URL = "http://85.119.144.206/";
 
-    private static final String SAMPLE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC84NS4xMTkuMTQ0LjIwNlwvYXBpXC9sb2dpbiIsImlhdCI6MTUyNzQ1MTUwNiwiZXhwIjoxNTI4MDU2MzA2LCJuYmYiOjE1Mjc0NTE1MDYsImp0aSI6Ind4VXF0RGY3U201VmkxTVYiLCJzdWIiOjQsInBydiI6ImY5MzA3ZWI1ZjI5YzcyYTkwZGJhYWVmMGUyNmYwMjYyZWRlODZmNTUiLCJtb2RlbCI6IkFwcFxcRW50aXRpZXNcXFVzZXIifQ.9VTmBcl7BKVoVbZoQjI8dd21G9bnrqRqutXV5UMC5eM";
-
     private static final String CONTENT_KEY = "Accept";
     private static final String CONTENT_VALUE = "application/json";
     private static final String AUTH_KEY = "Authorization";

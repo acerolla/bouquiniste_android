@@ -61,7 +61,7 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
         mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
         mView.setOnRefreshListener(() -> mPresenter.handleRefresh());
 
-        ((IMainView)getActivity()).setClearAllClickListener(v -> mPresenter.handleClearAllClick(mView.getList()));
+        //((IMainView)getActivity()).setClearAllClickListener(v -> mPresenter.handleClearAllClick(mView.getList()));
     }
 
     @Override
@@ -120,6 +120,10 @@ public class FavoritesFragment extends Fragment implements IFavoritesView {
     @Override
     public void showToast(String toast) {
         Toast.makeText(getContext(), toast, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClearAllPressed() {
+        mPresenter.handleClearAllClick(mView.getList());
     }
 
     @Override

@@ -12,14 +12,11 @@ public interface IMainView {
     void showFavorites();
     void showAdverts();
 
+    void setSearchButtonVisibility(boolean isVisible);
     void setFilterVisibility(boolean isVisible);
     void setLogoutVisibility(boolean isVisible);
     void setClearAllVisibility(boolean isVisible);
 
-    void setCategoryClickListener(View.OnClickListener listener);
-    void setClearAllClickListener(View.OnClickListener listener);
-
     void navigateToLogin();
-
     void imitateAdvertsClick();
 }

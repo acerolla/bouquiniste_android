@@ -1,16 +1,21 @@
 package com.acerolla.bouquiniste.presentation.main.view;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.acerolla.bouquiniste.R;
@@ -25,14 +30,22 @@ public class MainView extends RelativeLayout {
     public static final int ID_BOTTOM_MENU = 2;
     private static final int ID_TOOLBAR = 3;
 
-    private static final int ID_SHADOW = 3;
+    private static final int ID_SHADOW = 4;
 
     private Toolbar mToolbar;
-    private AppCompatImageView mIvCategory;
-    private AppCompatImageView mIvClearAll;
-    private AppCompatImageView mIvLogout;
+    private MenuItem mSearchItem;
+    private MenuItem mFilterItem;
+    private MenuItem mClearAllItem;
+    private MenuItem mLogoutItem;
+
+    private ImageView mIvNavigationBack;
+
     private FrameLayout mContentFrame;
     private BottomNavigationView mBottomMenu;
+
+    public interface SearchListener {
+        void invoke(String text);
+    }
 
     public MainView(Context context) {
         super(context);
@@ -52,53 +65,17 @@ public class MainView extends RelativeLayout {
 
         mToolbar = new Toolbar(getContext());
         mToolbar.setId(android.R.id.toggle);
-        mToolbar.setBackgroundColor(Color.BLACK);
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setSubtitleTextColor(Color.WHITE);
         mToolbar.setTitle(R.string.app_name);
         mToolbar.setElevation(ValuesConverter.dp2px(ValuesConverter.DP_8));
+
 
         AppBarLayout.LayoutParams toolbarParams = new AppBarLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         mToolbar.setLayoutParams(toolbarParams);
         appBarLayout.addView(mToolbar);
-
-        mIvCategory = new AppCompatImageView(getContext());
-        mIvCategory.setImageResource(R.drawable.ic_filter_list_white_24dp);
-        mIvCategory.setVisibility(GONE);
-
-        Toolbar.LayoutParams categoryParams = new Toolbar.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        categoryParams.gravity = Gravity.END;
-        categoryParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
-        mIvCategory.setLayoutParams(categoryParams);
-        mToolbar.addView(mIvCategory);
-
-        mIvClearAll = new AppCompatImageView(getContext());
-        mIvClearAll.setImageResource(R.drawable.ic_clear_all_black_24dp);
-        mIvClearAll.setVisibility(GONE);
-
-        Toolbar.LayoutParams clearAllParams = new Toolbar.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        clearAllParams.gravity = Gravity.END;
-        clearAllParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
-        mIvClearAll.setLayoutParams(clearAllParams);
-        mToolbar.addView(mIvClearAll);
-
-        mIvLogout = new AppCompatImageView(getContext());
-        mIvLogout.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
-        mIvLogout.setVisibility(GONE);
-
-        Toolbar.LayoutParams logoutParams = new Toolbar.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        logoutParams.gravity = Gravity.END;
-        logoutParams.rightMargin = ValuesConverter.dp2px(ValuesConverter.DP_10);
-        mIvLogout.setLayoutParams(logoutParams);
-        mToolbar.addView(mIvLogout);
 
         mContentFrame = new FrameLayout(getContext());
         mContentFrame.setId(ID_CONTENT_FRAME);
@@ -139,28 +116,92 @@ public class MainView extends RelativeLayout {
         mBottomMenu.setOnNavigationItemSelectedListener(listener);
     }
 
-    public void setCategoryClickListener(OnClickListener listener) {
-        mIvCategory.setOnClickListener(listener);
+    public void initToolbarMenu(SearchListener listener, Menu menu, AppCompatActivity activity) {
+        mSearchItem = menu.findItem(R.id.menu_item_toolbar_search);
+        mFilterItem = menu.findItem(R.id.menu_item_toolbar_filter);
+        mClearAllItem = menu.findItem(R.id.menu_item_toolbar_filter);
+        mLogoutItem = menu.findItem(R.id.menu_item_toolbar_logout);
+
+        mSearchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                mFilterItem.setVisible(false);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                mToolbar.setNavigationIcon(null);
+                mFilterItem.setVisible(true);
+                return true;
+            }
+        });
+
+        SearchView mSearchView = (SearchView) menu.findItem(R.id.menu_item_toolbar_search).getActionView();
+        SearchManager searchManager = (SearchManager) activity.getSystemService(AppCompatActivity.SEARCH_SERVICE);
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listener.invoke(newText);
+                return false;
+            }
+        });
+
+        EditText searchEditText = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHint("Поиск");
+
+        ImageView closeSearch = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        closeSearch.setImageDrawable(null);
+
     }
 
-    public void setClearAllClickListener(OnClickListener listener) {
-        mIvClearAll.setOnClickListener(listener);
+    public void collapseSearch() {
+        if (mSearchItem == null) {
+            return;
+        }
+        mSearchItem.collapseActionView();
     }
 
-    public void setLogoutClickListener(OnClickListener listener) {
-        mIvLogout.setOnClickListener(listener);
+
+
+    public void setSearchButtonVisibility(boolean isVisible) {
+        if (mSearchItem == null) {
+            return;
+        }
+
+       mSearchItem.setVisible(isVisible);
     }
 
-    public void setFilterVisibility(int visibility) {
-        mIvCategory.setVisibility(visibility);
+    public void setFilterVisibility(boolean isVisible) {
+        if (mFilterItem == null) {
+            return;
+        }
+
+        mFilterItem.setVisible(isVisible);
     }
 
-    public void setClearAllVisibility(int visibility) {
-        mIvClearAll.setVisibility(visibility);
+    public void setClearAllVisibility(boolean isVisible) {
+        if (mClearAllItem == null) {
+            return;
+        }
+
+        mClearAllItem.setVisible(isVisible);
     }
 
-    public void setLogoutVisibility(int visibility) {
-        mIvLogout.setVisibility(visibility);
+    public void setLogoutVisibility(boolean isVisible) {
+        if (mLogoutItem == null) {
+            return;
+        }
+
+        mLogoutItem.setVisible(isVisible);
     }
 
     public Toolbar getToolbar() {
@@ -175,9 +216,9 @@ public class MainView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mToolbar = null;
-        mIvCategory = null;
-        mIvClearAll = null;
-        mIvLogout = null;
+        //mIvCategory = null;
+        //mIvClearAll = null;
+        //mIvLogout = null;
         mContentFrame = null;
         mBottomMenu = null;
     }

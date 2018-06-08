@@ -11,7 +11,7 @@ public class ValuesConverter {
     public static final int DP_10 = 10;
     public static final int DP_25 = 25;
     public static final int DP_30 = 30;
-    public static final int DP_45 = 45;
+    public static final int DP_40 = 40;
     public static final int DP_48 = 48;
     public static final int DP_100 = 100;
     public static final int DP_150 = 150;

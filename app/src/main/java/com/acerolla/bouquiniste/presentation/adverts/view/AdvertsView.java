@@ -34,6 +34,12 @@ public class AdvertsView extends SwipeRefreshLayout {
     private ProgressBar mProgress;
     private TextView mTvError;
 
+    private boolean mLoading = false;
+
+    public interface LoadingCallback {
+        void onLoad(int advertsCount);
+    }
+
     public AdvertsView(Context context) {
         super(context);
     }
@@ -49,7 +55,7 @@ public class AdvertsView extends SwipeRefreshLayout {
         mRvAdverts = findViewById(R.id.rv_adverts);
         mRvAdverts.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mRvAdverts.setLayoutManager(mLayoutManager);
 
         mAdapter = new AdvertAdapter();
@@ -61,8 +67,35 @@ public class AdvertsView extends SwipeRefreshLayout {
         super.setOnRefreshListener(listener);
     }
 
+    public void setOnScrollListener(LoadingCallback callback) {
+        mRvAdverts.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (((LinearLayoutManager)mLayoutManager).findFirstCompletelyVisibleItemPosition() == 0) {
+                    AdvertsView.this.setEnabled(true);
+                } else {
+                    AdvertsView.this.setEnabled(false);
+                }
+                int totalItemCount = mLayoutManager.getItemCount();
+                int lastVisibleItem = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+                if (!mLoading && totalItemCount <= lastVisibleItem + 5) {
+                    mLoading = true;
+                    callback.onLoad(totalItemCount);
+                }
+            }
+        });
+    }
+
     public void setContentData(List<AdvertData> data) {
         mAdapter.setData(data);
+        setEnabled(true);
+        mLoading = false;
+    }
+
+    public void addContentData(List<AdvertData> data) {
+        mAdapter.addData(data);
+        mLoading = false;
     }
 
     public void setContentVisibility(int visibility) {

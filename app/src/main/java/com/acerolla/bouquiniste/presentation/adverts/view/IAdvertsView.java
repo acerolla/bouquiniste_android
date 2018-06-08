@@ -12,6 +12,7 @@ import java.util.List;
 public interface IAdvertsView {
 
     void setContentData(List<AdvertData> data);
+    void addContentData(List<AdvertData> data);
     void setContentVisibility(boolean isVisible);
     void setLoaderVisibility(boolean isVisible);
     void setErrorVisibility(boolean isVisible);
@@ -21,4 +22,5 @@ public interface IAdvertsView {
     void stopRefreshing();
 
     void setTitle(String title);
+    void setSearchVisibility(boolean isVisible);
 }

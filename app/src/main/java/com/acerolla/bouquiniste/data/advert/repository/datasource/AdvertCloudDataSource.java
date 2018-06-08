@@ -25,11 +25,11 @@ import retrofit2.Response;
 class AdvertCloudDataSource implements IAdvertDataSource {
 
     @Override
-    public void getAdvertList(ResultListener<List<AdvertData>> listener) {
+    public void getAdvertList(ResultListener<List<AdvertData>> listener, int page, String search) {
         BouquinisteApplication.getInstance()
                 .getApiManager()
                 .getRestApi()
-                .getAdverts()
+                .getAdverts(page, search)
                 .enqueue(new Callback<BaseResponseObject<List<AdvertResponse>>>() {
                     @Override
                     public void onResponse(Call<BaseResponseObject<List<AdvertResponse>>> call, Response<BaseResponseObject<List<AdvertResponse>>> response) {

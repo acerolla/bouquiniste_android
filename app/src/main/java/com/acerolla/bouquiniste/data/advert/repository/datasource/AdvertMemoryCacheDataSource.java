@@ -14,7 +14,7 @@ public class AdvertMemoryCacheDataSource implements IAdvertDataSource {
     private AdvertData mAdvert;
 
     @Override
-    public void getAdvertList(ResultListener<List<AdvertData>> listener) {
+    public void getAdvertList(ResultListener<List<AdvertData>> listener, int page, String search) {
         //ignore
     }
 

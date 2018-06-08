@@ -23,7 +23,7 @@ public class AdvertsRepository implements IAdvertsRepository {
     }
 
     @Override
-    public void loadAdvertList(ResultListener<List<AdvertData>> listener) {
+    public void loadAdvertList(ResultListener<List<AdvertData>> listener, int page, String search) {
         AdvertDataSourceFactory.getLocalDataSource()
                 .getAdvertList(resultFromLocal -> {
                     AdvertDataSourceFactory.getCloudDataSource()
@@ -43,8 +43,8 @@ public class AdvertsRepository implements IAdvertsRepository {
                                         listener.onResult(null);
                                     }
                                 }
-                            });
-                });
+                            }, page, search);
+                }, page, search);
     }
 
     @Override

@@ -16,7 +16,12 @@ class AdvertLocalDataSource implements IAdvertDataSource {
     private static final int ZERO = 0;
 
     @Override
-    public void getAdvertList(ResultListener<List<AdvertData>> listener) {
+    public void getAdvertList(ResultListener<List<AdvertData>> listener, int page, String search) {
+        if (!search.isEmpty()) {
+            listener.onResult(null);
+            return;
+        }
+
         BouquinisteApplication.getInstance()
                 .getBackgroundThread()
                 .execute(new BouquinisteRunnable() {

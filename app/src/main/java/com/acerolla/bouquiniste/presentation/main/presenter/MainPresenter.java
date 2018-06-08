@@ -25,6 +25,7 @@ public class MainPresenter implements IMainPresenter {
     public void bindView(IMainView view) {
         mView = view;
         mView.showAdverts();
+        mView.setSearchButtonVisibility(true);
         mView.setFilterVisibility(true);
         mInteractor.tryLoginUser();
     }
@@ -33,6 +34,7 @@ public class MainPresenter implements IMainPresenter {
     public void handleProfileItemClick() {
         mWhere = FROM_PROFILE;
         if (mInteractor.isUserLoggedIn()) {
+            mView.setSearchButtonVisibility(false);
             mView.setFilterVisibility(false);
             mView.setClearAllVisibility(false);
             mView.setLogoutVisibility(true);
@@ -46,6 +48,7 @@ public class MainPresenter implements IMainPresenter {
     public void handleAddingClick() {
         mWhere = FROM_ADDING;
         if (mInteractor.isUserLoggedIn()) {
+            mView.setSearchButtonVisibility(false);
             mView.setFilterVisibility(false);
             mView.setLogoutVisibility(false);
             mView.setClearAllVisibility(false);
@@ -57,6 +60,7 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void handleAdvertsClick() {
+        mView.setSearchButtonVisibility(true);
         mView.setFilterVisibility(true);
         mView.setLogoutVisibility(false);
         mView.setClearAllVisibility(false);
@@ -67,6 +71,7 @@ public class MainPresenter implements IMainPresenter {
     public void handleFavoritesClick() {
         mWhere = FROM_FAVORITES;
         if (mInteractor.isUserLoggedIn()) {
+            mView.setSearchButtonVisibility(false);
             mView.setFilterVisibility(false);
             mView.setLogoutVisibility(false);
             mView.setClearAllVisibility(true);

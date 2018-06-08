@@ -52,8 +52,8 @@ public interface IRestApi {
 
 
 
-    @GET("api/advert")   //?page=3
-    Call<BaseResponseObject<List<AdvertResponse>>> getAdverts();
+    @GET("api/advert")
+    Call<BaseResponseObject<List<AdvertResponse>>> getAdverts(@Query("page") int page, @Query("search") String search);
 
     @GET("api/advert/{id}")
     Call<BaseResponseObject<AdvertResponse>> getAdvert(@Path("id") int id);

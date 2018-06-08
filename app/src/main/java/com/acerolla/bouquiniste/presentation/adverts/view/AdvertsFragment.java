@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.acerolla.bouquiniste.di.DiManager;
 import com.acerolla.bouquiniste.presentation.adverts.presenter.IAdvertsPresenter;
 import com.acerolla.bouquiniste.presentation.category.view.CategoryActivity;
 import com.acerolla.bouquiniste.presentation.detail.view.DetailActivity;
-import com.acerolla.bouquiniste.presentation.main.view.IMainView;
 import com.acerolla.bouquiniste.presentation.main.view.MainActivity;
 
 import java.util.List;
@@ -57,11 +55,20 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
     }
 
     private void setListeners() {
-        mView.setItemClickListener(v -> mPresenter.handleItemClicked(mView.getDataByView(v)));
-        mView.setOnRefreshListener(() -> mPresenter.handleRefresh());
+        mView.setItemClickListener(v ->
+                mPresenter.handleItemClicked(mView.getDataByView(v)));
+        mView.setOnScrollListener((advertsCount) ->
+                mPresenter.onLoadMore(advertsCount));
+        mView.setOnRefreshListener(() ->
+                mPresenter.handleRefresh());
+    }
 
-        ((IMainView) getActivity()).setCategoryClickListener(v ->
-                mPresenter.handleFilterPressed());
+    public void onFilterPressed() {
+        mPresenter.handleFilterPressed();
+    }
+
+    public void onSearchTextChanged(String newText) {
+        mPresenter.handleSearchTextChanged(newText);
     }
 
     @Override
@@ -130,6 +137,20 @@ public class AdvertsFragment extends Fragment implements IAdvertsView {
     @Override
     public void setTitle(String title) {
         ((MainActivity)getActivity()).setTitle(title);
+    }
+
+    @Override
+    public void setSearchVisibility(boolean isVisible) {
+        if (!isVisible) {
+            ((MainActivity) getActivity()).collapseSearch();
+        }
+        ((MainActivity) getActivity()).setSearchButtonVisibility(isVisible);
+
+    }
+
+    @Override
+    public void addContentData(List<AdvertData> data) {
+        mView.addContentData(data);
     }
 
     @Override

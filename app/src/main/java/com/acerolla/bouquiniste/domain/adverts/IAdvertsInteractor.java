@@ -14,7 +14,7 @@ import java.util.List;
 public interface IAdvertsInteractor extends BaseInteractor {
 
 
-    void loadAdvertList(ResultListener<List<AdvertData>> listener);
+    void loadAdvertList(ResultListener<List<AdvertData>> listener, int page, String search);
     void loadUserAdverts(ResultListener<List<AdvertData>> listener, int userId);
     void saveAdvertToCache(AdvertData advertData);
     void loadAdvertsByCategories(ResultListener<List<AdvertData>> listener, int categoryId);

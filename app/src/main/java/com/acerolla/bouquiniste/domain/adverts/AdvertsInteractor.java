@@ -23,8 +23,8 @@ public class AdvertsInteractor implements IAdvertsInteractor {
     }
 
     @Override
-    public void loadAdvertList(ResultListener<List<AdvertData>> listener) {
-        mRepository.loadAdvertList(listener);
+    public void loadAdvertList(ResultListener<List<AdvertData>> listener, int page, String search) {
+        mRepository.loadAdvertList(listener, page, search);
     }
 
     @Override

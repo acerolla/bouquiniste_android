@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IAdvertDataSource {
 
-    void getAdvertList(ResultListener<List<AdvertData>> listener);
+    void getAdvertList(ResultListener<List<AdvertData>> listener, int page, String search);
     void getAdvert(ResultListener<AdvertData> listener, int advertId);
     void getUserAdverts(ResultListener<List<AdvertData>> listener, int userId);
     AdvertData getAdvertAsync();
