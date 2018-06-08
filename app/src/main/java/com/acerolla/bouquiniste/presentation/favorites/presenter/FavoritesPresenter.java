@@ -84,24 +84,19 @@ public class FavoritesPresenter implements IFavoritesPresenter {
     private ResultListener<List<AdvertData>> mLoadingListener = new ResultListener<List<AdvertData>>() {
         @Override
         public void onResult(List<AdvertData> result) {
+            if (mView == null) {
+                return;
+            }
+
             mView.stopRefreshing();
             if (result != null) {
-                if (mView != null) {
-                    if (!result.isEmpty()) {
-                        mView.setContentData(result);
-                        mView.setLoaderVisibility(false);
-                        mView.setErrorVisibility(false);
-                        mView.setContentVisibility(true);
-                    } else {
-                        mView.setLoaderVisibility(false);
-                        mView.setErrorVisibility(true);
-                    }
-                }
+                mView.setContentData(result);
+                mView.setLoaderVisibility(false);
+                mView.setErrorVisibility(false);
+                mView.setContentVisibility(true);
             } else {
-                if (mView != null) {
-                    mView.setLoaderVisibility(false);
-                    mView.setErrorVisibility(true);
-                }
+                mView.setLoaderVisibility(false);
+                mView.setErrorVisibility(true);
             }
         }
     };
